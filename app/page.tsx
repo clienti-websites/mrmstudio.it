@@ -6,6 +6,13 @@ import { StatsSection } from "@/components/StatsSection";
 import { CtaBand } from "@/components/CtaBand";
 import { getAllProjects } from "@/lib/projects";
 
+// Segnaposto generato dal render reale di Via Fedra 3. Da sostituire con il
+// filmato fornito da MRM: basta cambiare questi due percorsi.
+const HERO_VIDEO = {
+  src: "/video/hero-placeholder.mp4",
+  poster: "/video/hero-poster.jpg",
+};
+
 export default function HomePage() {
   const projects = getAllProjects().slice(0, 8);
 
@@ -14,6 +21,7 @@ export default function HomePage() {
       <Hero
         image={{ src: "/progetti/via-fedra-3/01-vista-aerea.jpg", alt: "Vista aerea di un progetto residenziale MRM Studio a Pescara" }}
         title="Dall'idea alla consegna delle chiavi."
+        video={HERO_VIDEO}
       />
 
       <PercorsoCompleto />
