@@ -16,7 +16,7 @@ function makeRequest(body: unknown, ip: string) {
 const validPayload = {
   name: "Mario Rossi",
   contact: "mario@example.com",
-  interventionType: "Ristrutturazione",
+  interventionType: "Ristrutturazione di un immobile",
   message: "Vorrei una consulenza per ristrutturare casa.",
   consent: true,
 };

@@ -10,10 +10,12 @@ export function Hero({
   image,
   title,
   video,
+  ctaHref = "/contatti",
 }: {
   image: { src: string; alt: string };
   title: string;
   video?: HeroVideo;
+  ctaHref?: string;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -53,7 +55,7 @@ export function Hero({
           solo interlocutore.
         </p>
         <Link
-          href="/contatti"
+          href={ctaHref}
           className="mt-7 inline-block bg-muschio px-6 py-3 font-medium text-carta hover:bg-muschio/90"
         >
           Contattaci

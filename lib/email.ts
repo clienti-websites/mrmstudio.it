@@ -6,7 +6,10 @@ export interface ContactEmailInput {
   name: string;
   contact: string;
   interventionType: string;
-  message: string;
+  stage?: string;
+  place?: string;
+  message?: string;
+  reference?: string;
 }
 
 /**
@@ -38,14 +41,20 @@ export async function sendContactEmail(input: ContactEmailInput): Promise<boolea
       body: JSON.stringify({
         from: `${SITE.name} <no-reply@${new URL(SITE.url).hostname}>`,
         to: [to],
-        subject: `Nuova richiesta dal sito — ${input.interventionType}`,
+        subject: input.reference
+          ? `Nuova richiesta dal sito — ${input.interventionType} (da ${input.reference})`
+          : `Nuova richiesta dal sito — ${input.interventionType}`,
         text: [
           `Nome: ${input.name}`,
           `Contatto: ${input.contact}`,
           `Tipo di intervento: ${input.interventionType}`,
-          "",
-          input.message,
-        ].join("\n"),
+          input.stage ? `A che punto è: ${input.stage}` : null,
+          input.place ? `Dove: ${input.place}` : null,
+          input.reference ? `Arriva dalla scheda: ${input.reference}` : null,
+          input.message ? `\n${input.message}` : null,
+        ]
+          .filter(Boolean)
+          .join("\n"),
       }),
     });
 

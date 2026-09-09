@@ -3,8 +3,9 @@ import { Hero } from "@/components/Hero";
 import { PercorsoCompleto } from "@/components/PercorsoCompleto";
 import { ProjectGrid } from "@/components/ProjectGrid";
 import { StatsSection } from "@/components/StatsSection";
-import { CtaBand } from "@/components/CtaBand";
+import { ContactForm } from "@/components/ContactForm";
 import { getAllProjects } from "@/lib/projects";
+import { SITE } from "@/lib/site";
 
 // Filmato temporaneo, da sostituire con quello di MRM prima della messa
 // online: cambiare questi due percorsi e sostituire i file in public/video.
@@ -22,6 +23,7 @@ export default function HomePage() {
         image={{ src: "/progetti/via-fedra-3/01-vista-aerea.jpg", alt: "Vista aerea di un progetto residenziale MRM Studio a Pescara" }}
         title="Dall'idea alla consegna delle chiavi."
         video={HERO_VIDEO}
+        ctaHref="#contatti"
       />
 
       <PercorsoCompleto />
@@ -58,12 +60,35 @@ export default function HomePage() {
         </div>
       </section>
 
-      <CtaBand
-        title="Un solo interlocutore, dall'idea alla consegna."
-        cta="Contattaci"
-        href="/contatti"
-        tone="dark"
-      />
+      <section id="contatti" aria-labelledby="contatti-titolo" className="scroll-mt-20 bg-grafite px-6 py-24 md:px-12">
+        <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-2">
+          <div>
+            <h2 id="contatti-titolo" className="text-2xl font-black text-carta md:text-3xl">
+              Un solo interlocutore, dall&apos;idea alla consegna.
+            </h2>
+            <p className="mt-4 text-carta/80">
+              Raccontaci l&apos;intervento che hai in mente. Ti richiamiamo noi.
+            </p>
+            <div className="mt-8 space-y-4 text-sm">
+              {SITE.offices.map((office) => (
+                <div key={office.id}>
+                  <p className="font-medium text-carta">{office.city}</p>
+                  <a href={`tel:${office.phone}`} className="text-carta/70 hover:text-carta">
+                    {office.phoneDisplay}
+                  </a>
+                </div>
+              ))}
+              <a href={`mailto:${SITE.email}`} className="block text-carta/70 hover:text-carta">
+                {SITE.email}
+              </a>
+            </div>
+          </div>
+
+          <div className="bg-carta p-6 md:p-8">
+            <ContactForm />
+          </div>
+        </div>
+      </section>
     </>
   );
 }

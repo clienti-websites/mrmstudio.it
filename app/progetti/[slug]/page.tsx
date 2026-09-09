@@ -4,7 +4,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { getProjectBySlug, getProjectSlugs, type Project } from "@/lib/projects";
 import { Gallery } from "@/components/Gallery";
 import { FaseChecklist } from "@/components/FaseChecklist";
-import { CtaBand } from "@/components/CtaBand";
+import { ContactForm } from "@/components/ContactForm";
 
 export function generateStaticParams() {
   return getProjectSlugs().map((slug) => ({ slug }));
@@ -86,7 +86,18 @@ export default async function ProgettoPage({ params }: { params: Promise<{ slug:
         </div>
       )}
 
-      <CtaBand title="Hai un progetto simile in mente?" cta="Parlaci del tuo progetto" href="/contatti" />
+      <section aria-labelledby="parlane-titolo" className="mt-16 scroll-mt-20 bg-nebbia p-8 md:p-12">
+        <h2 id="parlane-titolo" className="text-2xl font-black text-grafite">
+          Ti interessa un intervento come questo?
+        </h2>
+        <p className="mt-3 max-w-2xl text-pietra">
+          Non serve avere già un progetto, né sapere cosa chiedere. Rispondi a tre domande e ti ricontattiamo
+          noi: al resto pensiamo noi, come per {project.title}.
+        </p>
+        <div className="mt-8 max-w-2xl">
+          <ContactForm reference={project.title} />
+        </div>
+      </section>
     </article>
   );
 }

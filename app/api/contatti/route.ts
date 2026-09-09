@@ -45,7 +45,10 @@ export async function POST(request: NextRequest) {
     name: parsed.data.name,
     contact: parsed.data.contact,
     interventionType: parsed.data.interventionType,
+    stage: parsed.data.stage,
+    place: parsed.data.place,
     message: parsed.data.message,
+    reference: parsed.data.reference,
   });
 
   // No personal data logged (no name/contact/message) — only that a
