@@ -46,7 +46,6 @@ export function Header() {
         aria-label="Mobile"
         data-testid="mobile-nav"
         data-open={open}
-        aria-hidden={!open}
         className={`lg:hidden ${open ? "block" : "hidden"} border-t border-nebbia bg-carta px-6 pb-6`}
       >
         {LINKS.map((link) => (
