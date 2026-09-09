@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { getAllProjects, getProjectBySlug, getProjectSlugs } from "@/lib/projects";
+import { getProjectBySlug, getProjectSlugs, type Project } from "@/lib/projects";
 import { Gallery } from "@/components/Gallery";
 import { FaseChecklist } from "@/components/FaseChecklist";
 
@@ -10,9 +10,24 @@ export function generateStaticParams() {
   return getProjectSlugs().map((slug) => ({ slug }));
 }
 
+// Resolves a project by slug, returning null only when the .mdx file genuinely
+// doesn't exist (ENOENT). Any other error — e.g. a Zod parse failure from
+// malformed frontmatter on an existing file — is a real content bug and must
+// propagate rather than being silently swallowed into a 404.
+function findProjectBySlug(slug: string): Project | null {
+  try {
+    return getProjectBySlug(slug);
+  } catch (error) {
+    if (error && typeof error === "object" && "code" in error && error.code === "ENOENT") {
+      return null;
+    }
+    throw error;
+  }
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const project = getAllProjects().find((p) => p.slug === slug);
+  const project = findProjectBySlug(slug);
   if (!project) return {};
   return {
     title: `${project.title} — ${project.location}`,
@@ -23,12 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function ProgettoPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
-  let project;
-  try {
-    project = getProjectBySlug(slug);
-  } catch {
-    notFound();
-  }
+  const project = findProjectBySlug(slug);
   if (!project) notFound();
 
   return (
