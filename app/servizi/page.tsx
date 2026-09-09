@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Accordion } from "@/components/Accordion";
+import { CtaBand } from "@/components/CtaBand";
+import { getProjectsByPhase } from "@/lib/projects";
 
 export const metadata: Metadata = {
   title: "Servizi — Progettazione e Direzione Lavori a Pescara e in Abruzzo",
@@ -49,20 +51,27 @@ export default function ServiziPage() {
         Pescara e in tutto l&apos;Abruzzo.
       </p>
 
-      {SEZIONI.map((sezione) => (
-        <section key={sezione.id} id={sezione.id} className="scroll-mt-24 border-t border-nebbia py-12 first:border-t-0">
-          <h2 className="mb-4 text-2xl font-black text-grafite">{sezione.title}</h2>
-          <p className="mb-4 text-pietra">
-            <strong className="text-grafite">Cosa rischi senza:</strong> {sezione.rischio}
-          </p>
-          <p className="mb-6 text-pietra">
-            <strong className="text-grafite">Come lavora MRM:</strong> {sezione.come}
-          </p>
-          <Link href="/progetti/via-fedra-3" className="text-muschio underline">
-            Un caso reale: Via Fedra 3, Pescara
-          </Link>
-        </section>
-      ))}
+      {SEZIONI.map((sezione) => {
+        const caseProject = getProjectsByPhase(sezione.id)[0];
+        return (
+          <section key={sezione.id} id={sezione.id} className="scroll-mt-24 border-t border-nebbia py-12 first:border-t-0">
+            <h2 className="mb-4 text-2xl font-black text-grafite">{sezione.title}</h2>
+            <p className="mb-4 text-pietra">
+              <strong className="text-grafite">Cosa rischi senza:</strong> {sezione.rischio}
+            </p>
+            <p className="mb-6 text-pietra">
+              <strong className="text-grafite">Come lavora MRM:</strong> {sezione.come}
+            </p>
+            {caseProject ? (
+              <Link href={`/progetti/${caseProject.slug}`} className="text-muschio underline">
+                Un caso reale: {caseProject.location}
+              </Link>
+            ) : (
+              <p className="text-sm italic text-pietra">Caso reale in arrivo.</p>
+            )}
+          </section>
+        );
+      })}
 
       <Accordion summary="Dettaglio tecnico: adempimenti del direttore lavori">
         <p>
@@ -71,12 +80,7 @@ export default function ServiziPage() {
         </p>
       </Accordion>
 
-      <div className="mt-16 bg-nebbia p-8 text-center">
-        <p className="mb-4 text-lg font-medium text-grafite">Parliamo del tuo progetto.</p>
-        <Link href="/contatti" className="inline-block bg-muschio px-6 py-3 font-medium text-carta hover:bg-muschio/90">
-          Contattaci
-        </Link>
-      </div>
+      <CtaBand title="Parliamo del tuo progetto." cta="Contattaci" href="/contatti" />
     </div>
   );
 }

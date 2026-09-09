@@ -1,4 +1,4 @@
-import { getAllProjects, getProjectBySlug, getProjectSlugs, frontmatterSchema } from "@/lib/projects";
+import { getAllProjects, getProjectBySlug, getProjectSlugs, getProjectsByPhase, frontmatterSchema } from "@/lib/projects";
 
 describe("frontmatterSchema", () => {
   it("rejects a project missing required fields", () => {
@@ -42,10 +42,32 @@ describe("getProjectBySlug", () => {
   });
 });
 
+describe("getProjectBySlug — slug validation", () => {
+  it("rejects a slug that doesn't look like a filename before touching the filesystem", () => {
+    expect(() => getProjectBySlug("../../etc/passwd")).toThrow();
+  });
+
+  it("rejects a slug with a path separator even without traversal segments", () => {
+    expect(() => getProjectBySlug("foo/bar")).toThrow();
+  });
+});
+
 describe("getAllProjects", () => {
   it("returns at least the seed project", () => {
     const projects = getAllProjects();
     expect(projects.length).toBeGreaterThan(0);
     expect(projects.map((p) => p.slug)).toContain("via-fedra-3");
+  });
+});
+
+describe("getProjectsByPhase", () => {
+  it("includes a project that lists the given phase", () => {
+    const projects = getProjectsByPhase("progettazione");
+    expect(projects.map((p) => p.slug)).toContain("via-fedra-3");
+  });
+
+  it("excludes a project that does not list the given phase", () => {
+    const projects = getProjectsByPhase("appalto");
+    expect(projects.map((p) => p.slug)).not.toContain("via-fedra-3");
   });
 });

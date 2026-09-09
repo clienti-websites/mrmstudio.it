@@ -48,7 +48,15 @@ export function getProjectSlugs(): string[] {
     .map((file) => file.replace(/\.mdx$/, ""));
 }
 
+const SLUG_PATTERN = /^[a-z0-9-]+$/;
+
 export function getProjectBySlug(slug: string): Project {
+  if (!SLUG_PATTERN.test(slug)) {
+    const error = new Error(`Invalid project slug: ${slug}`) as NodeJS.ErrnoException;
+    error.code = "ENOENT";
+    throw error;
+  }
+
   const filePath = path.join(PROJECTS_DIR, `${slug}.mdx`);
   const raw = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(raw);
@@ -64,4 +72,8 @@ export function getAllProjects(): Project[] {
 
 export function getProjectsByCategory(category: Category): Project[] {
   return getAllProjects().filter((project) => project.category === category);
+}
+
+export function getProjectsByPhase(phase: Phase): Project[] {
+  return getAllProjects().filter((project) => project.phases.includes(phase));
 }
