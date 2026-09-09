@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Accordion } from "@/components/Accordion";
 
 export const metadata: Metadata = {
-  title: "Servizi — Progettazione, Appalto, Direzione Lavori, Maestranze",
+  title: "Servizi — Progettazione e Direzione Lavori a Pescara e in Abruzzo",
   description: "Come lavora MRM Studio a Pescara e in Abruzzo: dalla progettazione interna alla consegna delle chiavi.",
 };
 
