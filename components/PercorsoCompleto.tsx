@@ -43,16 +43,29 @@ export function PercorsoCompleto() {
         Un solo studio segue l&apos;opera dall&apos;idea alla consegna delle chiavi.
       </h2>
 
-      <div aria-hidden="true" className="mb-3 flex max-w-4xl justify-between opacity-40">
-        {ALTRI.map((chi, i) => (
-          <div key={chi} className="flex flex-col items-center gap-2">
-            <span
-              className="h-3 w-3 rounded-full border border-dashed border-pietra"
-              style={{ transform: `translateY(${i % 2 === 0 ? 0 : 10}px)` }}
+      <div aria-hidden="true" className="mb-3 max-w-4xl opacity-40">
+        <svg viewBox="0 0 800 40" className="h-10 w-full overflow-visible" role="presentation">
+          <line x1="20" y1="20" x2="780" y2="20" stroke="#6E6D65" strokeWidth="2" strokeDasharray="4 16" />
+          {ALTRI.map((chi, i) => (
+            <circle
+              key={chi}
+              cx={20 + i * (760 / 3)}
+              cy={20 + (i % 2 === 0 ? 0 : 10)}
+              r="6"
+              fill="none"
+              stroke="#6E6D65"
+              strokeWidth="1.5"
+              strokeDasharray="2 2"
             />
-            <span className="text-xs text-pietra">{chi}</span>
-          </div>
-        ))}
+          ))}
+        </svg>
+        <div className="mt-2 flex justify-between">
+          {ALTRI.map((chi) => (
+            <span key={chi} className="text-xs text-pietra">
+              {chi}
+            </span>
+          ))}
+        </div>
       </div>
       <p aria-hidden="true" className="mb-16 text-xs uppercase tracking-wide text-pietra">
         Così lavorano gli altri — nessuna connessione
@@ -62,6 +75,7 @@ export function PercorsoCompleto() {
         <svg viewBox="0 0 800 40" className="h-10 w-full overflow-visible" role="presentation">
           <line x1="20" y1="20" x2="780" y2="20" stroke="#EAEAE5" strokeWidth="2" />
           <motion.line
+            data-testid="percorso-line"
             x1="20"
             y1="20"
             x2="780"
