@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getProjectBySlug, getProjectSlugs, type Project } from "@/lib/projects";
 import { Gallery } from "@/components/Gallery";
 import { FaseChecklist } from "@/components/FaseChecklist";
+import { CtaBand } from "@/components/CtaBand";
 
 export function generateStaticParams() {
   return getProjectSlugs().map((slug) => ({ slug }));
@@ -59,7 +59,17 @@ export default async function ProgettoPage({ params }: { params: Promise<{ slug:
         <FaseChecklist phases={[...project.phases]} />
       </div>
 
-      <div className="prose max-w-none py-4 text-grafite">
+      {/*
+        No @tailwindcss/typography plugin here by design (this is a
+        hand-built design system, and the plugin's opinions would fight
+        it). Style the MDX output directly with arbitrary-variant rules on
+        this wrapper instead — Tailwind v4 preflight zeroes all margins, so
+        without this every paragraph/heading/list item would render flush
+        against its neighbours.
+      */}
+      <div
+        className="max-w-none py-4 text-grafite [&>blockquote]:mb-4 [&>blockquote]:max-w-[70ch] [&>blockquote]:border-l-2 [&>blockquote]:border-muschio [&>blockquote]:pl-4 [&>blockquote]:italic [&>h2]:mb-4 [&>h2]:mt-10 [&>h2]:text-2xl [&>h2]:font-black [&>h2]:text-grafite [&>h3]:mb-3 [&>h3]:mt-8 [&>h3]:text-xl [&>h3]:font-bold [&>h3]:text-grafite [&>ol]:mb-4 [&>ol]:max-w-[70ch] [&>ol]:list-decimal [&>ol]:pl-6 [&>p]:mb-4 [&>p]:max-w-[70ch] [&>ul]:mb-4 [&>ul]:max-w-[70ch] [&>ul]:list-disc [&>ul]:pl-6 [&_a]:text-muschio [&_a]:underline [&_li]:mb-1"
+      >
         <MDXRemote source={project.content} />
       </div>
 
@@ -68,12 +78,7 @@ export default async function ProgettoPage({ params }: { params: Promise<{ slug:
         <p className="text-pietra">{project.outcome}</p>
       </div>
 
-      <div className="mt-12 bg-nebbia p-8 text-center">
-        <p className="mb-4 text-lg font-medium text-grafite">Hai un progetto simile in mente?</p>
-        <Link href="/contatti" className="inline-block bg-muschio px-6 py-3 font-medium text-carta hover:bg-muschio/90">
-          Parlaci del tuo progetto
-        </Link>
-      </div>
+      <CtaBand title="Hai un progetto simile in mente?" cta="Parlaci del tuo progetto" href="/contatti" />
     </article>
   );
 }
