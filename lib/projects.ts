@@ -12,7 +12,7 @@ export const CATEGORIES = [
   "residenziale",
   "ristrutturazione-e-recupero",
   "direzionale-e-commerciale",
-  "ricettivo-e-turistico",
+  "urbanistica-e-spazio-pubblico",
 ] as const;
 export type Category = (typeof CATEGORIES)[number];
 
@@ -22,16 +22,20 @@ const galleryImageSchema = z.object({
 });
 export type GalleryImage = z.infer<typeof galleryImageSchema>;
 
+// Most works migrated from the studio's own archive have images but no
+// published year, cost, or record of which phases MRM handled. Those fields
+// are nullable so a project can be shown honestly with what is known, rather
+// than padded with figures nobody verified.
 export const frontmatterSchema = z.object({
   title: z.string(),
   location: z.string(),
-  year: z.string(),
+  year: z.string().nullable().default(null),
   category: z.enum(CATEGORIES),
   budget: z.string().nullable().default(null),
-  phases: z.array(z.enum(PHASES)).min(1),
+  phases: z.array(z.enum(PHASES)).default([]),
   coverImage: galleryImageSchema,
   gallery: z.array(galleryImageSchema).min(1),
-  outcome: z.string(),
+  outcome: z.string().nullable().default(null),
   excerpt: z.string(),
 });
 export type ProjectFrontmatter = z.infer<typeof frontmatterSchema>;
@@ -67,7 +71,14 @@ export function getProjectBySlug(slug: string): Project {
 export function getAllProjects(): Project[] {
   return getProjectSlugs()
     .map(getProjectBySlug)
-    .sort((a, b) => b.year.localeCompare(a.year));
+    .sort((a, b) => {
+      // Dated works first, most recent first; undated ones keep a stable
+      // alphabetical order at the end rather than jumping around.
+      if (a.year && b.year) return b.year.localeCompare(a.year);
+      if (a.year) return -1;
+      if (b.year) return 1;
+      return a.title.localeCompare(b.title);
+    });
 }
 
 export function getProjectsByCategory(category: Category): Project[] {

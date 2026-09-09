@@ -8,7 +8,7 @@ const CATEGORY_LABELS: Record<Category, string> = {
   residenziale: "Residenziale",
   "ristrutturazione-e-recupero": "Ristrutturazione e recupero",
   "direzionale-e-commerciale": "Direzionale e commerciale",
-  "ricettivo-e-turistico": "Ricettivo e turistico",
+  "urbanistica-e-spazio-pubblico": "Urbanistica e spazio pubblico",
 };
 
 export function ProjectsWithFilter({ projects, categories }: { projects: Project[]; categories: Category[] }) {

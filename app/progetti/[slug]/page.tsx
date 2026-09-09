@@ -49,14 +49,20 @@ export default async function ProgettoPage({ params }: { params: Promise<{ slug:
         <div>
           <h1 className="text-3xl font-black text-grafite md:text-4xl">{project.title}</h1>
           <p className="mt-1 text-pietra">
-            {project.location} · {project.year}
+            {[project.location, project.year].filter(Boolean).join(" · ")}
           </p>
         </div>
         {project.budget && <p className="text-lg font-medium text-grafite">{project.budget}</p>}
       </div>
 
       <div className="py-8">
-        <FaseChecklist phases={[...project.phases]} />
+        {project.phases.length > 0 ? (
+          <FaseChecklist phases={[...project.phases]} />
+        ) : (
+          <p className="text-sm text-pietra">
+            Prestazioni svolte su questo intervento: dettaglio in arrivo da MRM Studio.
+          </p>
+        )}
       </div>
 
       {/*
@@ -73,10 +79,12 @@ export default async function ProgettoPage({ params }: { params: Promise<{ slug:
         <MDXRemote source={project.content} />
       </div>
 
-      <div className="mt-8 border-t border-nebbia pt-8">
-        <h2 className="mb-2 font-medium text-grafite">Esito</h2>
-        <p className="text-pietra">{project.outcome}</p>
-      </div>
+      {project.outcome && (
+        <div className="mt-8 border-t border-nebbia pt-8">
+          <h2 className="mb-2 font-medium text-grafite">Esito</h2>
+          <p className="text-pietra">{project.outcome}</p>
+        </div>
+      )}
 
       <CtaBand title="Hai un progetto simile in mente?" cta="Parlaci del tuo progetto" href="/contatti" />
     </article>
