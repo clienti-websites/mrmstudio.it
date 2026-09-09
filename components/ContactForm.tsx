@@ -1,12 +1,19 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const confirmationRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    if (status === "success") {
+      confirmationRef.current?.focus();
+    }
+  }, [status]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -44,7 +51,11 @@ export function ContactForm() {
   }
 
   if (status === "success") {
-    return <p className="text-grafite">Grazie, il tuo messaggio è stato inviato. Ti risponderemo al più presto.</p>;
+    return (
+      <p ref={confirmationRef} role="status" tabIndex={-1} className="text-grafite outline-none">
+        Grazie, il tuo messaggio è stato inviato. Ti risponderemo al più presto.
+      </p>
+    );
   }
 
   return (
@@ -83,7 +94,11 @@ export function ContactForm() {
         <span>Acconsento al trattamento dei dati personali per essere ricontattato/a.</span>
       </label>
 
-      {status === "error" && <p className="text-sm text-red-700">{errorMessage}</p>}
+      {status === "error" && (
+        <p role="alert" className="border-l-2 border-muschio pl-3 text-sm text-grafite">
+          {errorMessage}
+        </p>
+      )}
 
       <button
         type="submit"
