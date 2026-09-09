@@ -6,10 +6,10 @@ import { StatsSection } from "@/components/StatsSection";
 import { CtaBand } from "@/components/CtaBand";
 import { getAllProjects } from "@/lib/projects";
 
-// Segnaposto generato dal render reale di Via Fedra 3. Da sostituire con il
-// filmato fornito da MRM: basta cambiare questi due percorsi.
+// Filmato temporaneo, da sostituire con quello di MRM prima della messa
+// online: cambiare questi due percorsi e sostituire i file in public/video.
 const HERO_VIDEO = {
-  src: "/video/hero-placeholder.mp4",
+  src: "/video/hero.mp4",
   poster: "/video/hero-poster.jpg",
 };
 

@@ -48,7 +48,7 @@ export function Hero({
 
       <div className="relative mx-6 max-w-3xl bg-grafite/85 px-8 py-10 text-center md:px-14 md:py-14">
         <h1 className="text-3xl font-black leading-tight text-carta md:text-5xl">{title}</h1>
-        <p className="mx-auto mt-5 text-carta/90">
+        <p className="mx-auto mt-5 text-center text-carta/90">
           Progettiamo, gestiamo l&apos;appalto, dirigiamo il cantiere e coordiniamo le maestranze. Un solo studio, un
           solo interlocutore.
         </p>

@@ -22,10 +22,13 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  /* Misura di riga leggibile. Niente `text-align: left` qui: vincerebbe
+     sull'allineamento ereditato e impedirebbe di centrare un paragrafo
+     dentro un blocco centrato. Il testo giustificato si evita non usandolo
+     — non c'è un solo `text-justify` nel progetto. */
   p,
   li,
   blockquote {
-    text-align: left;
     max-width: 70ch;
   }
 
