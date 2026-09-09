@@ -2,15 +2,25 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ContactForm } from "@/components/ContactForm";
 
+// Il modulo e' in tre passi: si arriva ai campi di contatto solo dopo
+// aver superato le due domande iniziali.
+async function goToLastStep(user: ReturnType<typeof userEvent.setup>) {
+  await user.click(screen.getByRole("button", { name: /avanti/i }));
+  await user.click(screen.getByRole("button", { name: /avanti/i }));
+}
+
 async function fillMinimum(user: ReturnType<typeof userEvent.setup>) {
+  await goToLastStep(user);
   await user.type(screen.getByRole("textbox", { name: /come ti chiami/i }), "Mario Rossi");
   await user.type(screen.getByRole("textbox", { name: /telefono o email/i }), "mario@example.com");
   await user.click(screen.getByRole("checkbox", { name: /trattamento dei dati/i }));
 }
 
 describe("ContactForm", () => {
-  it("renders the privacy consent checkbox unchecked by default", () => {
+  it("renders the privacy consent checkbox unchecked by default", async () => {
+    const user = userEvent.setup();
     render(<ContactForm />);
+    await goToLastStep(user);
     expect(screen.getByRole("checkbox", { name: /trattamento dei dati/i })).not.toBeChecked();
   });
 
@@ -19,13 +29,37 @@ describe("ContactForm", () => {
     expect(screen.queryByText(/fax/i)).not.toBeInTheDocument();
   });
 
-  it("guides the enquirer with options rather than a blank message box", () => {
+  it("opens on one simple question rather than the whole form", () => {
     render(<ContactForm />);
+    expect(screen.getByText(/passo 1 di 3/i)).toBeInTheDocument();
     // The intervention type is a choice, so someone who doesn't know the
-    // vocabulary can still answer — including an explicit "not sure yet".
-    expect(screen.getByRole("group", { name: /di cosa si tratta/i })).toBeInTheDocument();
+    // vocabulary can still answer, including an explicit "not sure yet".
     expect(screen.getByRole("radio", { name: /non lo so ancora/i })).toBeInTheDocument();
-    // The free-text box is explicitly optional.
+    // The contact fields belong to the last step, so they are hidden and
+    // genuinely absent from the accessibility tree — not merely invisible.
+    expect(screen.queryByRole("textbox", { name: /come ti chiami/i })).not.toBeInTheDocument();
+  });
+
+  it("walks forward and back through the steps without losing answers", async () => {
+    const user = userEvent.setup();
+    render(<ContactForm />);
+
+    await user.click(screen.getByRole("radio", { name: /nuova costruzione/i }));
+    await user.click(screen.getByRole("button", { name: /avanti/i }));
+    expect(screen.getByText(/passo 2 di 3/i)).toBeInTheDocument();
+
+    await user.type(screen.getByRole("textbox", { name: /dove si trova/i }), "Pescara");
+    await user.click(screen.getByRole("button", { name: /indietro/i }));
+    expect(screen.getByRole("radio", { name: /nuova costruzione/i })).toBeChecked();
+
+    await user.click(screen.getByRole("button", { name: /avanti/i }));
+    expect(screen.getByRole("textbox", { name: /dove si trova/i })).toHaveValue("Pescara");
+  });
+
+  it("keeps the free-text box optional on the last step", async () => {
+    const user = userEvent.setup();
+    render(<ContactForm />);
+    await goToLastStep(user);
     expect(screen.getByRole("textbox", { name: /facoltativo/i })).toBeInTheDocument();
   });
 

@@ -8,7 +8,7 @@ const LINKS = [
   { href: "/servizi", label: "Servizi" },
   { href: "/studio", label: "Studio" },
   { href: "/impegno-sociale", label: "Impegno sociale" },
-  { href: "/contatti", label: "Contatti" },
+  { href: "/#contatti", label: "Contatti" },
 ];
 
 export function Header() {

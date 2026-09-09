@@ -5,6 +5,7 @@ import { ProjectGrid } from "@/components/ProjectGrid";
 import { StatsSection } from "@/components/StatsSection";
 import { ContactForm } from "@/components/ContactForm";
 import { getAllProjects } from "@/lib/projects";
+import { getLavoriStats } from "@/lib/lavori";
 import { SITE } from "@/lib/site";
 
 // Filmato temporaneo, da sostituire con quello di MRM prima della messa
@@ -16,6 +17,7 @@ const HERO_VIDEO = {
 
 export default function HomePage() {
   const projects = getAllProjects().slice(0, 8);
+  const stats = getLavoriStats();
 
   return (
     <>
@@ -39,13 +41,25 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/*
+        Le cifre sono calcolate dall'elenco lavori pubblicato dallo studio,
+        non scritte a mano, e sono per definizione dei minimi: quell'elenco è
+        una selezione, non la storia completa dello studio. Per questo sono
+        presentate come "oltre" e la nota sotto lo dice apertamente — un
+        numero secco leggerebbe come "hanno fatto solo questo".
+      */}
       <StatsSection
         stats={[
-          { label: "Anni di attività", value: null },
-          { label: "Opere realizzate", value: null },
-          { label: "Importo lavori gestito", value: null },
-          { label: "Cantieri seguiti", value: null },
+          // Dato fornito dallo studio, da confermare prima della pubblicazione.
+          { label: "Anni di attività", value: "25+" },
+          {
+            label: "Importo lavori gestito",
+            value: `oltre € ${Math.floor(stats.importoTotale / 1_000_000)} mln`,
+          },
+          { label: "Cantieri seguiti in direzione lavori", value: `oltre ${stats.conDirezioneLavori}` },
+          { label: "Sedi in Abruzzo", value: String(SITE.offices.length) },
         ]}
+        note="Cifre ricavate dai lavori documentati sul sito: i totali effettivi dello studio sono superiori."
       />
 
       <section className="px-6 py-24 md:px-12">
@@ -81,6 +95,9 @@ export default function HomePage() {
               <a href={`mailto:${SITE.email}`} className="block text-carta/70 hover:text-carta">
                 {SITE.email}
               </a>
+              <Link href="/contatti" className="inline-block text-carta underline">
+                Indicazioni e mappe delle due sedi
+              </Link>
             </div>
           </div>
 

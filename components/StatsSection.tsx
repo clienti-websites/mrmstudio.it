@@ -1,4 +1,10 @@
-export function StatsSection({ stats }: { stats: Array<{ label: string; value: string | null }> }) {
+export function StatsSection({
+  stats,
+  note,
+}: {
+  stats: Array<{ label: string; value: string | null }>;
+  note?: string;
+}) {
   return (
     <section aria-label="Numeri di MRM Studio" className="border-y border-nebbia px-6 py-16 md:px-12">
       <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 md:grid-cols-4">
@@ -11,6 +17,7 @@ export function StatsSection({ stats }: { stats: Array<{ label: string; value: s
           </div>
         ))}
       </div>
+      {note && <p className="mx-auto mt-8 max-w-6xl text-sm text-pietra">{note}</p>}
     </section>
   );
 }
