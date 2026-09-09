@@ -9,7 +9,7 @@ const LABELS: Record<Phase, string> = {
 
 export function FaseChecklist({ phases }: { phases: Phase[] }) {
   return (
-    <ul aria-label="Fasi seguite da MRM in questo progetto" className="flex flex-wrap gap-x-5 gap-y-2">
+    <ul aria-label="Le quattro fasi su questo progetto" className="flex flex-wrap gap-x-5 gap-y-2">
       {PHASES.map((phase) => {
         const done = phases.includes(phase);
         return (
@@ -21,6 +21,7 @@ export function FaseChecklist({ phases }: { phases: Phase[] }) {
             <span data-done={done} className={done ? "text-grafite" : "text-pietra"}>
               {LABELS[phase]}
             </span>
+            <span className="sr-only">{done ? "seguita" : "non seguita"}</span>
           </li>
         );
       })}
