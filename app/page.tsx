@@ -42,24 +42,24 @@ export default function HomePage() {
       </section>
 
       {/*
-        Le cifre sono calcolate dall'elenco lavori pubblicato dallo studio,
-        non scritte a mano, e sono per definizione dei minimi: quell'elenco è
-        una selezione, non la storia completa dello studio. Per questo sono
-        presentate come "oltre" e la nota sotto lo dice apertamente — un
-        numero secco leggerebbe come "hanno fatto solo questo".
+        Niente importo lavori aggregato qui: sommare le opere darebbe una
+        cifra in gran parte relativa a incarichi di solo progetto o piano
+        urbanistico, che lo studio non ha "gestito". Il dettaglio corretto,
+        importo per importo e con le prestazioni svolte, sta nella tabella
+        dei lavori in /progetti.
+
+        Il conteggio dei cantieri è calcolato dall'elenco lavori, non scritto
+        a mano, ed è presentato come minimo: quell'elenco è una selezione,
+        non la storia completa dello studio.
       */}
       <StatsSection
         stats={[
           // Dato fornito dallo studio, da confermare prima della pubblicazione.
           { label: "Anni di attività", value: "25+" },
-          {
-            label: "Importo lavori gestito",
-            value: `oltre € ${Math.floor(stats.importoTotale / 1_000_000)} mln`,
-          },
           { label: "Cantieri seguiti in direzione lavori", value: `oltre ${stats.conDirezioneLavori}` },
           { label: "Sedi in Abruzzo", value: String(SITE.offices.length) },
         ]}
-        note="Cifre ricavate dai lavori documentati sul sito: i totali effettivi dello studio sono superiori."
+        note="Dato ricavato dai lavori documentati sul sito: i cantieri effettivamente seguiti dallo studio sono di più."
       />
 
       <section className="px-6 py-24 md:px-12">
