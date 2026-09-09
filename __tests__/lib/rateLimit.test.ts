@@ -12,4 +12,10 @@ describe("isRateLimited", () => {
   it("tracks each IP independently", () => {
     expect(isRateLimited("203.0.113.2")).toBe(false);
   });
+
+  it("fails open (never limits) when no IP could be determined", () => {
+    for (let i = 0; i < 10; i++) {
+      expect(isRateLimited(null)).toBe(false);
+    }
+  });
 });
