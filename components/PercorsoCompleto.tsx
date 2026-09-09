@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 
 const FASI = [
@@ -67,9 +68,7 @@ export function PercorsoCompleto() {
           ))}
         </div>
       </div>
-      <p aria-hidden="true" className="mb-16 text-xs uppercase tracking-wide text-pietra">
-        Così lavorano gli altri — nessuna connessione
-      </p>
+      <p className="mb-16 text-xs text-pietra">Così lavorano gli altri — nessuna connessione</p>
 
       <div className="relative max-w-4xl">
         <svg viewBox="0 0 800 40" className="h-10 w-full overflow-visible" role="presentation">
@@ -92,7 +91,11 @@ export function PercorsoCompleto() {
         <div className="mt-6 grid grid-cols-2 gap-8 md:grid-cols-4">
           {FASI.map((fase) => (
             <div key={fase.id}>
-              <h3 className="mb-1 font-medium text-grafite">{fase.label}</h3>
+              <h3 className="mb-1 font-medium text-grafite">
+                <Link href={`/servizi#${fase.id}`} className="hover:text-muschio hover:underline">
+                  {fase.label}
+                </Link>
+              </h3>
               <p className="text-sm text-pietra">{fase.detail}</p>
             </div>
           ))}

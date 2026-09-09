@@ -17,6 +17,7 @@ export function Gallery({ images }: { images: GalleryImage[] }) {
             key={image.src}
             type="button"
             onClick={() => setIndex(i)}
+            aria-label={`Apri l'immagine: ${image.alt}`}
             className="relative aspect-[4/3] overflow-hidden bg-nebbia"
           >
             <Image src={image.src} alt={image.alt} fill sizes="(min-width: 768px) 33vw, 50vw" className="object-cover" />

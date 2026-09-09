@@ -28,7 +28,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Vai al contenuto
         </a>
         <Header />
-        <main id="contenuto">{children}</main>
+        <main id="contenuto" tabIndex={-1} className="outline-none">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
