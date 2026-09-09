@@ -23,18 +23,22 @@ export function ContactForm() {
       website: String(form.get("website") ?? ""),
     };
 
-    const response = await fetch("/api/contatti", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+    try {
+      const response = await fetch("/api/contatti", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-    if (response.ok) {
-      setStatus("success");
-      event.currentTarget.reset();
-    } else {
-      const data = await response.json().catch(() => ({}));
-      setErrorMessage(data.error ?? "Si è verificato un errore. Riprova.");
+      if (response.ok) {
+        setStatus("success");
+      } else {
+        const data = await response.json().catch(() => ({}));
+        setErrorMessage(data.error ?? "Si è verificato un errore. Riprova.");
+        setStatus("error");
+      }
+    } catch {
+      setErrorMessage("Impossibile inviare il messaggio. Controlla la connessione e riprova.");
       setStatus("error");
     }
   }
