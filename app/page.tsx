@@ -3,6 +3,7 @@ import { Hero } from "@/components/Hero";
 import { PercorsoCompleto } from "@/components/PercorsoCompleto";
 import { ProjectGrid } from "@/components/ProjectGrid";
 import { StatsSection } from "@/components/StatsSection";
+import { CtaBand } from "@/components/CtaBand";
 import { getAllProjects } from "@/lib/projects";
 
 export default function HomePage() {
@@ -49,17 +50,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-grafite px-6 py-24 text-carta md:px-12">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-2xl font-black md:text-3xl">Un solo interlocutore, dall&apos;idea alla consegna.</h2>
-          <Link
-            href="/contatti"
-            className="mt-6 inline-block bg-muschio px-8 py-3 font-medium text-carta hover:bg-muschio/90"
-          >
-            Contattaci
-          </Link>
-        </div>
-      </section>
+      <CtaBand
+        title="Un solo interlocutore, dall'idea alla consegna."
+        cta="Contattaci"
+        href="/contatti"
+        tone="dark"
+      />
     </>
   );
 }

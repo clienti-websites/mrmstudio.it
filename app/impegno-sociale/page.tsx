@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { CtaBand } from "@/components/CtaBand";
 
 export const metadata: Metadata = {
   title: "Impegno Sociale — MRM Studio, Pescara e Abruzzo",
@@ -20,12 +20,7 @@ export default function ImpegnoSocialePage() {
         </p>
       </div>
 
-      <div className="mt-16 bg-nebbia p-8 text-center">
-        <p className="mb-4 text-lg font-medium text-grafite">Vuoi saperne di più?</p>
-        <Link href="/contatti" className="inline-block bg-muschio px-6 py-3 font-medium text-carta hover:bg-muschio/90">
-          Contattaci
-        </Link>
-      </div>
+      <CtaBand title="Vuoi saperne di più?" cta="Contattaci" href="/contatti" />
     </div>
   );
 }
