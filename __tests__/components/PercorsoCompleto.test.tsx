@@ -23,7 +23,7 @@ describe("PercorsoCompleto", () => {
   it("frames the four phases as one engagement rather than four separate offers", () => {
     render(<PercorsoCompleto />);
     expect(screen.getByText(/un unico incarico/i)).toBeInTheDocument();
-    expect(screen.getByText(/un solo interlocutore per tutte e quattro le fasi/i)).toBeInTheDocument();
+    expect(screen.getByText(/qualunque sia la fase, chiami noi/i)).toBeInTheDocument();
   });
 
   it("keeps the icons out of the accessibility tree so labels carry the meaning", () => {

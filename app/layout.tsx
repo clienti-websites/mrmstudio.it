@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     template: "%s | MRM Studio",
   },
   description:
-    "MRM Studio segue l'opera dall'idea alla consegna delle chiavi: progettazione, appalto, direzione lavori e maestranze, a Pescara e in Abruzzo.",
+    "Progettazione, appalto, direzione lavori e coordinamento delle imprese. MRM Studio segue l'opera dall'idea alla consegna delle chiavi, a Pescara e in Abruzzo.",
   openGraph: {
     type: "website",
     locale: "it_IT",

@@ -34,10 +34,10 @@ const ICONS = {
 } as const;
 
 const FASI = [
-  { id: "progettazione", label: "Progettazione", gloss: "Tutte le discipline, in casa" },
-  { id: "appalto", label: "Appalto", gloss: "Contratti e affidamento lavori" },
-  { id: "direzione-lavori", label: "Direzione lavori", gloss: "Cantiere, collaudo, agibilità" },
-  { id: "maestranze", label: "Maestranze", gloss: "Imprese e fornitori coordinati" },
+  { id: "progettazione", label: "Progettazione", gloss: "La facciamo tutta qui dentro" },
+  { id: "appalto", label: "Appalto", gloss: "Ce ne occupiamo per tuo conto" },
+  { id: "direzione-lavori", label: "Direzione lavori", gloss: "In cantiere ci stiamo noi" },
+  { id: "maestranze", label: "Maestranze", gloss: "Le imprese le scegliamo noi" },
 ] as const;
 
 export function PercorsoCompleto() {
@@ -48,7 +48,7 @@ export function PercorsoCompleto() {
           id="percorso-titolo"
           className="mx-auto max-w-3xl text-center text-3xl font-black tracking-tight text-grafite md:text-4xl"
         >
-          Un solo studio segue l&apos;opera dall&apos;idea alla consegna delle chiavi.
+          Seguiamo tutto noi, dal primo disegno alle chiavi in mano.
         </h2>
 
         {/* La graffa che racchiude le quattro fasi è l'argomento della
@@ -90,8 +90,8 @@ export function PercorsoCompleto() {
         </div>
 
         <p className="mx-auto mt-10 max-w-2xl text-center text-lg text-grafite">
-          Il committente non deve cercare né coordinare nessun altro: un solo interlocutore per tutte e quattro le
-          fasi.
+          Non devi cercare nessun altro, e non devi far parlare tra loro professionisti diversi. Qualunque sia la
+          fase, chiami noi.
         </p>
       </div>
     </section>

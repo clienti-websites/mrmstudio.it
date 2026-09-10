@@ -60,7 +60,7 @@ export default function HomePage() {
       */}
       <StatsSection
         title="Lo studio in breve"
-        intro="Progettazione sviluppata internamente, cantieri seguiti di persona, due sedi in Abruzzo."
+        intro="Progettiamo in casa e in cantiere ci andiamo di persona. Ci trovi a Pescara e a Castel di Sangro."
         stats={[
           { label: "Anni di attività", value: "19+" },
           { label: "Cantieri seguiti in direzione lavori", value: "20+" },
@@ -84,10 +84,10 @@ export default function HomePage() {
         <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-2">
           <div>
             <h2 id="contatti-titolo" className="text-2xl font-black text-carta md:text-3xl">
-              Un solo interlocutore, dall&apos;idea alla consegna.
+              Da dove vuoi cominciare?
             </h2>
             <p className="mt-4 text-carta/80">
-              Raccontaci l&apos;intervento che hai in mente. Ti richiamiamo noi.
+              Dicci cosa hai in mente, anche se è ancora un&apos;idea vaga. Ti richiamiamo noi.
             </p>
             <div className="mt-8 space-y-4 text-sm">
               {SITE.offices.map((office) => (

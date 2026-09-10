@@ -14,31 +14,31 @@ const SEZIONI = [
     id: "progettazione",
     title: "Progettazione",
     rischio:
-      "Senza un progetto interamente coordinato, ogni specialista (architetto, strutturista, impiantista) lavora per conto proprio: le versioni non coincidono, le responsabilità si diluiscono.",
+      "Se architetto, strutturista e impiantista lavorano ognuno per conto suo, ti ritrovi con versioni che non coincidono e senza nessuno che risponda dell'insieme.",
     come:
-      "MRM sviluppa internamente ogni disciplina — architettonica, strutturale, energetica, impiantistica, rendering e modellazione — così il progetto nasce già coerente, senza passaggi tra studi diversi.",
+      "Sviluppiamo ogni disciplina qui dentro, dall'architettonico allo strutturale, dall'energetico agli impianti fino ai rendering. Il progetto ti arriva già coerente, senza passaggi tra studi diversi.",
   },
   {
     id: "appalto",
     title: "Appalto",
     rischio:
-      "La parte contrattuale e amministrativa dell'affidamento lavori è spesso il punto in cui un committente privo di competenze tecniche si trova più esposto.",
-    come: "MRM segue la gestione dell'appalto per conto del committente, dalla stesura alla verifica delle condizioni contrattuali.",
+      "L'affidamento dei lavori è il punto dove rischi di più, perché si decide su contratti e clausole che nessuno ti ha mai spiegato.",
+    come: "Ce ne occupiamo noi per tuo conto, dalla stesura alla verifica delle condizioni contrattuali.",
   },
   {
     id: "direzione-lavori",
     title: "Direzione lavori",
     rischio:
-      "Senza una direzione lavori indipendente e competente, controllare che il cantiere segua il progetto, i tempi e le norme di sicurezza diventa un'incognita.",
+      "Senza qualcuno di indipendente che controlli il cantiere, non hai modo di sapere se quello che viene costruito segue il progetto, i tempi e le regole di sicurezza.",
     come:
-      "MRM dirige tecnicamente il cantiere: controllo dell'esecuzione, contabilità lavori, sicurezza, fino a collaudo e agibilità.",
+      "Dirigiamo noi il cantiere e ci restiamo fino alla fine, dalla contabilità dei lavori alla sicurezza, fino al collaudo e all'agibilità.",
   },
   {
     id: "maestranze",
     title: "Maestranze",
     rischio:
-      "Cercare e coordinare imprese, impiantisti, operai e fornitori — e fare da arbitro tra loro — è il compito che più spesso ricade, non richiesto, sul committente.",
-    come: "MRM seleziona e coordina le maestranze necessarie, restando l'unico interlocutore del committente per tutta la durata dei lavori.",
+      "Se non le coordina nessuno, finisci a cercare imprese e fornitori da solo e a fare da arbitro quando non vanno d'accordo.",
+    come: "Scegliamo noi le imprese e le teniamo insieme, e per tutta la durata dei lavori continui a parlare solo con noi.",
   },
 ] as const;
 
@@ -47,8 +47,8 @@ export default function ServiziPage() {
     <div className="mx-auto max-w-4xl px-6 py-16 md:px-12">
       <h1 className="mb-4 text-3xl font-black text-grafite md:text-4xl">Servizi</h1>
       <p className="mb-16 max-w-2xl text-pietra">
-        Quattro fasi, un solo studio. MRM Studio segue l&apos;opera dall&apos;idea alla consegna delle chiavi a
-        Pescara e in tutto l&apos;Abruzzo.
+        Un intervento edilizio passa per quattro fasi. Le seguiamo tutte noi, a Pescara e in tutto l&apos;Abruzzo,
+        così non devi tenere insieme professionisti diversi.
       </p>
 
       {SEZIONI.map((sezione) => {

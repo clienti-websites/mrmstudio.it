@@ -8,8 +8,8 @@ export function TabellaLavori() {
         Elenco dei lavori
       </h2>
       <p className="mt-3 max-w-2xl text-pietra">
-        Gli incarichi svolti dallo studio, con importo lavori e prestazioni. Alcuni hanno una scheda con le
-        immagini, altri sono documentati dai soli dati.
+        Gli incarichi che abbiamo svolto, con importo lavori e prestazioni. Di alcuni trovi anche la scheda con
+        le immagini.
       </p>
 
       <div className="mt-10 overflow-x-auto">

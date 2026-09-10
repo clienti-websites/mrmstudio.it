@@ -60,7 +60,7 @@ export default async function ProgettoPage({ params }: { params: Promise<{ slug:
           <FaseChecklist phases={[...project.phases]} />
         ) : (
           <p className="text-sm text-pietra">
-            Prestazioni svolte su questo intervento: dettaglio in arrivo da MRM Studio.
+            Il dettaglio delle prestazioni svolte su questo intervento arriverà a breve.
           </p>
         )}
       </div>
@@ -88,11 +88,11 @@ export default async function ProgettoPage({ params }: { params: Promise<{ slug:
 
       <section aria-labelledby="parlane-titolo" className="mt-16 scroll-mt-20 bg-nebbia p-8 md:p-12">
         <h2 id="parlane-titolo" className="text-2xl font-black text-grafite">
-          Ti interessa un intervento come questo?
+          Ti piacerebbe qualcosa di simile?
         </h2>
         <p className="mt-3 max-w-2xl text-pietra">
-          Non serve avere già un progetto, né sapere cosa chiedere. Rispondi a tre domande e ti ricontattiamo
-          noi: al resto pensiamo noi, come per {project.title}.
+          Non serve che tu abbia già un progetto, né che sappia cosa chiedere. Rispondi a tre domande e ti
+          richiamiamo noi.
         </p>
         <div className="mt-8 max-w-2xl">
           <ContactForm reference={project.title} />

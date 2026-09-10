@@ -12,9 +12,8 @@ export default function StudioPage() {
     <div className="mx-auto max-w-4xl px-6 py-16 md:px-12">
       <h1 className="mb-4 text-3xl font-black text-grafite md:text-4xl">Lo Studio</h1>
       <p className="mb-16 max-w-2xl text-pietra">
-        MRM Studio è una società di architettura e ingegneria con sede a Pescara e a Castel di Sangro. Segue
-        l&apos;opera dall&apos;idea alla consegna delle chiavi, con ogni disciplina di progettazione sviluppata
-        internamente.
+        Siamo una società di architettura e ingegneria, con studio a Pescara e a Castel di Sangro. Progettiamo
+        ogni disciplina qui dentro e restiamo sui lavori fino alla consegna delle chiavi.
       </p>
 
       <section className="border-t border-nebbia py-12">

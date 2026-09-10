@@ -11,21 +11,48 @@ describe("Header", () => {
     }
   });
 
-  it("toggles the mobile menu when the hamburger button is pressed", async () => {
+  it("opens the mobile menu as a side panel and closes it again", async () => {
+    const user = userEvent.setup();
     render(<Header />);
-    const toggle = screen.getByRole("button", { name: /apri il menu/i });
+    const toggle = screen.getByRole("button", { name: "Menu" });
     const mobileNav = screen.getByTestId("mobile-nav");
 
     expect(mobileNav).toHaveAttribute("data-open", "false");
-    expect(mobileNav.className).toMatch(/(?:^|\s)hidden(?:\s|$)/);
-    expect(mobileNav.className).not.toMatch(/(?:^|\s)block(?:\s|$)/);
+    expect(mobileNav).toHaveAttribute("hidden");
     expect(toggle).toHaveAttribute("aria-expanded", "false");
 
-    await userEvent.click(toggle);
+    await user.click(toggle);
 
     expect(mobileNav).toHaveAttribute("data-open", "true");
-    expect(mobileNav.className).toMatch(/(?:^|\s)block(?:\s|$)/);
-    expect(mobileNav.className).not.toMatch(/(?:^|\s)hidden(?:\s|$)/);
+    expect(mobileNav).not.toHaveAttribute("hidden");
+    // Pannello laterale sovrapposto, non una tendina che spinge la pagina.
+    expect(mobileNav.className).toMatch(/(?:^|\s)fixed(?:\s|$)/);
+    expect(mobileNav.className).toMatch(/right-0/);
     expect(toggle).toHaveAttribute("aria-expanded", "true");
+  });
+
+  it("stops the page behind from scrolling while the panel is open", async () => {
+    const user = userEvent.setup();
+    render(<Header />);
+
+    await user.click(screen.getByRole("button", { name: "Menu" }));
+    expect(document.body.style.overflow).toBe("hidden");
+
+    await user.click(screen.getByRole("button", { name: /chiudi il menu/i }));
+    expect(document.body.style.overflow).not.toBe("hidden");
+  });
+
+  it("closes on Escape and when a destination is chosen", async () => {
+    const user = userEvent.setup();
+    render(<Header />);
+    const mobileNav = screen.getByTestId("mobile-nav");
+
+    await user.click(screen.getByRole("button", { name: "Menu" }));
+    await user.keyboard("{Escape}");
+    expect(mobileNav).toHaveAttribute("data-open", "false");
+
+    await user.click(screen.getByRole("button", { name: "Menu" }));
+    await user.click(within(mobileNav).getByRole("link", { name: "Servizi" }));
+    expect(mobileNav).toHaveAttribute("data-open", "false");
   });
 });
