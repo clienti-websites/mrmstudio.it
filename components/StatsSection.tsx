@@ -1,19 +1,21 @@
 export function StatsSection({ stats }: { stats: Array<{ label: string; value: string | null }> }) {
   return (
     <section aria-label="Numeri di MRM Studio" className="border-y border-nebbia px-6 py-16 md:px-12">
-      {/* Le colonne seguono il numero di dati, così non resta una cella
-          vuota quando se ne mostrano tre invece di quattro. */}
+      {/* Le colonne seguono il numero di dati, così non resta una cella vuota
+          quando se ne mostrano tre invece di quattro. Con tre il gruppo sta
+          più stretto, altrimenti le celle si allontanano tanto da non
+          leggersi più come un blocco unico. */}
       <div
-        className={`mx-auto grid max-w-6xl gap-8 ${
-          stats.length === 3 ? "grid-cols-1 sm:grid-cols-3" : "grid-cols-2 md:grid-cols-4"
+        className={`mx-auto grid gap-10 text-center ${
+          stats.length === 3 ? "max-w-3xl grid-cols-1 sm:grid-cols-3" : "max-w-6xl grid-cols-2 md:grid-cols-4"
         }`}
       >
         {stats.map((stat) => (
-          <div key={stat.label}>
+          <div key={stat.label} className="flex flex-col items-center">
             <p className="text-4xl font-black tabular-nums text-grafite md:text-5xl">
               {stat.value ?? <span className="text-xl font-medium text-pietra">Dato in arrivo</span>}
             </p>
-            <p className="mt-2 text-sm text-pietra">{stat.label}</p>
+            <p className="mt-2 max-w-[18ch] text-sm text-pietra">{stat.label}</p>
           </div>
         ))}
       </div>
