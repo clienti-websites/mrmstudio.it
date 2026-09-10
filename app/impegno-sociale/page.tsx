@@ -11,13 +11,12 @@ export default function ImpegnoSocialePage() {
     <div className="mx-auto max-w-3xl px-6 py-16 md:px-12">
       <h1 className="mb-4 text-3xl font-black text-grafite md:text-4xl">Impegno Sociale</h1>
 
+      {/* Cosa serve per completare questa pagina: di cosa si tratta, il ruolo
+          di MRM, quando, con quale esito, e le fotografie. Il riferimento dato
+          dal cliente e' "Elena Aiello". Finche' non arriva, meglio una riga
+          asciutta che un paragrafo che spiega il vuoto. */}
       <div className="border-t border-nebbia py-12">
-        <p className="text-pietra">
-          Questa pagina è in attesa del materiale da parte di MRM Studio. Il riferimento indicato è
-          &quot;Elena Aiello&quot;; mancano ancora: di cosa si tratta, quale è stato il ruolo di MRM, quando,
-          con quale esito, e il materiale fotografico. Nessun contenuto è stato inventato per riempire questo
-          spazio.
-        </p>
+        <p className="text-pietra">In attesa di materiale.</p>
       </div>
 
       <CtaBand title="Vuoi saperne di più?" cta="Contattaci" href="/contatti" />
