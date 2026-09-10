@@ -13,6 +13,10 @@ const LINKS = [
   { href: "/#contatti", label: "Contatti" },
 ];
 
+// Nel pannello la Home e' una voce come le altre. Sulla barra desktop no:
+// li' ci arrivi dal logo, e ripeterla sarebbe una voce di troppo.
+const LINKS_MOBILE = [{ href: "/", label: "Home" }, ...LINKS];
+
 export function Header() {
   // Lo stato ricorda in quale pagina il pannello e' stato aperto: cambiando
   // rotta smette di coincidere e il pannello si chiude da se', senza un
@@ -131,7 +135,7 @@ export function Header() {
                 </button>
               </div>
 
-              {LINKS.map((link) => (
+              {LINKS_MOBILE.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}

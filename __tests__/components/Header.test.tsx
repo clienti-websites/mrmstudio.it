@@ -52,6 +52,19 @@ describe("Header", () => {
     expect(document.body.style.overflow).not.toBe("hidden");
   });
 
+  it("offers Home in the panel but not twice in the desktop bar", async () => {
+    const user = userEvent.setup();
+    render(<Header />);
+
+    // Sulla barra desktop alla home ci si arriva dal logo.
+    const desktopNav = screen.getByRole("navigation", { name: "Principale" });
+    expect(within(desktopNav).queryByRole("link", { name: "Home" })).not.toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: "Menu" }));
+    const panel = screen.getByTestId("mobile-nav");
+    expect(within(panel).getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
+  });
+
   it("closes itself when the visitor moves to another page", async () => {
     const user = userEvent.setup();
     const { rerender } = render(<Header />);
