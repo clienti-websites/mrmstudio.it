@@ -2,6 +2,13 @@ import { render, screen, waitForElementToBeRemoved, within } from "@testing-libr
 import userEvent from "@testing-library/user-event";
 import { Header } from "@/components/Header";
 
+let mockPathname = "/";
+jest.mock("next/navigation", () => ({ usePathname: () => mockPathname }));
+
+beforeEach(() => {
+  mockPathname = "/";
+});
+
 describe("Header", () => {
   it("renders all primary nav links", () => {
     render(<Header />);
@@ -43,6 +50,21 @@ describe("Header", () => {
     await user.click(screen.getByRole("button", { name: /chiudi il menu/i }));
     await waitForElementToBeRemoved(() => screen.queryByTestId("mobile-nav"));
     expect(document.body.style.overflow).not.toBe("hidden");
+  });
+
+  it("closes itself when the visitor moves to another page", async () => {
+    const user = userEvent.setup();
+    const { rerender } = render(<Header />);
+
+    await user.click(screen.getByRole("button", { name: "Menu" }));
+    expect(screen.getByTestId("mobile-nav")).toBeInTheDocument();
+
+    // Una navigazione qualsiasi, compreso il tasto indietro del browser,
+    // cambia il percorso: il pannello non deve restare aperto sopra la
+    // pagina nuova.
+    mockPathname = "/progetti";
+    rerender(<Header />);
+    await waitForElementToBeRemoved(() => screen.queryByTestId("mobile-nav"));
   });
 
   it("closes on Escape and when a destination is chosen", async () => {
