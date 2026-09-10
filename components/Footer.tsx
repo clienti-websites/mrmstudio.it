@@ -31,9 +31,14 @@ export function Footer() {
         <a href={`mailto:${SITE.email}`} className="hover:text-carta">
           {SITE.email}
         </a>
-        <Link href="/contatti" className="hover:text-carta">
-          Contatti
-        </Link>
+        <div className="flex gap-6">
+          <Link href="/privacy" className="hover:text-carta">
+            Privacy
+          </Link>
+          <Link href="/contatti" className="hover:text-carta">
+            Contatti
+          </Link>
+        </div>
       </div>
     </footer>
   );

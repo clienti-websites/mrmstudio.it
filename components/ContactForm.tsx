@@ -192,7 +192,10 @@ export function ContactForm({ reference }: { reference?: string }) {
 
         <label className="flex items-start gap-2 text-sm text-pietra">
           <input type="checkbox" name="consent" defaultChecked={false} required={isLast} className="mt-1" />
-          <span>Acconsento al trattamento dei dati personali per essere ricontattato/a.</span>
+          <span>
+            Acconsento al trattamento dei dati personali per essere ricontattato/a, come descritto{" "}
+            <a href="/privacy" className="underline hover:text-grafite">nell&apos;informativa privacy</a>.
+          </span>
         </label>
       </div>
 
