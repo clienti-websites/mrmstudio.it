@@ -1,10 +1,34 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useSyncExternalStore } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 type HeroVideo = { src: string; poster: string };
+
+const QUERY_SCHERMO = "(min-width: 768px)";
+const QUERY_MOVIMENTO = "(prefers-reduced-motion: reduce)";
+
+function ascoltaPreferenze(alCambio: () => void) {
+  const schermo = window.matchMedia(QUERY_SCHERMO);
+  const movimento = window.matchMedia(QUERY_MOVIMENTO);
+  schermo.addEventListener("change", alCambio);
+  movimento.addEventListener("change", alCambio);
+  return () => {
+    schermo.removeEventListener("change", alCambio);
+    movimento.removeEventListener("change", alCambio);
+  };
+}
+
+function leggiPreferenze() {
+  const risparmioDati =
+    (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
+  return (
+    window.matchMedia(QUERY_SCHERMO).matches &&
+    !window.matchMedia(QUERY_MOVIMENTO).matches &&
+    !risparmioDati
+  );
+}
 
 export function Hero({
   image,
@@ -17,22 +41,19 @@ export function Hero({
   video?: HeroVideo;
   ctaHref?: string;
 }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const element = videoRef.current;
-    if (!element) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      element.pause();
-      element.currentTime = 0;
-    }
-  }, []);
+  // Il video pesa qualche megabyte ed e' decorativo: non lo scarica chi apre
+  // il sito dal telefono, chi ha chiesto meno movimento o chi ha il risparmio
+  // dati attivo. Sotto resta sempre la fotografia, che next/image consegna
+  // gia' ridimensionata per lo schermo.
+  const vaBeneIlVideo = useSyncExternalStore(ascoltaPreferenze, leggiPreferenze, () => false);
+  const mostraVideo = Boolean(video) && vaBeneIlVideo;
 
   return (
     <section className="relative flex h-[85dvh] min-h-[560px] w-full items-center justify-center overflow-hidden">
-      {video ? (
+      <Image src={image.src} alt={image.alt} fill priority sizes="100vw" className="object-cover" />
+
+      {mostraVideo && video && (
         <video
-          ref={videoRef}
           className="absolute inset-0 h-full w-full object-cover"
           src={video.src}
           poster={video.poster}
@@ -40,10 +61,8 @@ export function Hero({
           muted
           loop
           playsInline
-          aria-label={image.alt}
+          aria-hidden="true"
         />
-      ) : (
-        <Image src={image.src} alt={image.alt} fill priority sizes="100vw" className="object-cover" />
       )}
 
       {/*
