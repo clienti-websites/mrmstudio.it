@@ -15,32 +15,33 @@ const SEZIONI: Array<{ id: Phase; title: string; rischio: string; come: string }
     id: "progettazione",
     title: "Progettazione",
     rischio:
-      "Se architetto, strutturista e impiantista lavorano ognuno per conto suo, ti ritrovi con versioni che non coincidono e senza nessuno che risponda dell'insieme.",
+      "Quando architettonico, strutture e impianti nascono in studi diversi, le incongruenze non vengono fuori sui disegni ma in cantiere, sotto forma di varianti, fermi e costi che nessuno aveva previsto. E quando succede, ognuno indica l'altro.",
     come:
-      "Sviluppiamo ogni disciplina qui dentro, dall'architettonico allo strutturale, dall'energetico agli impianti fino ai rendering. Il progetto ti arriva già coerente, senza passaggi tra studi diversi.",
+      "Da noi le discipline stanno nella stessa stanza. Facciamo il rilievo, il progetto architettonico e il definitivo, l'esecutivo strutturale, il progetto energetico e degli impianti, i grafici esecutivi e il computo, fino alle viste fotorealistiche per vedere come verrà prima di cominciare. Se una scelta strutturale complica gli impianti ce ne accorgiamo mentre disegniamo, non quando arriva l'impresa.",
   },
   {
     id: "appalto",
     title: "Appalto",
     rischio:
-      "L'affidamento dei lavori è il punto dove rischi di più, perché si decide su contratti e clausole che nessuno ti ha mai spiegato.",
-    come: "Ce ne occupiamo noi per tuo conto, dalla stesura alla verifica delle condizioni contrattuali.",
+      "L'affidamento dei lavori si decide sulla carta, tra voci di computo, tempi contrattuali, penali e riserve. Chi non ha gli strumenti per leggerli firma condizioni che si pagano più avanti, quando cambiarle non è più possibile.",
+    come:
+      "Prepariamo la documentazione tecnica per la gara o per la trattativa, confrontiamo le offerte sul merito e non solo sul ribasso, e verifichiamo le condizioni contrattuali prima che tu firmi. Restiamo dalla tua parte del tavolo.",
   },
   {
     id: "direzione-lavori",
     title: "Direzione lavori",
     rischio:
-      "Senza qualcuno di indipendente che controlli il cantiere, non hai modo di sapere se quello che viene costruito segue il progetto, i tempi e le regole di sicurezza.",
+      "In cantiere il progetto incontra la realtà. Senza una direzione lavori che risponda a te e non all'impresa, non hai modo di sapere se quello che viene costruito corrisponde a quello che hai approvato, né se tempi e sicurezza vengono rispettati.",
     come:
-      "Dirigiamo noi il cantiere e ci restiamo fino alla fine, dalla contabilità dei lavori alla sicurezza, fino al collaudo e all'agibilità.",
+      "Seguiamo l'esecuzione dall'apertura del cantiere alla consegna. Controlliamo che venga realizzato quello che è stato approvato, teniamo la contabilità dei lavori e gli stati di avanzamento, coordiniamo la sicurezza e chiudiamo con il collaudo e le pratiche per l'agibilità.",
   },
   {
     id: "maestranze",
     title: "Maestranze",
     rischio:
-      "Se non le coordina nessuno, finisci a cercare imprese e fornitori da solo e a fare da arbitro quando non vanno d'accordo.",
+      "Trovare imprese e fornitori affidabili è già difficile. Farli lavorare insieme lo è di più, e quando qualcosa non torna finisci a fare da arbitro tra chi ha posato e chi doveva passare dopo.",
     come:
-      "Scegliamo noi le imprese e le teniamo insieme, e per tutta la durata dei lavori continui a parlare solo con noi.",
+      "Le imprese le individuiamo e le coordiniamo noi, tenendo insieme tempi e lavorazioni. Tu continui a parlare con una persona sola per tutta la durata dei lavori, anche quando in cantiere ce ne sono dieci.",
   },
 ];
 
@@ -51,8 +52,10 @@ export default function ServiziPage() {
         <div className="mx-auto max-w-4xl">
           <h1 className="text-3xl font-black text-carta md:text-5xl">Quattro fasi, un solo studio.</h1>
           <p className="mt-6 max-w-2xl text-lg text-carta/85">
-            Un intervento edilizio passa per quattro fasi. Le seguiamo tutte noi, a Pescara e in tutto
-            l&apos;Abruzzo, così non devi tenere insieme professionisti diversi.
+            Costruire o ristrutturare vuol dire attraversare quattro fasi diverse, ognuna con le sue competenze e
+            le sue responsabilità. Di solito ognuna ha il suo professionista, e tenere insieme il lavoro di tutti
+            tocca a chi paga. Da noi le quattro fasi restano dentro lo stesso studio, a Pescara e in tutto
+            l&apos;Abruzzo.
           </p>
         </div>
       </section>
@@ -109,7 +112,7 @@ export default function ServiziPage() {
       <section className="px-6 py-20 md:px-12">
         <div className="mx-auto max-w-4xl">
           <p className="text-pietra">
-            Vuoi vedere come si traduce su un lavoro vero?{" "}
+            Vuoi vedere come si traduce su un cantiere vero?{" "}
             <Link href="/progetti" className="text-muschio underline">
               Guarda i progetti e l&apos;elenco dei lavori
             </Link>
