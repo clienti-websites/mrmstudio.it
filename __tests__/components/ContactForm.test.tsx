@@ -92,6 +92,24 @@ describe("ContactForm", () => {
     expect(body.reference).toBe("Via Venezia");
   });
 
+  it("lets the enquirer detach the project when the question is about something else", async () => {
+    const user = userEvent.setup();
+    global.fetch = jest.fn().mockResolvedValue({ ok: true, json: async () => ({ ok: true }) });
+
+    render(<ContactForm reference="Via Venezia" />);
+    expect(screen.getByText(/via venezia/i)).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /volevo chiedere di altro/i }));
+    expect(screen.queryByText(/via venezia/i)).not.toBeInTheDocument();
+
+    await fillMinimum(user);
+    await user.click(screen.getByRole("button", { name: /invia richiesta/i }));
+    await screen.findByRole("status");
+
+    const body = JSON.parse((global.fetch as jest.Mock).mock.calls[0][1].body);
+    expect(body.reference).toBeUndefined();
+  });
+
   it("shows a retryable error and re-enables the button when the network request fails", async () => {
     const user = userEvent.setup();
     global.fetch = jest.fn().mockRejectedValue(new Error("network error"));

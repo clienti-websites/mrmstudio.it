@@ -18,6 +18,10 @@ const STEPS = ["Di cosa si tratta?", "A che punto sei?", "Come ti contattiamo?"]
  * scheda di un'opera non deve spiegare a cosa si riferisce.
  */
 export function ContactForm({ reference }: { reference?: string }) {
+  // Il riferimento si puo' sganciare: chi sta guardando un progetto ma
+  // vuole chiedere altro non deve subirsi un modulo intestato a un'opera
+  // che non c'entra, ne' andare a cercare un modulo neutro altrove.
+  const [linkedProject, setLinkedProject] = useState(reference);
   const [step, setStep] = useState(0);
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -96,7 +100,7 @@ export function ContactForm({ reference }: { reference?: string }) {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-6">
       <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
-      {reference && <input type="hidden" name="reference" value={reference} />}
+      {linkedProject && <input type="hidden" name="reference" value={linkedProject} />}
 
       <div>
         <div className="flex gap-1" aria-hidden="true">
@@ -117,10 +121,19 @@ export function ContactForm({ reference }: { reference?: string }) {
         </p>
       </div>
 
-      {reference && step === 0 && (
-        <p className="border-l-2 border-muschio pl-3 text-sm text-pietra">
-          Richiesta riferita a <span className="font-medium text-grafite">{reference}</span>.
-        </p>
+      {linkedProject && step === 0 && (
+        <div className="border-l-2 border-muschio pl-3 text-sm text-pietra">
+          <p>
+            Richiesta riferita a <span className="font-medium text-grafite">{linkedProject}</span>.
+          </p>
+          <button
+            type="button"
+            onClick={() => setLinkedProject(undefined)}
+            className="mt-1 underline hover:text-grafite"
+          >
+            Volevo chiedere di altro
+          </button>
+        </div>
       )}
 
       <fieldset hidden={step !== 0} className={step !== 0 ? "hidden" : "flex flex-col gap-2"}>
