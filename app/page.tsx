@@ -5,7 +5,6 @@ import { ProjectGrid } from "@/components/ProjectGrid";
 import { StatsSection } from "@/components/StatsSection";
 import { ContactForm } from "@/components/ContactForm";
 import { getAllProjects } from "@/lib/projects";
-import { getLavoriStats } from "@/lib/lavori";
 import { SITE } from "@/lib/site";
 
 // Filmato temporaneo, da sostituire con quello di MRM prima della messa
@@ -17,7 +16,6 @@ const HERO_VIDEO = {
 
 export default function HomePage() {
   const projects = getAllProjects().slice(0, 8);
-  const stats = getLavoriStats();
 
   return (
     <>
@@ -48,18 +46,16 @@ export default function HomePage() {
         importo per importo e con le prestazioni svolte, sta nella tabella
         dei lavori in /progetti.
 
-        Il conteggio dei cantieri è calcolato dall'elenco lavori, non scritto
-        a mano, ed è presentato come minimo: quell'elenco è una selezione,
-        non la storia completa dello studio.
+        Anni e cantieri sono dati forniti dallo studio, non ricavati
+        dall'elenco pubblicato (che ne documenta una parte): vanno confermati
+        da MRM prima della messa online.
       */}
       <StatsSection
         stats={[
-          // Dato fornito dallo studio, da confermare prima della pubblicazione.
-          { label: "Anni di attività", value: "25+" },
-          { label: "Cantieri seguiti in direzione lavori", value: `oltre ${stats.conDirezioneLavori}` },
+          { label: "Anni di attività", value: "19+" },
+          { label: "Cantieri seguiti in direzione lavori", value: "20+" },
           { label: "Sedi in Abruzzo", value: String(SITE.offices.length) },
         ]}
-        note="Dato ricavato dai lavori documentati sul sito: i cantieri effettivamente seguiti dallo studio sono di più."
       />
 
       <section className="px-6 py-24 md:px-12">

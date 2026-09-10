@@ -192,24 +192,3 @@ export const LAVORI: Lavoro[] = [
       "Elaborazione dei grafici progettuali di piano, collaborazione al testo normativo, documenti integrativi, revisione finale",
   },
 ];
-
-/**
- * Statistiche ricavate dall'elenco lavori, non inserite a mano: restano vere
- * man mano che si aggiungono voci, e ogni cifra e' risalibile alla riga che
- * la produce. Gli importi non divulgati non entrano nella somma, quindi il
- * totale e' una stima per difetto.
- */
-export function getLavoriStats() {
-  const importi = LAVORI.map((lavoro) => lavoro.importo)
-    .filter((importo): importo is string => importo !== null)
-    // Primo numero della stringa: "€ 6.500.000, di cui € 1.250.000..." conta
-    // l'importo dell'opera, non lo stralcio.
-    .map((importo) => Number(importo.replace(/^[^\d]*/, "").split(",")[0].replace(/\./g, "")))
-    .filter((valore) => Number.isFinite(valore) && valore > 0);
-
-  return {
-    lavori: LAVORI.length,
-    importoTotale: importi.reduce((somma, valore) => somma + valore, 0),
-    conDirezioneLavori: LAVORI.filter((lavoro) => /direzione lavori/i.test(lavoro.prestazioni)).length,
-  };
-}

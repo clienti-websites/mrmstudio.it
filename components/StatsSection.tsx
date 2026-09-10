@@ -1,10 +1,4 @@
-export function StatsSection({
-  stats,
-  note,
-}: {
-  stats: Array<{ label: string; value: string | null }>;
-  note?: string;
-}) {
+export function StatsSection({ stats }: { stats: Array<{ label: string; value: string | null }> }) {
   return (
     <section aria-label="Numeri di MRM Studio" className="border-y border-nebbia px-6 py-16 md:px-12">
       {/* Le colonne seguono il numero di dati, così non resta una cella
@@ -23,7 +17,6 @@ export function StatsSection({
           </div>
         ))}
       </div>
-      {note && <p className="mx-auto mt-8 max-w-6xl text-sm text-pietra">{note}</p>}
     </section>
   );
 }
