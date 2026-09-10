@@ -1,6 +1,26 @@
-export function StatsSection({ stats }: { stats: Array<{ label: string; value: string | null }> }) {
+export function StatsSection({
+  stats,
+  title,
+  intro,
+}: {
+  stats: Array<{ label: string; value: string | null }>;
+  title?: string;
+  intro?: string;
+}) {
   return (
-    <section aria-label="Numeri di MRM Studio" className="border-y border-nebbia px-6 py-16 md:px-12">
+    <section
+      aria-labelledby={title ? "numeri-titolo" : undefined}
+      aria-label={title ? undefined : "Numeri di MRM Studio"}
+      className="border-y border-nebbia px-6 py-20 md:px-12"
+    >
+      {title && (
+        <div className="mx-auto mb-14 max-w-3xl text-center">
+          <h2 id="numeri-titolo" className="text-2xl font-black text-grafite md:text-3xl">
+            {title}
+          </h2>
+          {intro && <p className="mx-auto mt-3 text-center text-pietra">{intro}</p>}
+        </div>
+      )}
       {/* Le colonne seguono il numero di dati, così non resta una cella vuota
           quando se ne mostrano tre invece di quattro. Con tre il gruppo sta
           più stretto, altrimenti le celle si allontanano tanto da non

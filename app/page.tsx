@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { Hero } from "@/components/Hero";
 import { PercorsoCompleto } from "@/components/PercorsoCompleto";
-import { ProjectGrid } from "@/components/ProjectGrid";
+import { ProjectsWithFilter } from "@/components/ProjectsWithFilter";
 import { StatsSection } from "@/components/StatsSection";
 import { ContactForm } from "@/components/ContactForm";
-import { getAllProjects } from "@/lib/projects";
+import { CATEGORIES, getAllProjects } from "@/lib/projects";
 import { SITE } from "@/lib/site";
 
 // Filmato temporaneo, da sostituire con quello di MRM prima della messa
@@ -15,7 +15,7 @@ const HERO_VIDEO = {
 };
 
 export default function HomePage() {
-  const projects = getAllProjects().slice(0, 8);
+  const projects = getAllProjects();
 
   return (
     <>
@@ -30,9 +30,17 @@ export default function HomePage() {
 
       <section className="px-6 py-24 md:px-12">
         <div className="mx-auto max-w-6xl">
-          <h2 className="mb-10 text-2xl font-black text-grafite md:text-3xl">Progetti</h2>
+          <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <h2 className="text-2xl font-black text-grafite md:text-3xl">Progetti</h2>
+              <p className="mt-2 text-pietra">Una selezione. Cambia tipologia per vederne altri.</p>
+            </div>
+            <Link href="/progetti" className="text-muschio underline">
+              Tutti i progetti e i lavori svolti
+            </Link>
+          </div>
           {projects.length > 0 ? (
-            <ProjectGrid projects={projects} />
+            <ProjectsWithFilter projects={projects} categories={[...CATEGORIES]} limit={3} />
           ) : (
             <p className="text-pietra">Nuove schede progetto in arrivo.</p>
           )}
@@ -51,6 +59,8 @@ export default function HomePage() {
         da MRM prima della messa online.
       */}
       <StatsSection
+        title="Lo studio in breve"
+        intro="Progettazione sviluppata internamente, cantieri seguiti di persona, due sedi in Abruzzo."
         stats={[
           { label: "Anni di attività", value: "19+" },
           { label: "Cantieri seguiti in direzione lavori", value: "20+" },

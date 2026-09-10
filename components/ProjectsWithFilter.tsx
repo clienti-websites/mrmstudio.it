@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import type { Category, Project } from "@/lib/projects";
 import { ProjectGrid } from "./ProjectGrid";
 
@@ -11,15 +12,30 @@ const CATEGORY_LABELS: Record<Category, string> = {
   "urbanistica-e-spazio-pubblico": "Urbanistica e spazio pubblico",
 };
 
-export function ProjectsWithFilter({ projects, categories }: { projects: Project[]; categories: Category[] }) {
+/**
+ * `limit` serve alla home, dove si mostra un assaggio invece dell'intero
+ * catalogo. Il cambio di categoria e' animato perche' altrimenti la griglia
+ * si sostituisce di colpo e non si capisce che e' successo qualcosa; chi ha
+ * chiesto meno movimento la vede cambiare e basta.
+ */
+export function ProjectsWithFilter({
+  projects,
+  categories,
+  limit,
+}: {
+  projects: Project[];
+  categories: Category[];
+  limit?: number;
+}) {
   const [active, setActive] = useState<Category | "tutti">("tutti");
+  const reduceMotion = useReducedMotion();
 
   const availableCategories = categories.filter((category) => projects.some((p) => p.category === category));
 
-  const filtered = useMemo(
-    () => (active === "tutti" ? projects : projects.filter((p) => p.category === active)),
-    [projects, active]
-  );
+  const filtered = useMemo(() => {
+    const byCategory = active === "tutti" ? projects : projects.filter((p) => p.category === active);
+    return limit ? byCategory.slice(0, limit) : byCategory;
+  }, [projects, active, limit]);
 
   return (
     <div>
@@ -48,7 +64,14 @@ export function ProjectsWithFilter({ projects, categories }: { projects: Project
       )}
 
       {filtered.length > 0 ? (
-        <ProjectGrid projects={filtered} />
+        <motion.div
+          key={active}
+          initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.25, ease: "easeOut" }}
+        >
+          <ProjectGrid projects={filtered} />
+        </motion.div>
       ) : (
         <p className="text-pietra">Nessun progetto in questa categoria per ora.</p>
       )}
