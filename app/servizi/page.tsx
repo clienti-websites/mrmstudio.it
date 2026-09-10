@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Accordion } from "@/components/Accordion";
 import { CtaBand } from "@/components/CtaBand";
 import { FaseIcon } from "@/components/FaseIcon";
 import { ProjectCard } from "@/components/ProjectCard";
@@ -75,11 +74,11 @@ export default function ServiziPage() {
             className={`scroll-mt-20 px-6 py-20 md:px-12 ${scuro ? "bg-nebbia" : ""}`}
           >
             <div
-              className={`mx-auto flex max-w-6xl flex-col gap-12 md:items-center ${
-                scuro ? "md:flex-row-reverse" : "md:flex-row"
-              }`}
+              className={`mx-auto flex flex-col gap-12 md:items-center ${
+                caseProject ? "max-w-6xl" : "max-w-3xl"
+              } ${scuro ? "md:flex-row-reverse" : "md:flex-row"}`}
             >
-              <div className="md:w-1/2">
+              <div className={caseProject ? "md:w-1/2" : "w-full"}>
                 <div className="flex items-center gap-4">
                   <FaseIcon phase={sezione.id} className="h-9 w-9 shrink-0 text-muschio" />
                   <span className="text-sm tracking-wider tabular-nums text-pietra">
@@ -96,18 +95,12 @@ export default function ServiziPage() {
                 <p className="mt-5 border-l-2 border-muschio pl-4 text-grafite">{sezione.come}</p>
               </div>
 
-              <div className="md:w-1/2">
-                {caseProject ? (
-                  <div>
-                    <p className="mb-3 text-sm text-pietra">Dove l&apos;abbiamo fatto</p>
-                    <ProjectCard project={caseProject} />
-                  </div>
-                ) : (
-                  <p className="border border-nebbia p-6 text-sm text-pietra">
-                    Stiamo preparando la scheda di un lavoro che mostri questa fase.
-                  </p>
-                )}
-              </div>
+              {caseProject && (
+                <div className="md:w-1/2">
+                  <p className="mb-3 text-sm text-pietra">Dove l&apos;abbiamo fatto</p>
+                  <ProjectCard project={caseProject} />
+                </div>
+              )}
             </div>
           </section>
         );
@@ -115,14 +108,7 @@ export default function ServiziPage() {
 
       <section className="px-6 py-20 md:px-12">
         <div className="mx-auto max-w-4xl">
-          <Accordion summary="Dettaglio tecnico: adempimenti del direttore lavori">
-            <p>
-              Elenco dettagliato in arrivo da MRM Studio (es. i diciassette adempimenti previsti per la direzione
-              lavori).
-            </p>
-          </Accordion>
-
-          <p className="mt-10 text-pietra">
+          <p className="text-pietra">
             Vuoi vedere come si traduce su un lavoro vero?{" "}
             <Link href="/progetti" className="text-muschio underline">
               Guarda i progetti e l&apos;elenco dei lavori
