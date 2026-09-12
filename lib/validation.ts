@@ -22,9 +22,48 @@ export const PROJECT_STAGES = [
   "Devo capire se è fattibile",
 ] as const;
 
+/**
+ * Il recapito è un campo solo: ci si può scrivere un telefono oppure
+ * un'email. Va quindi riconosciuto quale dei due è, e va fatto con la mano
+ * leggera: rifiutare il recapito di una persona vera costa molto più che
+ * accettarne uno strano, perché la richiesta si perde e nessuno lo scopre.
+ *
+ * Email: basta che ci sia una chiocciola con qualcosa prima, un punto dopo e
+ * un'estensione di almeno due lettere. Niente controlli sulla sintassi
+ * completa, che rifiuterebbero indirizzi legittimi.
+ *
+ * Telefono: si tolgono spazi, punti, trattini, barre e parentesi, come li
+ * scrive la gente, e restano solo le cifre. Devono essere da nove a quindici
+ * (quindici è il massimo internazionale) e il numero deve cominciare con +,
+ * con 0 o con 3, che copre fissi e cellulari italiani e i prefissi esteri
+ * scritti per esteso. Otto cifre come "34828688" non bastano: un numero così
+ * non è chiamabile.
+ */
+const EMAIL = /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/;
+
+export const CONTACT_ERROR = "Serve un numero di telefono o un'email a cui possiamo risponderti.";
+
+export function isPlausibleContact(value: string): boolean {
+  const pulito = value.trim();
+  if (pulito.length < 5 || pulito.length > 200) return false;
+  if (pulito.includes("@")) return EMAIL.test(pulito);
+
+  const cifre = pulito.replace(/[\s.\-/()]/g, "");
+  if (!/^\+?\d{9,15}$/.test(cifre)) return false;
+  return /^[+03]/.test(cifre);
+}
+
+/** Un nome fatto solo di cifre o di punteggiatura non è un nome. */
+export const NAME_ERROR = "Inserisci il tuo nome.";
+
+export function isPlausibleName(value: string): boolean {
+  const pulito = value.trim();
+  return pulito.length >= 2 && pulito.length <= 120 && /\p{L}/u.test(pulito);
+}
+
 export const contactFormSchema = z.object({
-  name: z.string().trim().min(2, "Inserisci il tuo nome.").max(120),
-  contact: z.string().trim().min(5, "Inserisci un telefono o un'email.").max(200),
+  name: z.string().trim().refine(isPlausibleName, { message: NAME_ERROR }),
+  contact: z.string().trim().refine(isPlausibleContact, { message: CONTACT_ERROR }),
   interventionType: z.enum(INTERVENTION_TYPES, {
     message: "Scegli il tipo di intervento.",
   }),

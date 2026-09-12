@@ -1,12 +1,22 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { INTERVENTION_TYPES, PROJECT_STAGES } from "@/lib/validation";
+import {
+  CONTACT_ERROR,
+  INTERVENTION_TYPES,
+  NAME_ERROR,
+  PROJECT_STAGES,
+  isPlausibleContact,
+  isPlausibleName,
+} from "@/lib/validation";
 import { InterventoIcon } from "./InterventoIcon";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
 const fieldClass = "border border-nebbia bg-carta px-3 py-2 text-grafite";
+// Il campo sbagliato si distingue per il bordo più marcato, non per il solo
+// colore: accanto compare comunque il testo che dice cosa manca.
+const erroreFieldClass = "border-2 border-muschio bg-carta px-3 py-2 text-grafite";
 const STEPS = ["Di cosa si tratta?", "A che punto sei?", "Come ti contattiamo?"] as const;
 
 /**
@@ -26,9 +36,14 @@ export function ContactForm({ reference }: { reference?: string }) {
   const [step, setStep] = useState(0);
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  // Errori per campo, mostrati sotto il campo invece che come un unico
+  // "dati non validi" in fondo: chi sbaglia deve sapere dove.
+  const [fieldErrors, setFieldErrors] = useState<{ name?: string; contact?: string }>({});
   const headingRef = useRef<HTMLParagraphElement>(null);
   const confirmationRef = useRef<HTMLParagraphElement>(null);
   const movedRef = useRef(false);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const contactRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (status === "success") confirmationRef.current?.focus();
@@ -51,6 +66,26 @@ export function ContactForm({ reference }: { reference?: string }) {
     setErrorMessage(null);
 
     const form = new FormData(event.currentTarget);
+
+    // Controllati qui prima di partire: gli stessi controlli girano anche sul
+    // server, che resta l'autorità, ma far fare un giro di rete per dire che
+    // "ciao" non è un recapito è tempo perso per chi scrive.
+    const nome = String(form.get("name") ?? "");
+    const recapito = String(form.get("contact") ?? "");
+    const errori: { name?: string; contact?: string } = {};
+    if (!isPlausibleName(nome)) errori.name = NAME_ERROR;
+    if (!isPlausibleContact(recapito)) errori.contact = CONTACT_ERROR;
+
+    if (errori.name || errori.contact) {
+      setFieldErrors(errori);
+      setStatus("idle");
+      const primo = errori.name ? nameRef.current : contactRef.current;
+      primo?.focus();
+      return;
+    }
+
+    setFieldErrors({});
+
     const optional = (key: string) => {
       const value = String(form.get(key) ?? "").trim();
       return value === "" ? undefined : value;
@@ -192,12 +227,43 @@ export function ContactForm({ reference }: { reference?: string }) {
         <div className="grid gap-5 sm:grid-cols-2">
           <label className="flex flex-col gap-1">
             <span className="text-sm font-medium text-grafite">Come ti chiami?</span>
-            <input name="name" type="text" required={isLast} className={fieldClass} />
+            <input
+              ref={nameRef}
+              name="name"
+              type="text"
+              autoComplete="name"
+              required={isLast}
+              aria-invalid={fieldErrors.name ? true : undefined}
+              aria-describedby={fieldErrors.name ? "errore-nome" : undefined}
+              onChange={() => setFieldErrors((e) => ({ ...e, name: undefined }))}
+              className={fieldErrors.name ? erroreFieldClass : fieldClass}
+            />
+            {fieldErrors.name && (
+              <span id="errore-nome" className="text-sm text-grafite">
+                {fieldErrors.name}
+              </span>
+            )}
           </label>
 
           <label className="flex flex-col gap-1">
             <span className="text-sm font-medium text-grafite">Telefono o email</span>
-            <input name="contact" type="text" required={isLast} className={fieldClass} />
+            <input
+              ref={contactRef}
+              name="contact"
+              type="text"
+              inputMode="tel"
+              autoComplete="tel"
+              required={isLast}
+              aria-invalid={fieldErrors.contact ? true : undefined}
+              aria-describedby={fieldErrors.contact ? "errore-recapito" : undefined}
+              onChange={() => setFieldErrors((e) => ({ ...e, contact: undefined }))}
+              className={fieldErrors.contact ? erroreFieldClass : fieldClass}
+            />
+            {fieldErrors.contact && (
+              <span id="errore-recapito" className="text-sm text-grafite">
+                {fieldErrors.contact}
+              </span>
+            )}
           </label>
         </div>
 

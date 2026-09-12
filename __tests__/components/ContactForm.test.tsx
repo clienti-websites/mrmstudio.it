@@ -121,4 +121,87 @@ describe("ContactForm", () => {
     expect(await screen.findByText(/impossibile inviare il messaggio/i)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /invia richiesta/i })).not.toBeDisabled();
   });
+
+  it("non manda niente al server se il recapito non è un recapito", async () => {
+    const user = userEvent.setup();
+    global.fetch = jest.fn();
+
+    render(<ContactForm />);
+    await goToLastStep(user);
+    await user.type(screen.getByRole("textbox", { name: /come ti chiami/i }), "Mario Rossi");
+    await user.type(screen.getByRole("textbox", { name: /telefono o email/i }), "ciao");
+    await user.click(screen.getByRole("checkbox", { name: /trattamento dei dati/i }));
+    await user.click(screen.getByRole("button", { name: /invia richiesta/i }));
+
+    expect(global.fetch).not.toHaveBeenCalled();
+    expect(screen.getByText(/serve un numero di telefono o un'email/i)).toBeInTheDocument();
+    // Il campo sbagliato riceve il fuoco, così chi usa la tastiera o uno
+    // screen reader si ritrova dove deve correggere.
+    expect(screen.getByRole("textbox", { name: /telefono o email/i })).toHaveFocus();
+  });
+
+  it("rifiuta un numero troppo corto per essere chiamabile", async () => {
+    const user = userEvent.setup();
+    global.fetch = jest.fn();
+
+    render(<ContactForm />);
+    await goToLastStep(user);
+    await user.type(screen.getByRole("textbox", { name: /come ti chiami/i }), "Mario Rossi");
+    await user.type(screen.getByRole("textbox", { name: /telefono o email/i }), "34828688");
+    await user.click(screen.getByRole("checkbox", { name: /trattamento dei dati/i }));
+    await user.click(screen.getByRole("button", { name: /invia richiesta/i }));
+
+    expect(global.fetch).not.toHaveBeenCalled();
+    expect(screen.getByText(/serve un numero di telefono o un'email/i)).toBeInTheDocument();
+  });
+
+  it("accetta un numero scritto come lo scrive la gente", async () => {
+    const user = userEvent.setup();
+    global.fetch = jest.fn().mockResolvedValue({ ok: true, json: async () => ({ ok: true }) });
+
+    render(<ContactForm />);
+    await goToLastStep(user);
+    await user.type(screen.getByRole("textbox", { name: /come ti chiami/i }), "Mario Rossi");
+    await user.type(screen.getByRole("textbox", { name: /telefono o email/i }), "328 400 6099");
+    await user.click(screen.getByRole("checkbox", { name: /trattamento dei dati/i }));
+    await user.click(screen.getByRole("button", { name: /invia richiesta/i }));
+
+    expect(await screen.findByRole("status")).toBeInTheDocument();
+  });
+
+  it("toglie l'errore appena si ricomincia a scrivere", async () => {
+    const user = userEvent.setup();
+    global.fetch = jest.fn().mockResolvedValue({ ok: true, json: async () => ({ ok: true }) });
+
+    render(<ContactForm />);
+    await goToLastStep(user);
+    await user.type(screen.getByRole("textbox", { name: /come ti chiami/i }), "Mario Rossi");
+    const recapito = screen.getByRole("textbox", { name: /telefono o email/i });
+    await user.type(recapito, "ciao");
+    await user.click(screen.getByRole("checkbox", { name: /trattamento dei dati/i }));
+    await user.click(screen.getByRole("button", { name: /invia richiesta/i }));
+    expect(screen.getByText(/serve un numero di telefono/i)).toBeInTheDocument();
+
+    await user.clear(recapito);
+    await user.type(recapito, "0864 845252");
+    expect(screen.queryByText(/serve un numero di telefono/i)).not.toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /invia richiesta/i }));
+    expect(await screen.findByRole("status")).toBeInTheDocument();
+  });
+
+  it("rifiuta un nome fatto di sole cifre", async () => {
+    const user = userEvent.setup();
+    global.fetch = jest.fn();
+
+    render(<ContactForm />);
+    await goToLastStep(user);
+    await user.type(screen.getByRole("textbox", { name: /come ti chiami/i }), "123");
+    await user.type(screen.getByRole("textbox", { name: /telefono o email/i }), "328 4006099");
+    await user.click(screen.getByRole("checkbox", { name: /trattamento dei dati/i }));
+    await user.click(screen.getByRole("button", { name: /invia richiesta/i }));
+
+    expect(global.fetch).not.toHaveBeenCalled();
+    expect(screen.getByText(/inserisci il tuo nome/i)).toBeInTheDocument();
+  });
 });
