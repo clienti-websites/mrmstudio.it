@@ -41,3 +41,4 @@ export const contactFormSchema = z.object({
 });
 
 export type ContactFormInput = z.infer<typeof contactFormSchema>;
+export type InterventionType = (typeof INTERVENTION_TYPES)[number];

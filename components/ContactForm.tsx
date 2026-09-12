@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { INTERVENTION_TYPES, PROJECT_STAGES } from "@/lib/validation";
+import { InterventoIcon } from "./InterventoIcon";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -136,21 +137,37 @@ export function ContactForm({ reference }: { reference?: string }) {
         </div>
       )}
 
-      <fieldset hidden={step !== 0} className={step !== 0 ? "hidden" : "flex flex-col gap-2"}>
+      {/*
+        Sei riquadri invece di sei pallini. Il comando resta un radio vero,
+        quindi tastiera e lettura assistita funzionano come prima: e' steso a
+        coprire tutto il riquadro e reso invisibile, cosi' l'area da toccare
+        e' l'intera casella e non un cerchietto da sei millimetri.
+
+        Lo stato scelto non e' affidato al solo colore: il bordo passa da
+        nebbia a muschio e il quadratino in alto a destra si riempie.
+      */}
+      <fieldset hidden={step !== 0} className={step !== 0 ? "hidden" : "grid gap-3 sm:grid-cols-2"}>
         <legend className="sr-only">Di cosa si tratta?</legend>
-        {/* Righe alte abbastanza da centrarle col pollice: sul telefono
-            questa e' la prima cosa che si tocca del modulo. */}
         {INTERVENTION_TYPES.map((type, i) => (
-          <label key={type} className="flex cursor-pointer items-center gap-3 py-1.5 text-grafite">
+          <label key={type} className="relative block cursor-pointer">
             <input
               type="radio"
               name="interventionType"
               value={type}
               defaultChecked={i === 0}
               required
-              className="h-6 w-6 shrink-0 accent-muschio"
+              className="peer absolute inset-0 h-full w-full cursor-pointer appearance-none"
             />
-            <span>{type}</span>
+            <span className="flex h-full flex-col gap-2.5 border-2 border-nebbia bg-carta p-4 text-sm text-grafite transition-colors peer-hover:bg-nebbia/60 peer-checked:border-muschio peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-muschio">
+              <InterventoIcon type={type} className="h-7 w-7 shrink-0 text-muschio" />
+              <span className="leading-snug">{type}</span>
+            </span>
+            {/* Fuori dal flusso del testo, così l'etichetta usa tutta la
+                larghezza invece di andare a capo tre volte. */}
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute right-3 top-4 h-3.5 w-3.5 border border-nebbia peer-checked:border-muschio peer-checked:bg-muschio"
+            />
           </label>
         ))}
       </fieldset>
