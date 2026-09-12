@@ -6,13 +6,18 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { AnchorLink } from "./AnchorLink";
 
+// Contatti è l'unica voce che chiede di fare qualcosa invece di portare
+// altrove: sulla barra è un pulsante pieno, e le altre restano testo. È
+// l'unico posto del sito, oltre alla chiamata all'azione dell'apertura, in
+// cui il verde compare come fondo e non come dettaglio.
 const LINKS = [
   { href: "/progetti", label: "Progetti" },
   { href: "/servizi", label: "Servizi" },
   { href: "/studio", label: "Studio" },
   { href: "/impegno-sociale", label: "Impegno sociale" },
-  { href: "/#contatti", label: "Contatti" },
 ];
+
+const CONTATTI = { href: "/#contatti", label: "Contatti" };
 
 // Nel pannello la Home e' una voce come le altre. Sulla barra desktop no:
 // li' ci arrivi dal logo, e ripeterla sarebbe una voce di troppo.
@@ -86,6 +91,12 @@ export function Header() {
                 {link.label}
               </AnchorLink>
             ))}
+            <AnchorLink
+              href={CONTATTI.href}
+              className="ml-2 bg-muschio px-5 py-2.5 text-sm font-medium text-carta hover:bg-muschio/90"
+            >
+              {CONTATTI.label}
+            </AnchorLink>
           </nav>
 
           <button
@@ -150,6 +161,14 @@ export function Header() {
                   {link.label}
                 </AnchorLink>
               ))}
+
+              <AnchorLink
+                href={CONTATTI.href}
+                className="mt-6 bg-muschio px-5 py-3 text-center text-base font-medium text-carta"
+                onNavigate={() => setOpenedAt(null)}
+              >
+                {CONTATTI.label}
+              </AnchorLink>
             </motion.nav>
           </>
         )}
