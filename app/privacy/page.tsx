@@ -14,6 +14,11 @@ export const metadata: Metadata = {
  * destinatari sono i servizi effettivamente usati, Vercel per l'hosting e
  * Resend per l'invio delle email (vedi lib/email.ts).
  *
+ * Le mappe delle sedi sono l'unico contenuto di terzi del sito e hanno una
+ * sezione propria: si caricano solo su richiesta esplicita, e prima di quel
+ * momento verso Google non parte nessuna richiesta (verificato sul traffico
+ * di rete). Il sito non installa cookie e non usa la memoria del browser.
+ *
  * Due punti restano da confermare a MRM prima della pubblicazione:
  * 1. il periodo di conservazione, qui descritto in termini di finalità
  *    invece che con un numero di mesi, che nessuno ha ancora deciso;
@@ -59,11 +64,36 @@ export default function PrivacyPage() {
         <p className="mt-3 text-grafite">
           Il tuo indirizzo IP viene usato per pochi istanti al momento dell&apos;invio, per limitare le
           richieste automatiche ravvicinate. Non viene salvato in un archivio. Il fornitore che ospita il
-          sito registra inoltre gli accessi nei propri log tecnici, come avviene per qualunque sito.
+          sito registra inoltre gli accessi nei propri log tecnici, come avviene per qualunque sito: la base
+          giuridica è il nostro legittimo interesse a tenere il sito funzionante e al sicuro, ai sensi
+          dell&apos;articolo 6, paragrafo 1, lettera f) del Regolamento.
         </p>
         <p className="mt-3 text-grafite">
-          Il sito non usa cookie di profilazione, non impiega strumenti di statistica o di tracciamento e non
-          ti profila in alcun modo.
+          Compilare il modulo è libero. Senza il nome e un recapito, però, non abbiamo modo di risponderti.
+        </p>
+        <p className="mt-3 text-grafite">
+          Il sito non installa cookie di alcun tipo, non usa la memoria del browser, non impiega strumenti di
+          statistica o di tracciamento e non ti profila in alcun modo. È il motivo per cui non trovi nessun
+          avviso da accettare quando arrivi.
+        </p>
+      </section>
+
+      <section className="mt-10 border-t border-nebbia pt-10">
+        <h2 className="text-xl font-black text-grafite">Le mappe delle sedi</h2>
+        <p className="mt-3 text-grafite">
+          Nella pagina dei contatti, al posto delle mappe trovi un riquadro con un pulsante. Finché non lo
+          premi, il tuo browser non contatta Google e nessun dato esce da questo sito.
+        </p>
+        <p className="mt-3 text-grafite">
+          Se premi «Mostra la mappa», la mappa viene caricata da Google Maps. In quel momento Google riceve il
+          tuo indirizzo IP e le informazioni del tuo browser, e può installare propri cookie: è un trattamento
+          che avviene sotto la responsabilità di Google, secondo le sue condizioni. Google LLC ha sede negli
+          Stati Uniti, quindi i dati possono essere trattati fuori dall&apos;Unione Europea, sulla base delle
+          clausole contrattuali standard approvate dalla Commissione Europea.
+        </p>
+        <p className="mt-3 text-grafite">
+          Accanto al pulsante c&apos;è un collegamento che apre le indicazioni stradali in una scheda nuova:
+          serve a chi vuole arrivare in sede senza caricare la mappa dentro questa pagina.
         </p>
       </section>
 
@@ -81,10 +111,14 @@ export default function PrivacyPage() {
       <section className="mt-10 border-t border-nebbia pt-10">
         <h2 className="text-xl font-black text-grafite">Per quanto tempo li conserviamo</h2>
         <p className="mt-3 text-grafite">
-          Conserviamo la tua richiesta per il tempo necessario a darti riscontro. Se dalla richiesta nasce un
-          incarico professionale, i dati vengono conservati per la durata del rapporto e per i termini
-          previsti dalla legge in materia contabile, fiscale e di responsabilità professionale. Se invece non
-          se ne fa nulla, la richiesta viene eliminata quando non serve più.
+          Il sito non tiene una copia delle richieste: non ha un archivio. Ogni richiesta diventa un&apos;email
+          che arriva nella nostra casella di posta, e quella è l&apos;unica copia esistente.
+        </p>
+        <p className="mt-3 text-grafite">
+          La conserviamo per il tempo necessario a darti riscontro. Se dalla richiesta nasce un incarico
+          professionale, i dati vengono conservati per la durata del rapporto e per i termini previsti dalla
+          legge in materia contabile, fiscale e di responsabilità professionale. Se invece non se ne fa nulla,
+          la richiesta viene eliminata quando non serve più.
         </p>
       </section>
 
