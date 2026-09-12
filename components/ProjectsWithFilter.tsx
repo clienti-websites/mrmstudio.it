@@ -45,7 +45,7 @@ export function ProjectsWithFilter({
             type="button"
             onClick={() => setActive("tutti")}
             aria-pressed={active === "tutti"}
-            className={`px-4 py-2 text-sm ${active === "tutti" ? "bg-grafite text-carta" : "bg-nebbia text-grafite"}`}
+            className={`px-4 py-3 text-sm ${active === "tutti" ? "bg-grafite text-carta" : "bg-nebbia text-grafite"}`}
           >
             Tutti
           </button>
@@ -55,7 +55,7 @@ export function ProjectsWithFilter({
               type="button"
               onClick={() => setActive(category)}
               aria-pressed={active === category}
-              className={`px-4 py-2 text-sm ${active === category ? "bg-grafite text-carta" : "bg-nebbia text-grafite"}`}
+              className={`px-4 py-3 text-sm ${active === category ? "bg-grafite text-carta" : "bg-nebbia text-grafite"}`}
             >
               {CATEGORY_LABELS[category]}
             </button>

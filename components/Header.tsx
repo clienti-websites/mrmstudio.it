@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnchorLink } from "./AnchorLink";
 
 const LINKS = [
   { href: "/progetti", label: "Progetti" },
@@ -71,22 +72,26 @@ export function Header() {
     <>
       <header className="sticky top-0 z-50 bg-carta/95 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Link href="/" className="text-lg font-black tracking-tight text-grafite">
+          <Link href="/" className="-my-2 inline-block py-2 text-lg font-black tracking-tight text-grafite">
             MRM Studio
           </Link>
 
           <nav aria-label="Principale" className="hidden items-center gap-8 lg:flex">
             {LINKS.map((link) => (
-              <Link key={link.href} href={link.href} className="text-sm font-medium text-grafite hover:text-muschio">
+              <AnchorLink
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium text-grafite hover:text-muschio"
+              >
                 {link.label}
-              </Link>
+              </AnchorLink>
             ))}
           </nav>
 
           <button
             ref={toggleRef}
             type="button"
-            className="lg:hidden"
+            className="-mr-2 flex h-11 w-11 flex-col items-center justify-center lg:hidden"
             aria-label="Menu"
             aria-expanded={open}
             onClick={() => setOpenedAt(open ? null : pathname)}
@@ -136,14 +141,14 @@ export function Header() {
               </div>
 
               {LINKS_MOBILE.map((link) => (
-                <Link
+                <AnchorLink
                   key={link.href}
                   href={link.href}
                   className="border-b border-nebbia py-4 text-base font-medium text-grafite"
-                  onClick={() => setOpenedAt(null)}
+                  onNavigate={() => setOpenedAt(null)}
                 >
                   {link.label}
-                </Link>
+                </AnchorLink>
               ))}
             </motion.nav>
           </>

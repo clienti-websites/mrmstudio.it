@@ -7,6 +7,9 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
+  alternates: {
+    canonical: "./",
+  },
   title: {
     default: "MRM Studio — Architettura e Ingegneria a Pescara e Abruzzo",
     template: "%s | MRM Studio",
@@ -17,6 +20,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "it_IT",
     siteName: SITE.name,
+  },
+  twitter: {
+    card: "summary_large_image",
   },
 };
 

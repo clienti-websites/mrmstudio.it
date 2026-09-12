@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AnchorLink } from "./AnchorLink";
 
 export interface CtaBandProps {
   title: string;
@@ -24,9 +24,9 @@ export function CtaBand({ title, cta, href, tone = "light" }: CtaBandProps) {
       <section className="bg-grafite px-6 py-24 text-carta md:px-12">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="mx-auto text-2xl font-black md:text-3xl">{title}</h2>
-          <Link href={href} className={buttonClass}>
+          <AnchorLink href={href} className={buttonClass}>
             {cta}
-          </Link>
+          </AnchorLink>
         </div>
       </section>
     );
@@ -35,9 +35,9 @@ export function CtaBand({ title, cta, href, tone = "light" }: CtaBandProps) {
   return (
     <div className="mt-16 bg-nebbia p-8 text-center">
       <p className="mx-auto mb-4 text-lg font-medium text-grafite">{title}</p>
-      <Link href={href} className={buttonClass}>
+      <AnchorLink href={href} className={buttonClass}>
         {cta}
-      </Link>
+      </AnchorLink>
     </div>
   );
 }

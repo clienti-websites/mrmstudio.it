@@ -5,7 +5,11 @@ import type { Project } from "@/lib/projects";
 export function ProjectCard({ project, featured = false }: { project: Project; featured?: boolean }) {
   return (
     <Link href={`/progetti/${project.slug}`} className={`group block ${featured ? "md:col-span-2" : ""}`}>
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-nebbia">
+      <div
+        className={`relative w-full overflow-hidden bg-nebbia ${
+          featured ? "aspect-[4/3] md:aspect-[21/9]" : "aspect-[4/3]"
+        }`}
+      >
         <Image
           src={project.coverImage.src}
           alt={project.coverImage.alt}

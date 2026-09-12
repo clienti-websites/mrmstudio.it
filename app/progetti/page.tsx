@@ -16,13 +16,17 @@ export default function ProgettiPage() {
   return (
     <div className="mx-auto max-w-6xl px-6 py-16 md:px-12">
       <h1 className="text-3xl font-black text-grafite md:text-4xl">Progetti</h1>
-      <div className="mt-10 mb-20">
+
+      <section aria-labelledby="opere-titolo" className="mt-10 mb-20">
+        <h2 id="opere-titolo" className="sr-only">
+          Le opere
+        </h2>
         {projects.length > 0 ? (
           <ProjectsWithFilter projects={projects} categories={[...CATEGORIES]} />
         ) : (
           <p className="text-pietra">Nuove schede progetto in arrivo.</p>
         )}
-      </div>
+      </section>
 
       <TabellaLavori />
 

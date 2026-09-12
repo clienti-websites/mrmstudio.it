@@ -10,6 +10,7 @@ const residenziale: Project = {
   year: "2024",
   category: "residenziale",
   budget: null,
+  team: [],
   phases: ["progettazione"],
   coverImage: { src: "/x.jpg", alt: "Vista del progetto residenziale" },
   gallery: [{ src: "/x.jpg", alt: "Vista del progetto residenziale" }],

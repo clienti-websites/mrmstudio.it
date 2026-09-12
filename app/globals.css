@@ -11,9 +11,11 @@
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
+  /* Niente `scroll-behavior: smooth` globale: animava anche il salto in cima
+     a ogni cambio pagina, e mentre la pagina scorreva da sola un click su
+     una scheda partiva su un elemento e finiva su un altro, quindi non
+     partiva affatto. Lo scorrimento morbido resta, ma solo dove lo chiediamo
+     noi (vedi components/AnchorLink.tsx). */
 
   body {
     background-color: var(--color-carta);

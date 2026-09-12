@@ -35,6 +35,10 @@ export const frontmatterSchema = z.object({
   phases: z.array(z.enum(PHASES)).default([]),
   coverImage: galleryImageSchema,
   gallery: z.array(galleryImageSchema).min(1),
+  // Chi ha seguito l'opera. Viene dalla sezione PROJECT TEAM delle schede
+  // del sito attuale: i nomi sono quelli dichiarati da MRM, i ruoli sono la
+  // traduzione delle etichette inglesi usate lì.
+  team: z.array(z.object({ name: z.string(), role: z.string() })).default([]),
   outcome: z.string().nullable().default(null),
   excerpt: z.string(),
 });

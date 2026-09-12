@@ -1,4 +1,4 @@
-import { render, screen, waitForElementToBeRemoved, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Header } from "@/components/Header";
 
@@ -36,7 +36,7 @@ describe("Header", () => {
     expect(toggle).toHaveAttribute("aria-expanded", "true");
 
     await user.click(screen.getByRole("button", { name: /chiudi il menu/i }));
-    await waitForElementToBeRemoved(() => screen.queryByTestId("mobile-nav"));
+    await waitFor(() => expect(screen.queryByTestId("mobile-nav")).not.toBeInTheDocument());
     expect(toggle).toHaveAttribute("aria-expanded", "false");
   });
 
@@ -48,7 +48,7 @@ describe("Header", () => {
     expect(document.body.style.overflow).toBe("hidden");
 
     await user.click(screen.getByRole("button", { name: /chiudi il menu/i }));
-    await waitForElementToBeRemoved(() => screen.queryByTestId("mobile-nav"));
+    await waitFor(() => expect(screen.queryByTestId("mobile-nav")).not.toBeInTheDocument());
     expect(document.body.style.overflow).not.toBe("hidden");
   });
 
@@ -77,7 +77,7 @@ describe("Header", () => {
     // pagina nuova.
     mockPathname = "/progetti";
     rerender(<Header />);
-    await waitForElementToBeRemoved(() => screen.queryByTestId("mobile-nav"));
+    await waitFor(() => expect(screen.queryByTestId("mobile-nav")).not.toBeInTheDocument());
   });
 
   it("closes on Escape and when a destination is chosen", async () => {
@@ -86,11 +86,11 @@ describe("Header", () => {
 
     await user.click(screen.getByRole("button", { name: "Menu" }));
     await user.keyboard("{Escape}");
-    await waitForElementToBeRemoved(() => screen.queryByTestId("mobile-nav"));
+    await waitFor(() => expect(screen.queryByTestId("mobile-nav")).not.toBeInTheDocument());
 
     await user.click(screen.getByRole("button", { name: "Menu" }));
     const panel = screen.getByTestId("mobile-nav");
     await user.click(within(panel).getByRole("link", { name: "Servizi" }));
-    await waitForElementToBeRemoved(() => screen.queryByTestId("mobile-nav"));
+    await waitFor(() => expect(screen.queryByTestId("mobile-nav")).not.toBeInTheDocument());
   });
 });

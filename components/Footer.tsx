@@ -17,10 +17,10 @@ export function Footer() {
           <div key={office.id}>
             <p className="font-medium">{office.city}</p>
             <p className="text-sm text-carta/70">{office.streetAddress}</p>
-            <a href={`tel:${office.phone}`} className="mt-2 block text-sm text-carta/70 hover:text-carta">
+            <a href={`tel:${office.phone}`} className="mt-1 block py-2 text-sm text-carta/70 hover:text-carta">
               {office.phoneDisplay}
             </a>
-            <a href={`tel:${office.mobile}`} className="block text-sm text-carta/70 hover:text-carta">
+            <a href={`tel:${office.mobile}`} className="block py-2 text-sm text-carta/70 hover:text-carta">
               {office.mobileDisplay}
             </a>
           </div>
@@ -28,14 +28,14 @@ export function Footer() {
       </div>
 
       <div className="mx-auto mt-10 flex max-w-6xl items-center justify-between border-t border-carta/20 pt-6 text-sm text-carta/60">
-        <a href={`mailto:${SITE.email}`} className="hover:text-carta">
+        <a href={`mailto:${SITE.email}`} className="-my-2 inline-block py-2 hover:text-carta">
           {SITE.email}
         </a>
         <div className="flex gap-6">
-          <Link href="/privacy" className="hover:text-carta">
+          <Link href="/privacy" className="-my-2 inline-block py-2 hover:text-carta">
             Privacy
           </Link>
-          <Link href="/contatti" className="hover:text-carta">
+          <Link href="/contatti" className="-my-2 inline-block py-2 hover:text-carta">
             Contatti
           </Link>
         </div>

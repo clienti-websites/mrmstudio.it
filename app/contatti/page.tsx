@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
 import { LocalBusinessJsonLd } from "@/components/LocalBusinessJsonLd";
+import { MappaSede } from "@/components/MappaSede";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -23,23 +24,18 @@ export default function ContattiPage() {
             <div key={office.id}>
               <h2 className="mb-1 text-xl font-medium text-grafite">{office.city}</h2>
               <p className="text-pietra">{office.streetAddress}</p>
-              <a href={`tel:${office.phone}`} className="mt-2 block text-muschio underline">
+              <a href={`tel:${office.phone}`} className="mt-1 block py-2 text-muschio underline">
                 {office.phoneDisplay}
               </a>
-              <a href={`tel:${office.mobile}`} className="block text-muschio underline">
+              <a href={`tel:${office.mobile}`} className="block py-2 text-muschio underline">
                 {office.mobileDisplay}
               </a>
-              <a
-                href={office.mapsUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-2 inline-block text-sm text-pietra underline"
-              >
-                Indicazioni stradali
-              </a>
+              <div className="mt-4">
+                <MappaSede office={office} />
+              </div>
             </div>
           ))}
-          <a href={`mailto:${SITE.email}`} className="block text-muschio underline">
+          <a href={`mailto:${SITE.email}`} className="block py-2 text-muschio underline">
             {SITE.email}
           </a>
         </div>

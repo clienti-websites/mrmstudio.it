@@ -129,7 +129,7 @@ export function ContactForm({ reference }: { reference?: string }) {
           <button
             type="button"
             onClick={() => setLinkedProject(undefined)}
-            className="mt-1 underline hover:text-grafite"
+            className="-mb-2 inline-block py-2 underline hover:text-grafite"
           >
             Volevo chiedere di altro
           </button>
@@ -138,9 +138,18 @@ export function ContactForm({ reference }: { reference?: string }) {
 
       <fieldset hidden={step !== 0} className={step !== 0 ? "hidden" : "flex flex-col gap-2"}>
         <legend className="sr-only">Di cosa si tratta?</legend>
+        {/* Righe alte abbastanza da centrarle col pollice: sul telefono
+            questa e' la prima cosa che si tocca del modulo. */}
         {INTERVENTION_TYPES.map((type, i) => (
-          <label key={type} className="flex items-center gap-2 text-grafite">
-            <input type="radio" name="interventionType" value={type} defaultChecked={i === 0} required />
+          <label key={type} className="flex cursor-pointer items-center gap-3 py-1.5 text-grafite">
+            <input
+              type="radio"
+              name="interventionType"
+              value={type}
+              defaultChecked={i === 0}
+              required
+              className="h-6 w-6 shrink-0 accent-muschio"
+            />
             <span>{type}</span>
           </label>
         ))}
@@ -191,7 +200,13 @@ export function ContactForm({ reference }: { reference?: string }) {
         </label>
 
         <label className="flex items-start gap-2 text-sm text-pietra">
-          <input type="checkbox" name="consent" defaultChecked={false} required={isLast} className="mt-1" />
+          <input
+            type="checkbox"
+            name="consent"
+            defaultChecked={false}
+            required={isLast}
+            className="mt-0.5 h-6 w-6 shrink-0 accent-muschio"
+          />
           <span>
             Acconsento al trattamento dei dati personali per essere ricontattato/a, come descritto{" "}
             <a href="/privacy" className="underline hover:text-grafite">nell&apos;informativa privacy</a>.

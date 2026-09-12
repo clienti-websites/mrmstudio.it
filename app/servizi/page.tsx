@@ -6,11 +6,18 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { getProjectsByPhase, type Phase } from "@/lib/projects";
 
 export const metadata: Metadata = {
-  title: "Servizi — Progettazione e Direzione Lavori a Pescara e in Abruzzo",
+  title: "Progettazione e direzione lavori a Pescara",
   description: "Come lavora MRM Studio a Pescara e in Abruzzo, dalla progettazione interna alla consegna delle chiavi.",
 };
 
-const SEZIONI: Array<{ id: Phase; title: string; rischio: string; come: string }> = [
+const SEZIONI: Array<{
+  id: Phase;
+  title: string;
+  rischio: string;
+  come: string;
+  /** Pagina dedicata, dove esiste: ha un indirizzo suo e un testo suo. */
+  approfondimento?: { href: string; label: string };
+}> = [
   {
     id: "progettazione",
     title: "Progettazione",
@@ -34,6 +41,10 @@ const SEZIONI: Array<{ id: Phase; title: string; rischio: string; come: string }
       "In cantiere il progetto incontra la realtà. Senza una direzione lavori che risponda a te e non all'impresa, non hai modo di sapere se quello che viene costruito corrisponde a quello che hai approvato, né se tempi e sicurezza vengono rispettati.",
     come:
       "Seguiamo l'esecuzione dall'apertura del cantiere alla consegna. Controlliamo che venga realizzato quello che è stato approvato, teniamo la contabilità dei lavori e gli stati di avanzamento, coordiniamo la sicurezza e chiudiamo con il collaudo e le pratiche per l'agibilità.",
+    approfondimento: {
+      href: "/assistenza-cantieristica-e-direzione-lavori",
+      label: "Tutto quello che facciamo in cantiere, passaggio per passaggio",
+    },
   },
   {
     id: "maestranze",
@@ -76,12 +87,8 @@ export default function ServiziPage() {
             aria-labelledby={`${sezione.id}-titolo`}
             className={`scroll-mt-20 px-6 py-20 md:px-12 ${scuro ? "bg-nebbia" : ""}`}
           >
-            <div
-              className={`mx-auto flex flex-col gap-12 md:items-center ${
-                caseProject ? "max-w-6xl" : "max-w-3xl"
-              } ${scuro ? "md:flex-row-reverse" : "md:flex-row"}`}
-            >
-              <div className={caseProject ? "md:w-1/2" : "w-full"}>
+            <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-2 md:items-center">
+              <div className={scuro ? "md:order-2" : ""}>
                 <div className="flex items-center gap-4">
                   <FaseIcon phase={sezione.id} className="h-9 w-9 shrink-0 text-muschio" />
                   <span className="text-sm tracking-wider tabular-nums text-pietra">
@@ -96,10 +103,19 @@ export default function ServiziPage() {
                 <p className="mt-5 text-lg leading-relaxed text-grafite">{sezione.rischio}</p>
 
                 <p className="mt-5 border-l-2 border-muschio pl-4 text-grafite">{sezione.come}</p>
+
+                {sezione.approfondimento && (
+                  <Link
+                    href={sezione.approfondimento.href}
+                    className="mt-5 inline-block py-2 text-muschio underline"
+                  >
+                    {sezione.approfondimento.label}
+                  </Link>
+                )}
               </div>
 
               {caseProject && (
-                <div className="md:w-1/2">
+                <div className={scuro ? "md:order-1" : ""}>
                   <p className="mb-3 text-sm text-pietra">Dove l&apos;abbiamo fatto</p>
                   <ProjectCard project={caseProject} />
                 </div>
@@ -111,9 +127,31 @@ export default function ServiziPage() {
 
       <section className="px-6 py-20 md:px-12">
         <div className="mx-auto max-w-4xl">
-          <p className="text-pietra">
+          <h2 className="text-2xl font-black text-grafite">Due cose che facciamo spesso</h2>
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+            <Link
+              href="/ristrutturazioni-chiavi-in-mano"
+              className="block border-t border-nebbia pt-5 hover:border-muschio"
+            >
+              <span className="block font-medium text-grafite">Ristrutturazioni chiavi in mano</span>
+              <span className="mt-1 block text-sm text-pietra">
+                Progetto, pratiche, imprese e detrazioni con un solo interlocutore.
+              </span>
+            </Link>
+            <Link
+              href="/assistenza-cantieristica-e-direzione-lavori"
+              className="block border-t border-nebbia pt-5 hover:border-muschio"
+            >
+              <span className="block font-medium text-grafite">Assistenza cantieristica e direzione lavori</span>
+              <span className="mt-1 block text-sm text-pietra">
+                Il controllo dell&apos;esecuzione, della contabilità e della sicurezza.
+              </span>
+            </Link>
+          </div>
+
+          <p className="mt-12 text-pietra">
             Vuoi vedere come si traduce su un cantiere vero?{" "}
-            <Link href="/progetti" className="text-muschio underline">
+            <Link href="/progetti" className="inline-block py-2 text-muschio underline">
               Guarda i progetti e l&apos;elenco dei lavori
             </Link>
           </p>

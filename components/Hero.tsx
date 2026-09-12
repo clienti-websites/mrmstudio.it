@@ -2,9 +2,9 @@
 
 import { useSyncExternalStore } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { AnchorLink } from "./AnchorLink";
 
-type HeroVideo = { src: string; poster: string };
+type HeroVideo = { src: string };
 
 const QUERY_SCHERMO = "(min-width: 768px)";
 const QUERY_MOVIMENTO = "(prefers-reduced-motion: reduce)";
@@ -56,7 +56,6 @@ export function Hero({
         <video
           className="absolute inset-0 h-full w-full object-cover"
           src={video.src}
-          poster={video.poster}
           autoPlay
           muted
           loop
@@ -88,12 +87,12 @@ export function Hero({
           Progettiamo, gestiamo l&apos;appalto, dirigiamo il cantiere e scegliamo le imprese. Tu parli con noi e
           basta.
         </p>
-        <Link
+        <AnchorLink
           href={ctaHref}
           className="mt-7 inline-block bg-muschio px-6 py-3 font-medium text-carta hover:bg-muschio/90"
         >
           Contattaci
-        </Link>
+        </AnchorLink>
       </div>
     </section>
   );

@@ -5,13 +5,13 @@ import { ProjectsWithFilter } from "@/components/ProjectsWithFilter";
 import { StatsSection } from "@/components/StatsSection";
 import { ContactForm } from "@/components/ContactForm";
 import { CATEGORIES, getAllProjects } from "@/lib/projects";
+import { LocalBusinessJsonLd } from "@/components/LocalBusinessJsonLd";
 import { SITE } from "@/lib/site";
 
 // Filmato temporaneo, da sostituire con quello di MRM prima della messa
 // online: cambiare questi due percorsi e sostituire i file in public/video.
 const HERO_VIDEO = {
   src: "/video/hero.mp4",
-  poster: "/video/hero-poster.jpg",
 };
 
 export default function HomePage() {
@@ -19,6 +19,10 @@ export default function HomePage() {
 
   return (
     <>
+      {SITE.offices.map((office) => (
+        <LocalBusinessJsonLd key={office.id} office={office} />
+      ))}
+
       <Hero
         image={{ src: "/progetti/via-fedra-3/01-vista-aerea.jpg", alt: "Vista aerea di un progetto residenziale MRM Studio a Pescara" }}
         title="Dall'idea alla consegna delle chiavi."
@@ -35,7 +39,7 @@ export default function HomePage() {
               <h2 className="text-2xl font-black text-grafite md:text-3xl">Progetti</h2>
               <p className="mt-2 text-pietra">Una selezione. Cambia tipologia per vederne altri.</p>
             </div>
-            <Link href="/progetti" className="text-muschio underline">
+            <Link href="/progetti" className="-my-2 inline-block py-2 text-muschio underline">
               Tutti i progetti e i lavori svolti
             </Link>
           </div>
@@ -73,7 +77,7 @@ export default function HomePage() {
           <h2 className="mb-4 text-2xl font-black text-grafite md:text-3xl">Impegno sociale</h2>
           <p className="text-pietra">
             Materiale e dettagli in arrivo da MRM Studio.{" "}
-            <Link href="/impegno-sociale" className="text-muschio underline">
+            <Link href="/impegno-sociale" className="inline-block py-2 text-muschio underline">
               Scopri di più
             </Link>
           </p>
@@ -93,15 +97,15 @@ export default function HomePage() {
               {SITE.offices.map((office) => (
                 <div key={office.id}>
                   <p className="font-medium text-carta">{office.city}</p>
-                  <a href={`tel:${office.phone}`} className="text-carta/70 hover:text-carta">
+                  <a href={`tel:${office.phone}`} className="inline-block py-2 text-carta/70 hover:text-carta">
                     {office.phoneDisplay}
                   </a>
                 </div>
               ))}
-              <a href={`mailto:${SITE.email}`} className="block text-carta/70 hover:text-carta">
+              <a href={`mailto:${SITE.email}`} className="block py-2 text-carta/70 hover:text-carta">
                 {SITE.email}
               </a>
-              <Link href="/contatti" className="inline-block text-carta underline">
+              <Link href="/contatti" className="inline-block py-2 text-carta underline">
                 Indicazioni e mappe delle due sedi
               </Link>
             </div>
