@@ -19,7 +19,12 @@ export interface Persona {
   role: string;
   founder: boolean;
   office: "Pescara" | "Castel di Sangro" | null;
-  /** Ritratto in bianco e nero su fondo bianco, dal set dello studio. */
+  /**
+   * Ritratto in bianco e nero su fondo bianco, dal set dello studio,
+   * ritagliato a mezzo busto: gli originali sono quadrati a mezza figura e
+   * dentro un riquadro da poco piu' di cento pixel la faccia diventava
+   * illeggibile.
+   */
   photo: string;
   bio: string;
 }

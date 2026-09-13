@@ -52,7 +52,7 @@ export default function StudioPage() {
                     alt={`Ritratto di ${persona.name}`}
                     fill
                     sizes="112px"
-                    className="object-cover object-top"
+                    className="object-cover"
                   />
                 </div>
                 <h3 className="font-medium text-grafite">{persona.name}</h3>
@@ -80,7 +80,7 @@ export default function StudioPage() {
                     alt={`Ritratto di ${persona.name}`}
                     fill
                     sizes="112px"
-                    className="object-cover object-top"
+                    className="object-cover"
                   />
                 </div>
                 <h3 className="font-medium text-grafite">{persona.name}</h3>
