@@ -134,8 +134,25 @@ export function ContactForm({ reference }: { reference?: string }) {
   const isLast = step === STEPS.length - 1;
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-      <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
+    <form onSubmit={handleSubmit} className="relative flex flex-col gap-6">
+      {/*
+        Trappola per le compilazioni automatiche. Non usa display:none
+        secco, che i programmi più accorti riconoscono e saltano: il campo
+        esiste, occupa spazio nel documento ed è solo spostato fuori dallo
+        schermo. Per le persone resta irraggiungibile, perché è nascosto
+        alla lettura assistita e fuori dall'ordine di tabulazione.
+      */}
+      <div className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+        <label htmlFor="website">Non compilare questo campo</label>
+        <input
+          id="website"
+          type="text"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+          defaultValue=""
+        />
+      </div>
       {linkedProject && <input type="hidden" name="reference" value={linkedProject} />}
 
       <div>
@@ -144,12 +161,11 @@ export function ContactForm({ reference }: { reference?: string }) {
             <span key={label} className={i <= step ? "h-0.5 flex-1 bg-muschio" : "h-0.5 flex-1 bg-nebbia"} />
           ))}
         </div>
-        <p
-          ref={headingRef}
-          tabIndex={-1}
-          aria-live="polite"
-          className="mt-4 text-lg font-medium text-grafite outline-none"
-        >
+        {/* Solo lo spostamento del fuoco, senza aria-live: con entrambi
+            alcuni lettori di schermo annunciavano il passo due volte. Il
+            fuoco ha il vantaggio di portare anche la lettura nel punto
+            giusto, cosa che una regione viva non fa. */}
+        <p ref={headingRef} tabIndex={-1} className="mt-4 text-lg font-medium text-grafite outline-none">
           <span className="block text-sm font-normal text-pietra">
             Passo {step + 1} di {STEPS.length}
           </span>
@@ -289,7 +305,15 @@ export function ContactForm({ reference }: { reference?: string }) {
           />
           <span>
             Acconsento al trattamento dei dati personali per essere ricontattato/a, come descritto{" "}
-            <a href="/privacy" className="underline hover:text-grafite">nell&apos;informativa privacy</a>.
+            <a
+              href="/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-grafite"
+            >
+              nell&apos;informativa privacy
+            </a>{" "}
+            <span className="text-pietra">(si apre in una nuova scheda)</span>.
           </span>
         </label>
       </div>

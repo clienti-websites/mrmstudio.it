@@ -12,6 +12,9 @@ import { SITE } from "@/lib/site";
 // online: cambiare questi due percorsi e sostituire i file in public/video.
 const HERO_VIDEO = {
   src: "/video/hero.mp4",
+  // Ricavato dal primo mezzo secondo del filmato stesso: prima che il video
+  // parta il riquadro mostrava nero.
+  poster: "/video/hero-poster.jpg",
 };
 
 export default function HomePage() {

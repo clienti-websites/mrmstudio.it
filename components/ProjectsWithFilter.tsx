@@ -32,6 +32,28 @@ export function ProjectsWithFilter({
 
   const availableCategories = categories.filter((category) => projects.some((p) => p.category === category));
 
+  const scelte = [
+    { valore: "tutti" as const, etichetta: "Tutti" },
+    ...availableCategories.map((category) => ({ valore: category, etichetta: CATEGORY_LABELS[category] })),
+  ];
+
+  function spostaConLeFrecce(evento: React.KeyboardEvent<HTMLDivElement>) {
+    const direzione =
+      evento.key === "ArrowRight" || evento.key === "ArrowDown"
+        ? 1
+        : evento.key === "ArrowLeft" || evento.key === "ArrowUp"
+          ? -1
+          : 0;
+    if (direzione === 0) return;
+
+    evento.preventDefault();
+    const corrente = scelte.findIndex((scelta) => scelta.valore === active);
+    const prossima = (corrente + direzione + scelte.length) % scelte.length;
+    setActive(scelte[prossima].valore);
+    const gruppo = evento.currentTarget;
+    gruppo.querySelector<HTMLButtonElement>(`[data-indice="${prossima}"]`)?.focus();
+  }
+
   const filtered = useMemo(() => {
     const byCategory = active === "tutti" ? projects : projects.filter((p) => p.category === active);
     return limit ? byCategory.slice(0, limit) : byCategory;
@@ -39,25 +61,36 @@ export function ProjectsWithFilter({
 
   return (
     <div>
+      {/*
+        I filtri sono alternativi fra loro: se ne sceglie uno e gli altri si
+        spengono. `aria-pressed` descriveva invece dei tasti indipendenti,
+        ognuno acceso o spento per conto proprio. Qui è un gruppo di scelte,
+        con `aria-checked` su ciascuna e la freccia che sposta la selezione
+        come in un gruppo di radio.
+      */}
       {availableCategories.length > 1 && (
-        <div role="group" aria-label="Filtra per tipologia" className="mb-10 flex flex-wrap gap-3">
-          <button
-            type="button"
-            onClick={() => setActive("tutti")}
-            aria-pressed={active === "tutti"}
-            className={`px-4 py-3 text-sm ${active === "tutti" ? "bg-grafite text-carta" : "bg-nebbia text-grafite"}`}
-          >
-            Tutti
-          </button>
-          {availableCategories.map((category) => (
+        <div
+          role="radiogroup"
+          aria-label="Filtra per tipologia"
+          className="mb-10 flex flex-wrap gap-3"
+          onKeyDown={spostaConLeFrecce}
+        >
+          {scelte.map((scelta, i) => (
             <button
-              key={category}
+              key={scelta.valore}
               type="button"
-              onClick={() => setActive(category)}
-              aria-pressed={active === category}
-              className={`px-4 py-3 text-sm ${active === category ? "bg-grafite text-carta" : "bg-nebbia text-grafite"}`}
+              role="radio"
+              aria-checked={active === scelta.valore}
+              // In un gruppo di scelte solo quella attiva resta nel giro
+              // della tabulazione: da lì ci si muove con le frecce.
+              tabIndex={active === scelta.valore ? 0 : -1}
+              data-indice={i}
+              onClick={() => setActive(scelta.valore)}
+              className={`px-4 py-3 text-sm ${
+                active === scelta.valore ? "bg-grafite text-carta" : "bg-nebbia text-grafite"
+              }`}
             >
-              {CATEGORY_LABELS[category]}
+              {scelta.etichetta}
             </button>
           ))}
         </div>

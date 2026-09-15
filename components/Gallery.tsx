@@ -49,7 +49,7 @@ export function Gallery({ images }: { images: GalleryImage[] }) {
             aria-label={`Apri l'immagine: ${image.alt}`}
             className={`relative overflow-hidden bg-nebbia ${classiRiquadro(i, images.length)}`}
           >
-            <Image src={image.src} alt={image.alt} fill sizes="(min-width: 768px) 33vw, 50vw" className="object-cover" />
+            <Image src={image.src} alt={image.alt} fill sizes="(min-width: 1024px) 336px, (min-width: 768px) 33vw, 50vw" className="object-cover" />
           </button>
         ))}
       </div>

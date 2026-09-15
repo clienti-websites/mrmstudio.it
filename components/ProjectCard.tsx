@@ -14,7 +14,14 @@ export function ProjectCard({ project, featured = false }: { project: Project; f
           src={project.coverImage.src}
           alt={project.coverImage.alt}
           fill
-          sizes={featured ? "100vw" : "(min-width: 768px) 50vw, 100vw"}
+          // La griglia sta in un contenitore da 1152px: oltre quella soglia
+          // l'immagine non cresce più, e dichiarare 100vw farebbe scaricare
+          // file più grandi del necessario sugli schermi larghi.
+          sizes={
+            featured
+              ? "(min-width: 1152px) 1152px, 100vw"
+              : "(min-width: 1152px) 568px, (min-width: 768px) 50vw, 100vw"
+          }
           className="object-cover transition-transform duration-300 group-hover:scale-105"
         />
       </div>

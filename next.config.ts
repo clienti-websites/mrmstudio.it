@@ -55,6 +55,44 @@ const OPERE: Array<[string, string]> = [
   ["vista-mare", "vista-mare"],
 ];
 
+/**
+ * Regole su cosa la pagina può caricare e verso dove può parlare.
+ *
+ * `script-src` resta permissivo sugli script in linea: Next ne inietta di
+ * suoi in ogni pagina per l'avvio, e stringerli richiederebbe un valore
+ * diverso a ogni richiesta emesso dal middleware, cosa che farebbe costruire
+ * ogni pagina a ogni visita e butterebbe via la pregenerazione di tutto il
+ * sito. Su un sito senza contenuti scritti da estranei il conto non torna.
+ *
+ * Tutto il resto è stretto, ed è lì che sta il guadagno: il sito non può
+ * essere incorniciato altrove, il modulo non può spedire a un indirizzo che
+ * non sia il nostro, non si possono iniettare iframe o plugin, e non si può
+ * dirottare la base dei collegamenti relativi.
+ *
+ * Le eccezioni sono tutte motivate:
+ * - `data:` e `blob:` fra le immagini servono ai segnaposto di next/image e
+ *   alla lightbox della galleria;
+ * - gli stili in linea servono a next/image, che scrive le misure
+ *   nell'attributo style, e alle animazioni;
+ * - `frame-src` verso Google serve solo alla mappa delle sedi, che si carica
+ *   comunque su richiesta esplicita.
+ */
+const CSP = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline'",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob:",
+  "font-src 'self'",
+  "media-src 'self'",
+  "connect-src 'self'",
+  "frame-src https://www.google.com",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'none'",
+  "upgrade-insecure-requests",
+].join("; ");
+
 const nextConfig: NextConfig = {
   /* config options here */
   // yet-another-react-lightbox ships ESM-only (no CJS build); this makes both
@@ -80,7 +118,10 @@ const nextConfig: NextConfig = {
         headers: [
           { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
           { key: "X-Content-Type-Options", value: "nosniff" },
-          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Content-Security-Policy", value: CSP },
+          // Coerente con frame-ancestors 'none' della CSP: i browser vecchi
+          // che non leggono la CSP applicano almeno questa.
+          { key: "X-Frame-Options", value: "DENY" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           // Il sito non usa né camera, né microfono, né posizione: dirlo
           // impedisce a un eventuale contenuto di terzi di chiederli.

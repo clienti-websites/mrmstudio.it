@@ -4,7 +4,7 @@ import { useSyncExternalStore } from "react";
 import Image from "next/image";
 import { AnchorLink } from "./AnchorLink";
 
-type HeroVideo = { src: string };
+type HeroVideo = { src: string; poster: string };
 
 const QUERY_SCHERMO = "(min-width: 768px)";
 const QUERY_MOVIMENTO = "(prefers-reduced-motion: reduce)";
@@ -45,6 +45,10 @@ export function Hero({
   // il sito dal telefono, chi ha chiesto meno movimento o chi ha il risparmio
   // dati attivo. Sotto resta sempre la fotografia, che next/image consegna
   // gia' ridimensionata per lo schermo.
+  //
+  // L'elemento non viene proprio creato quando non serve: nasconderlo con un
+  // foglio di stile lo farebbe scaricare lo stesso. Chi ha chiesto meno
+  // movimento vede quindi l'immagine ferma, che e' il comportamento atteso.
   const vaBeneIlVideo = useSyncExternalStore(ascoltaPreferenze, leggiPreferenze, () => false);
   const mostraVideo = Boolean(video) && vaBeneIlVideo;
 
@@ -56,6 +60,13 @@ export function Hero({
         <video
           className="absolute inset-0 h-full w-full object-cover"
           src={video.src}
+          poster={video.poster}
+          // Del filmato si scarica prima la sola intestazione: il primo
+          // fotogramma a schermo lo dà il poster, quindi non serve tirare
+          // giù tutto per avere qualcosa da mostrare.
+          preload="metadata"
+          width={1280}
+          height={720}
           autoPlay
           muted
           loop

@@ -11,18 +11,21 @@ export const metadata: Metadata = {
 /**
  * Informativa redatta sul funzionamento reale del sito: i dati elencati sono
  * esattamente quelli che il modulo raccoglie (vedi lib/validation.ts) e i
- * destinatari sono i servizi effettivamente usati, Vercel per l'hosting e
- * Resend per l'invio delle email (vedi lib/email.ts).
+ * destinatari sono i servizi effettivamente usati: la casella di posta
+ * Aruba per la consegna (vedi lib/email.ts) e il server che ospita il sito.
  *
  * Le mappe delle sedi sono l'unico contenuto di terzi del sito e hanno una
  * sezione propria: si caricano solo su richiesta esplicita, e prima di quel
  * momento verso Google non parte nessuna richiesta (verificato sul traffico
  * di rete). Il sito non installa cookie e non usa la memoria del browser.
  *
- * Due punti restano da confermare a MRM prima della pubblicazione:
- * 1. il periodo di conservazione, qui descritto in termini di finalità
- *    invece che con un numero di mesi, che nessuno ha ancora deciso;
- * 2. l'eventuale presenza di un responsabile della protezione dei dati.
+ * I dati del titolare (ragione sociale, sedi, partita IVA, REA, email) non
+ * sono segnaposto: vengono da lib/site.ts e sono quelli dichiarati da MRM
+ * sul proprio sito. Restano invece da completare, e sono marcati nel testo
+ * con [DA COMPLETARE]:
+ * 1. il fornitore che ospiterà il server;
+ * 2. il periodo massimo di conservazione delle richieste senza seguito;
+ * 3. se esista un responsabile della protezione dei dati.
  * Il testo va comunque fatto verificare da un legale.
  */
 const AGGIORNAMENTO = "settembre 2026";
@@ -43,6 +46,10 @@ export default function PrivacyPage() {
           Il titolare del trattamento è {SITE.legalName}, con sedi in {SITE.offices[0].streetAddress},{" "}
           {SITE.offices[0].city}, e in {SITE.offices[1].streetAddress}, {SITE.offices[1].city}. Partita IVA{" "}
           {SITE.vatNumber}, REA {SITE.rea}.
+        </p>
+        <p className="mt-3 text-pietra">
+          [DA COMPLETARE: indicare se lo studio ha nominato un responsabile della protezione dei dati e, in
+          caso affermativo, i suoi recapiti. Se non è stato nominato, questa riga va tolta.]
         </p>
         <p className="mt-3 text-grafite">
           Per qualsiasi questione riguardante i tuoi dati puoi scrivere a{" "}
@@ -111,14 +118,21 @@ export default function PrivacyPage() {
       <section className="mt-10 border-t border-nebbia pt-10">
         <h2 className="text-xl font-black text-grafite">Per quanto tempo li conserviamo</h2>
         <p className="mt-3 text-grafite">
-          Il sito non tiene una copia delle richieste: non ha un archivio. Ogni richiesta diventa un&apos;email
-          che arriva nella nostra casella di posta, e quella è l&apos;unica copia esistente.
+          Quando invii il modulo, la tua richiesta viene prima scritta in un file sul nostro server e poi
+          spedita alla nostra casella di posta. Se la spedizione riesce, <strong>quel file viene cancellato
+          subito</strong>: la richiesta è già arrivata e non serve tenerne una seconda copia. Il file resta
+          solo nel caso in cui la spedizione non riesca, perché altrimenti la tua richiesta andrebbe persa
+          senza che nessuno lo sappia, e viene eliminato appena l&apos;abbiamo recuperata.
         </p>
         <p className="mt-3 text-grafite">
-          La conserviamo per il tempo necessario a darti riscontro. Se dalla richiesta nasce un incarico
-          professionale, i dati vengono conservati per la durata del rapporto e per i termini previsti dalla
-          legge in materia contabile, fiscale e di responsabilità professionale. Se invece non se ne fa nulla,
-          la richiesta viene eliminata quando non serve più.
+          La richiesta che arriva per email la conserviamo per il tempo necessario a darti riscontro. Se ne
+          nasce un incarico professionale, i dati vengono conservati per la durata del rapporto e per i
+          termini previsti dalla legge in materia contabile, fiscale e di responsabilità professionale. Se
+          invece non se ne fa nulla, la richiesta viene eliminata quando non serve più.
+        </p>
+        <p className="mt-3 text-pietra">
+          [DA COMPLETARE: periodo massimo di conservazione delle richieste che non danno luogo a un incarico,
+          espresso in mesi.]
         </p>
       </section>
 
@@ -126,15 +140,28 @@ export default function PrivacyPage() {
         <h2 className="text-xl font-black text-grafite">Chi altro vede i tuoi dati</h2>
         <p className="mt-3 text-grafite">
           I dati sono trattati dai professionisti e dai collaboratori dello studio autorizzati a farlo. Per
-          far funzionare il sito ci appoggiamo inoltre a due fornitori, che agiscono come responsabili del
-          trattamento: Vercel Inc., che ospita il sito, e Resend, che consegna alla nostra casella le email
-          generate dal modulo.
+          far funzionare il sito ci appoggiamo inoltre a questi fornitori, che agiscono come responsabili del
+          trattamento:
         </p>
-        <p className="mt-3 text-grafite">
-          Entrambi hanno sede negli Stati Uniti, quindi i dati possono essere trattati fuori dall&apos;Unione
-          Europea. Il trasferimento avviene sulla base delle clausole contrattuali standard approvate dalla
-          Commissione Europea. Non vendiamo né cediamo i tuoi dati a nessun altro, e non li usiamo per
-          finalità commerciali diverse dalla risposta alla tua richiesta.
+        <ul className="mt-4 space-y-3">
+          <li className="border-l-2 border-nebbia pl-4 text-grafite">
+            <span className="font-medium">Aruba S.p.A.</span>, che gestisce la casella di posta su cui
+            arrivano le richieste del modulo. Ha sede in Italia.
+          </li>
+          <li className="border-l-2 border-nebbia pl-4 text-grafite">
+            <span className="font-medium">[DA COMPLETARE: fornitore del server che ospita il sito]</span>,
+            che ospita le pagine e conserva i registri tecnici degli accessi.
+          </li>
+          <li className="border-l-2 border-nebbia pl-4 text-grafite">
+            <span className="font-medium">Google Ireland Limited</span>, ma soltanto se apri una delle mappe
+            nella pagina dei contatti. Finché non la apri, verso Google non parte nessuna richiesta. Il
+            dettaglio sta nella sezione dedicata qui sopra.
+          </li>
+        </ul>
+        <p className="mt-4 text-grafite">
+          La copia di sicurezza delle richieste descritta più sotto resta sul server dello studio e non viene
+          affidata a nessun altro. Non vendiamo né cediamo i tuoi dati, e non li usiamo per finalità
+          commerciali diverse dalla risposta alla tua richiesta.
         </p>
       </section>
 

@@ -34,7 +34,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Vai al contenuto
         </a>
         <Header />
-        <main id="contenuto" tabIndex={-1} className="outline-none">
+        {/* Bersaglio del collegamento "Vai al contenuto": il contorno del
+            fuoco deve restare visibile, altrimenti chi ci arriva da tastiera
+            non sa di esserci arrivato. */}
+        <main id="contenuto" tabIndex={-1}>
           {children}
         </main>
         <Footer />
