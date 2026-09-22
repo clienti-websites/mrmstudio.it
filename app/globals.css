@@ -4,7 +4,10 @@
   --color-carta: #F4F4F1;
   --color-grafite: #1C1E1B;
   --color-muschio: #2E4034;
-  --color-pietra: #6E6D65;
+  /* Scurito da #6E6D65: quel valore passava su carta (4,72) ma non su
+     nebbia (4,31), e il testo secondario compare su entrambi. Ora fa 5,23
+     su carta e 4,78 su nebbia, sopra il minimo AA in tutti e due i casi. */
+  --color-pietra: #67665F;
   --color-nebbia: #EAEAE5;
 
   --font-sans: var(--font-archivo), system-ui, sans-serif;

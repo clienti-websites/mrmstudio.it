@@ -204,4 +204,28 @@ describe("ContactForm", () => {
     expect(global.fetch).not.toHaveBeenCalled();
     expect(screen.getByText(/inserisci il tuo nome/i)).toBeInTheDocument();
   });
+
+  it("con Invio in un campo si passa al passo successivo", async () => {
+    const user = userEvent.setup();
+    global.fetch = jest.fn();
+
+    render(<ContactForm />);
+    await user.click(screen.getByRole("button", { name: /avanti/i }));
+    expect(screen.getByText(/passo 2 di 3/i)).toBeInTheDocument();
+
+    // Prima "Avanti" era un pulsante qualunque: premendo Invio in un campo
+    // non succedeva niente, e chi compila da tastiera restava bloccato.
+    await user.type(screen.getByRole("textbox", { name: /dove si trova/i }), "Pescara{Enter}");
+
+    expect(screen.getByText(/passo 3 di 3/i)).toBeInTheDocument();
+    // E non deve aver provato a spedire niente a metà percorso.
+    expect(global.fetch).not.toHaveBeenCalled();
+  });
+
+  it("il gruppo delle scelte prende il nome dalla domanda visibile", async () => {
+    render(<ContactForm />);
+
+    // Niente legenda nascosta che ripeta a voce una domanda già scritta.
+    expect(screen.getByRole("group", { name: /di cosa si tratta/i })).toBeInTheDocument();
+  });
 });

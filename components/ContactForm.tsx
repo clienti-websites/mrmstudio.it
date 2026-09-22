@@ -62,6 +62,16 @@ export function ContactForm({ reference }: { reference?: string }) {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    // Nei primi due passi l'invio del modulo vuol dire "avanti". Serve
+    // perché "Avanti" è un pulsante di invio vero: senza, premendo Invio
+    // dentro un campo non succedeva niente, cosa che chi compila da
+    // tastiera non si aspetta.
+    if (!isLast) {
+      go(step + 1);
+      return;
+    }
+
     setStatus("submitting");
     setErrorMessage(null);
 
@@ -169,7 +179,7 @@ export function ContactForm({ reference }: { reference?: string }) {
           <span className="block text-sm font-normal text-pietra">
             Passo {step + 1} di {STEPS.length}
           </span>
-          {STEPS[step]}
+          <span id="passo-corrente">{STEPS[step]}</span>
         </p>
       </div>
 
@@ -200,8 +210,14 @@ export function ContactForm({ reference }: { reference?: string }) {
         selezionato serve perche' altrimenti il passaggio del mouse
         vincerebbe e il riquadro scelto sembrerebbe deselezionarsi.
       */}
-      <fieldset hidden={step !== 0} className={step !== 0 ? "hidden" : "grid grid-cols-2 gap-3"}>
-        <legend className="sr-only">Di cosa si tratta?</legend>
+      {/* Il gruppo prende il nome dalla domanda già visibile sopra, invece
+          di ripeterla in una legenda nascosta: chi ascolta sente una volta
+          sola, e il nome del gruppo resta legato a un testo che esiste. */}
+      <fieldset
+        hidden={step !== 0}
+        aria-labelledby="passo-corrente"
+        className={step !== 0 ? "hidden" : "grid grid-cols-2 gap-3"}
+      >
         {INTERVENTION_TYPES.map((type, i) => (
           <label key={type} className="relative block cursor-pointer">
             <input
@@ -341,8 +357,7 @@ export function ContactForm({ reference }: { reference?: string }) {
           </button>
         ) : (
           <button
-            type="button"
-            onClick={() => go(step + 1)}
+            type="submit"
             className="bg-muschio px-6 py-3 font-medium text-carta hover:bg-muschio/90"
           >
             Avanti

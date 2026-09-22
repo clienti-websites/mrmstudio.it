@@ -25,20 +25,26 @@ export function StatsSection({
           quando se ne mostrano tre invece di quattro. Con tre il gruppo sta
           più stretto, altrimenti le celle si allontanano tanto da non
           leggersi più come un blocco unico. */}
-      <div
+      {/* Elenco di definizioni, non due paragrafi accostati: così il numero
+          e la sua etichetta risultano legati anche a chi ascolta, che
+          altrimenti sente "19+" e poi, staccato, "anni di attività".
+          L'ordine nel documento mette prima l'etichetta, come vuole un
+          elenco di definizioni; l'inversione della colonna rimette il
+          numero sopra a schermo. */}
+      <dl
         className={`mx-auto grid gap-10 text-center ${
           stats.length === 3 ? "max-w-3xl grid-cols-1 sm:grid-cols-3" : "max-w-6xl grid-cols-2 md:grid-cols-4"
         }`}
       >
         {stats.map((stat) => (
-          <div key={stat.label} className="flex flex-col items-center">
-            <p className="text-4xl font-black tabular-nums text-grafite md:text-5xl">
+          <div key={stat.label} className="flex flex-col-reverse items-center">
+            <dt className="mt-2 max-w-[18ch] text-sm text-pietra">{stat.label}</dt>
+            <dd className="ml-0 text-4xl font-black tabular-nums text-grafite md:text-5xl">
               {stat.value ?? <span className="text-xl font-medium text-pietra">Dato in arrivo</span>}
-            </p>
-            <p className="mt-2 max-w-[18ch] text-sm text-pietra">{stat.label}</p>
+            </dd>
           </div>
         ))}
-      </div>
+      </dl>
     </section>
   );
 }
