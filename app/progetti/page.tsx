@@ -15,7 +15,7 @@ export default function ProgettiPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-16 md:px-12">
-      <h1 className="text-3xl font-black text-grafite md:text-4xl">Progetti</h1>
+      <h1 className="text-3xl font-bold text-grafite md:text-4xl">Progetti</h1>
 
       <section aria-labelledby="opere-titolo" className="mt-10 mb-20">
         <h2 id="opere-titolo" className="sr-only">

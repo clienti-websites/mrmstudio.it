@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { archivo } from "./fonts";
+import { archivo, poppins } from "./fonts";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SITE } from "@/lib/site";
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="it" className={archivo.variable}>
+    <html lang="it" className={`${archivo.variable} ${poppins.variable}`}>
       <body>
         <a href="#contenuto" className="skip-link">
           Vai al contenuto

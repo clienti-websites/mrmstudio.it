@@ -60,6 +60,11 @@ export default async function ProgettoPage({ params }: { params: Promise<{ slug:
   // è lì che stanno importo e prestazioni.
   const inElenco = LAVORI.some((lavoro) => lavoro.slug === project.slug);
 
+  // La copertina va in testa all'elenco: e' quella grande a sinistra, e la
+  // lightbox deve sfogliarle nell'ordine in cui si vedono. In otto schede su
+  // ventiquattro non coincide con la prima della galleria, da qui il filtro.
+  const immagini = [project.coverImage, ...project.gallery.filter((img) => img.src !== project.coverImage.src)];
+
   const briciole = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -82,7 +87,7 @@ export default async function ProgettoPage({ params }: { params: Promise<{ slug:
   };
 
   return (
-    <article className="mx-auto max-w-5xl px-6 py-16 md:px-12">
+    <article className="mx-auto max-w-6xl px-6 py-16 md:px-12">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(briciole) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(opera) }} />
 
@@ -98,49 +103,45 @@ export default async function ProgettoPage({ params }: { params: Promise<{ slug:
         <span>{project.title}</span>
       </nav>
 
-      <div className="mb-8 flex flex-wrap items-baseline justify-between gap-4 border-b border-nebbia pb-8">
-        <div>
-          <h1 className="text-3xl font-black text-grafite md:text-4xl">{project.title}</h1>
-          <p className="mt-1 text-pietra">
-            {[project.location, project.year].filter(Boolean).join(" · ")}
-          </p>
-        </div>
-        {project.budget && <p className="text-lg font-medium text-grafite">{project.budget}</p>}
-      </div>
+      {/* Copertina a sinistra, scheda a destra, resto delle fotografie
+          sotto. Le due colonne sono una cosa sola: chi arriva da una ricerca
+          vede l'opera e, nello stesso sguardo, dove si trova, quanto è
+          costata e cosa ci abbiamo fatto noi — senza scorrere dieci immagini
+          per scoprire cosa sta guardando. */}
+      <Gallery
+        images={immagini}
+        aside={
+          <>
+            <h1 className="text-3xl font-bold text-grafite md:text-4xl">{project.title}</h1>
+            <p className="mt-2 text-pietra">{[project.location, project.year].filter(Boolean).join(" · ")}</p>
+            {project.budget && <p className="mt-4 text-lg font-medium text-grafite">{project.budget}</p>}
 
-      <Gallery images={project.gallery} />
+            <div className="mt-6 h-px bg-nebbia" />
 
-      {inElenco && (
-        <p className="mt-6 text-sm text-pietra">
-          Questo intervento compare anche{" "}
-          {/* py-1.5 su un elemento in linea allarga solo l'area toccabile:
-              sborda sopra e sotto la riga senza spostare il testo. */}
-          <Link href="/progetti#lavori-titolo" className="py-1.5 text-muschio underline">
-            nell&apos;elenco dei lavori
-          </Link>
-          , con importo e prestazioni.
-        </p>
-      )}
+            <div className="mt-6 max-w-none text-grafite [&>blockquote]:mb-4 [&>blockquote]:max-w-[70ch] [&>blockquote]:border-l-2 [&>blockquote]:border-muschio [&>blockquote]:pl-4 [&>blockquote]:italic [&>h2]:mb-4 [&>h2]:mt-10 [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:text-grafite [&>h3]:mb-3 [&>h3]:mt-8 [&>h3]:text-xl [&>h3]:font-bold [&>h3]:text-grafite [&>ol]:mb-4 [&>ol]:max-w-[70ch] [&>ol]:list-decimal [&>ol]:pl-6 [&>p]:mb-4 [&>p]:max-w-[70ch] [&>ul]:mb-4 [&>ul]:max-w-[70ch] [&>ul]:list-disc [&>ul]:pl-6 [&_a]:text-muschio [&_a]:underline [&_li]:mb-1">
+              <MDXRemote source={project.content} />
+            </div>
 
-      {project.phases.length > 0 && (
-        <div className="py-8">
-          <FaseChecklist phases={[...project.phases]} />
-        </div>
-      )}
+            {project.phases.length > 0 && (
+              <div className="mt-6 border-t border-nebbia pt-6">
+                <FaseChecklist phases={[...project.phases]} />
+              </div>
+            )}
 
-      {/*
-        No @tailwindcss/typography plugin here by design (this is a
-        hand-built design system, and the plugin's opinions would fight
-        it). Style the MDX output directly with arbitrary-variant rules on
-        this wrapper instead — Tailwind v4 preflight zeroes all margins, so
-        without this every paragraph/heading/list item would render flush
-        against its neighbours.
-      */}
-      <div
-        className="max-w-none py-4 text-grafite [&>blockquote]:mb-4 [&>blockquote]:max-w-[70ch] [&>blockquote]:border-l-2 [&>blockquote]:border-muschio [&>blockquote]:pl-4 [&>blockquote]:italic [&>h2]:mb-4 [&>h2]:mt-10 [&>h2]:text-2xl [&>h2]:font-black [&>h2]:text-grafite [&>h3]:mb-3 [&>h3]:mt-8 [&>h3]:text-xl [&>h3]:font-bold [&>h3]:text-grafite [&>ol]:mb-4 [&>ol]:max-w-[70ch] [&>ol]:list-decimal [&>ol]:pl-6 [&>p]:mb-4 [&>p]:max-w-[70ch] [&>ul]:mb-4 [&>ul]:max-w-[70ch] [&>ul]:list-disc [&>ul]:pl-6 [&_a]:text-muschio [&_a]:underline [&_li]:mb-1"
-      >
-        <MDXRemote source={project.content} />
-      </div>
+            {inElenco && (
+              <p className="mt-6 text-sm text-pietra">
+                Questo intervento compare anche{" "}
+                {/* py-1.5 su un elemento in linea allarga solo l'area toccabile:
+                    sborda sopra e sotto la riga senza spostare il testo. */}
+                <Link href="/progetti#lavori-titolo" className="py-1.5 text-muschio underline">
+                  nell&apos;elenco dei lavori
+                </Link>
+                , con importo e prestazioni.
+              </p>
+            )}
+          </>
+        }
+      />
 
       {/* Chi ha seguito il lavoro. Per un committente pubblico è
           un'informazione che pesa quanto le fotografie, e sul vecchio sito
@@ -194,7 +195,7 @@ export default async function ProgettoPage({ params }: { params: Promise<{ slug:
       </nav>
 
       <section aria-labelledby="parlane-titolo" className="mt-16 scroll-mt-20 bg-nebbia p-8 md:p-12">
-        <h2 id="parlane-titolo" className="text-2xl font-black text-grafite">
+        <h2 id="parlane-titolo" className="text-2xl font-bold text-grafite">
           Ti piacerebbe qualcosa di simile?
         </h2>
         <p className="mt-3 max-w-2xl text-pietra">

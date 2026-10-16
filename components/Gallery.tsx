@@ -35,19 +35,55 @@ function classiRiquadro(indice: number, totale: number): string {
   return `${telefono} ${schermo}`;
 }
 
-export function Gallery({ images }: { images: GalleryImage[] }) {
+/**
+ * Con `aside` la galleria si apre in due colonne: la prima immagine diventa
+ * la copertina a sinistra, il testo della scheda le sta a destra, e le altre
+ * immagini scendono sotto a tutta larghezza.
+ *
+ * La copertina resta dentro `images` invece di arrivare per conto suo: la
+ * lightbox è una sola e deve poterla sfogliare insieme alle altre, quindi
+ * l'indice che apre ogni riquadro dev'essere quello vero dell'elenco. Chi
+ * chiama passa la copertina in testa.
+ */
+export function Gallery({ images, aside }: { images: GalleryImage[]; aside?: React.ReactNode }) {
   const [index, setIndex] = useState(-1);
+
+  const copertina = aside ? images[0] : null;
+  const riquadri = copertina ? images.slice(1) : images;
+  const scarto = copertina ? 1 : 0;
 
   return (
     <>
+      {copertina && (
+        <div className="mb-2 grid items-start gap-8 md:grid-cols-[1.4fr_1fr] md:gap-12">
+          <button
+            type="button"
+            onClick={() => setIndex(0)}
+            aria-label={`Apri l'immagine: ${copertina.alt}`}
+            className="relative block aspect-[4/3] w-full overflow-hidden bg-nebbia"
+          >
+            <Image
+              src={copertina.src}
+              alt={copertina.alt}
+              fill
+              priority
+              sizes="(min-width: 768px) 56vw, 100vw"
+              className="object-cover"
+            />
+          </button>
+
+          <div>{aside}</div>
+        </div>
+      )}
+
       <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
-        {images.map((image, i) => (
+        {riquadri.map((image, i) => (
           <button
             key={image.src}
             type="button"
-            onClick={() => setIndex(i)}
+            onClick={() => setIndex(i + scarto)}
             aria-label={`Apri l'immagine: ${image.alt}`}
-            className={`relative overflow-hidden bg-nebbia ${classiRiquadro(i, images.length)}`}
+            className={`relative overflow-hidden bg-nebbia ${classiRiquadro(i, riquadri.length)}`}
           >
             <Image src={image.src} alt={image.alt} fill sizes="(min-width: 1024px) 336px, (min-width: 768px) 33vw, 50vw" className="object-cover" />
           </button>

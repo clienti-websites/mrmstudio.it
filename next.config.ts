@@ -77,9 +77,18 @@ const OPERE: Array<[string, string]> = [
  * - `frame-src` verso Google serve solo alla mappa delle sedi, che si carica
  *   comunque su richiesta esplicita.
  */
+/**
+ * React in sviluppo usa `eval()` per ricostruire gli stack delle eccezioni, e
+ * la CSP lo vieta: il pannello di Next segnala un errore a ogni caricamento,
+ * e gli errori veri arrivano senza riga né file. In produzione React non lo
+ * usa mai, quindi il permesso vale solo per `next dev` e l'intestazione
+ * servita ai visitatori resta quella di prima.
+ */
+const SVILUPPO = process.env.NODE_ENV === "development";
+
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline'",
+  `script-src 'self' 'unsafe-inline'${SVILUPPO ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "font-src 'self'",

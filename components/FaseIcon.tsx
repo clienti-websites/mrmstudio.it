@@ -24,12 +24,14 @@ const PATHS: Record<Phase, React.ReactNode> = {
       <path d="M6 12l12-3" />
     </>
   ),
-  maestranze: (
+  // Una poltrona: schienale, braccioli che scendono nella seduta, gambe.
+  // A 24px la sagoma si legge per la silhouette, non per i dettagli.
+  "interior-design": (
     <>
-      <circle cx="8" cy="8" r="2.5" />
-      <circle cx="16" cy="8" r="2.5" />
-      <path d="M3.5 19c0-2.8 2-4.5 4.5-4.5s4.5 1.7 4.5 4.5" />
-      <path d="M12.5 19c0-2.8 1.5-4.5 3.5-4.5s4.5 1.7 4.5 4.5" />
+      <path d="M5.5 11V8a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v3" />
+      <path d="M5.5 11A1.75 1.75 0 0 0 3.75 12.75V17h16.5v-4.25A1.75 1.75 0 0 0 18.5 11" />
+      <path d="M3.75 14.5h16.5" />
+      <path d="M6.5 17v2M17.5 17v2" />
     </>
   ),
 };

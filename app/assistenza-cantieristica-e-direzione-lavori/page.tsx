@@ -76,7 +76,7 @@ export default function DirezioneLavoriPage() {
             <FaseIcon phase="direzione-lavori" className="h-9 w-9 shrink-0 text-carta/70" />
             <span className="text-sm text-carta/70">Una delle quattro fasi</span>
           </div>
-          <h1 className="mt-6 text-3xl font-black text-carta md:text-5xl">
+          <h1 className="mt-6 text-3xl font-bold text-carta md:text-5xl">
             Assistenza cantieristica e direzione lavori
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-carta/85">
@@ -105,7 +105,7 @@ export default function DirezioneLavoriPage() {
         <div className="mx-auto max-w-3xl">
           {MOMENTI.map((momento) => (
             <div key={momento.titolo} className="border-t border-nebbia py-10">
-              <h2 className="text-2xl font-black text-grafite">{momento.titolo}</h2>
+              <h2 className="text-2xl font-bold text-grafite">{momento.titolo}</h2>
               <p className="mt-2 text-pietra">{momento.quando}</p>
               <ul className="mt-6 space-y-3">
                 {momento.compiti.map((compito) => (
@@ -122,7 +122,7 @@ export default function DirezioneLavoriPage() {
       {esempi.length > 0 && (
         <section className="bg-nebbia px-6 py-16 md:px-12">
           <div className="mx-auto max-w-5xl">
-            <h2 className="mb-8 text-2xl font-black text-grafite">Dove l&apos;abbiamo fatto</h2>
+            <h2 className="mb-8 text-2xl font-bold text-grafite">Dove l&apos;abbiamo fatto</h2>
             <div className="grid gap-8 md:grid-cols-2">
               {esempi.map((progetto) => (
                 <ProjectCard key={progetto.slug} project={progetto} />

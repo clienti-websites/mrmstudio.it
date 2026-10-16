@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Hero } from "@/components/Hero";
 import { PercorsoCompleto } from "@/components/PercorsoCompleto";
+import { OperePubbliche } from "@/components/OperePubbliche";
 import { ProjectsWithFilter } from "@/components/ProjectsWithFilter";
 import { StatsSection } from "@/components/StatsSection";
 import { ContactForm } from "@/components/ContactForm";
@@ -35,11 +36,13 @@ export default function HomePage() {
 
       <PercorsoCompleto />
 
+      <OperePubbliche />
+
       <section className="px-6 py-24 md:px-12">
         <div className="mx-auto max-w-6xl">
           <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
             <div>
-              <h2 className="text-2xl font-black text-grafite md:text-3xl">Progetti</h2>
+              <h2 className="text-2xl font-bold text-grafite md:text-3xl">Progetti</h2>
               <p className="mt-2 text-pietra">Una selezione. Cambia tipologia per vederne altri.</p>
             </div>
             <Link href="/progetti" className="-my-2 inline-block py-2 text-muschio underline">
@@ -77,7 +80,7 @@ export default function HomePage() {
 
       <section className="px-6 py-24 md:px-12">
         <div className="mx-auto max-w-3xl">
-          <h2 className="mb-4 text-2xl font-black text-grafite md:text-3xl">Impegno sociale</h2>
+          <h2 className="mb-4 text-2xl font-bold text-grafite md:text-3xl">Impegno sociale</h2>
           <p className="text-pietra">
             Materiale e dettagli in arrivo da MRM Studio.{" "}
             <Link href="/impegno-sociale" className="inline-block py-2 text-muschio underline">
@@ -90,7 +93,7 @@ export default function HomePage() {
       <section id="contatti" aria-labelledby="contatti-titolo" className="scroll-mt-20 bg-grafite px-6 py-24 md:px-12">
         <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-2">
           <div>
-            <h2 id="contatti-titolo" className="text-2xl font-black text-carta md:text-3xl">
+            <h2 id="contatti-titolo" className="text-2xl font-bold text-carta md:text-3xl">
               Da dove vuoi cominciare?
             </h2>
             <p className="mt-4 text-carta/80">

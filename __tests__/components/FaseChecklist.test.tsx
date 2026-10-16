@@ -11,7 +11,7 @@ describe("FaseChecklist", () => {
     expect(screen.getByText("Progettazione")).toHaveAttribute("data-done", "true");
     expect(screen.getByText("Direzione lavori")).toHaveAttribute("data-done", "true");
     expect(screen.getByText("Appalto")).toHaveAttribute("data-done", "false");
-    expect(screen.getByText("Maestranze")).toHaveAttribute("data-done", "false");
+    expect(screen.getByText("Interior design")).toHaveAttribute("data-done", "false");
   });
 
   it("tells screen-reader users which phases were and weren't followed, not just done vs. not by colour", () => {

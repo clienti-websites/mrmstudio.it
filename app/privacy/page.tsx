@@ -33,7 +33,7 @@ const AGGIORNAMENTO = "settembre 2026";
 export default function PrivacyPage() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-16 md:px-12">
-      <h1 className="text-3xl font-black text-grafite md:text-4xl">Informativa privacy</h1>
+      <h1 className="text-3xl font-bold text-grafite md:text-4xl">Informativa privacy</h1>
       <p className="mt-4 text-pietra">
         Questa informativa spiega come trattiamo i dati personali di chi visita questo sito e di chi ci
         scrive attraverso il modulo dei contatti, ai sensi del Regolamento UE 2016/679 (GDPR). Ultimo
@@ -41,7 +41,7 @@ export default function PrivacyPage() {
       </p>
 
       <section className="mt-12 border-t border-nebbia pt-10">
-        <h2 className="text-xl font-black text-grafite">Chi tratta i tuoi dati</h2>
+        <h2 className="text-xl font-bold text-grafite">Chi tratta i tuoi dati</h2>
         <p className="mt-3 text-grafite">
           Il titolare del trattamento è {SITE.legalName}, con sedi in {SITE.offices[0].streetAddress},{" "}
           {SITE.offices[0].city}, e in {SITE.offices[1].streetAddress}, {SITE.offices[1].city}. Partita IVA{" "}
@@ -61,7 +61,7 @@ export default function PrivacyPage() {
       </section>
 
       <section className="mt-10 border-t border-nebbia pt-10">
-        <h2 className="text-xl font-black text-grafite">Quali dati raccogliamo</h2>
+        <h2 className="text-xl font-bold text-grafite">Quali dati raccogliamo</h2>
         <p className="mt-3 text-grafite">
           Se compili il modulo dei contatti ci arrivano il tuo nome, il recapito che ci lasci (telefono o
           email) e il tipo di intervento che hai scelto. Sono facoltativi il punto a cui si trova il lavoro,
@@ -86,7 +86,7 @@ export default function PrivacyPage() {
       </section>
 
       <section className="mt-10 border-t border-nebbia pt-10">
-        <h2 className="text-xl font-black text-grafite">Le mappe delle sedi</h2>
+        <h2 className="text-xl font-bold text-grafite">Le mappe delle sedi</h2>
         <p className="mt-3 text-grafite">
           Nella pagina dei contatti, al posto delle mappe trovi un riquadro con un pulsante. Finché non lo
           premi, il tuo browser non contatta Google e nessun dato esce da questo sito.
@@ -105,7 +105,7 @@ export default function PrivacyPage() {
       </section>
 
       <section className="mt-10 border-t border-nebbia pt-10">
-        <h2 className="text-xl font-black text-grafite">Perché li trattiamo</h2>
+        <h2 className="text-xl font-bold text-grafite">Perché li trattiamo</h2>
         <p className="mt-3 text-grafite">
           Usiamo questi dati solo per leggere la tua richiesta e risponderti. La base giuridica è il consenso
           che presti spuntando la casella nel modulo, ai sensi dell&apos;articolo 6, paragrafo 1, lettera a)
@@ -116,7 +116,7 @@ export default function PrivacyPage() {
       </section>
 
       <section className="mt-10 border-t border-nebbia pt-10">
-        <h2 className="text-xl font-black text-grafite">Per quanto tempo li conserviamo</h2>
+        <h2 className="text-xl font-bold text-grafite">Per quanto tempo li conserviamo</h2>
         <p className="mt-3 text-grafite">
           Quando invii il modulo, la tua richiesta viene prima scritta in un file sul nostro server e poi
           spedita alla nostra casella di posta. Se la spedizione riesce, <strong>quel file viene cancellato
@@ -137,7 +137,7 @@ export default function PrivacyPage() {
       </section>
 
       <section className="mt-10 border-t border-nebbia pt-10">
-        <h2 className="text-xl font-black text-grafite">Chi altro vede i tuoi dati</h2>
+        <h2 className="text-xl font-bold text-grafite">Chi altro vede i tuoi dati</h2>
         <p className="mt-3 text-grafite">
           I dati sono trattati dai professionisti e dai collaboratori dello studio autorizzati a farlo. Per
           far funzionare il sito ci appoggiamo inoltre a questi fornitori, che agiscono come responsabili del
@@ -166,7 +166,7 @@ export default function PrivacyPage() {
       </section>
 
       <section className="mt-10 border-t border-nebbia pt-10">
-        <h2 className="text-xl font-black text-grafite">Che diritti hai</h2>
+        <h2 className="text-xl font-bold text-grafite">Che diritti hai</h2>
         <p className="mt-3 text-grafite">
           Puoi chiederci in qualsiasi momento di sapere quali dati abbiamo su di te, di correggerli, di
           cancellarli, di limitarne il trattamento, di ricevere in formato leggibile quelli che ci hai
@@ -188,7 +188,7 @@ export default function PrivacyPage() {
       </section>
 
       <section className="mt-10 border-t border-nebbia pt-10">
-        <h2 className="text-xl font-black text-grafite">Decisioni automatiche</h2>
+        <h2 className="text-xl font-bold text-grafite">Decisioni automatiche</h2>
         <p className="mt-3 text-grafite">
           Non prendiamo decisioni sul tuo conto in modo automatizzato e non facciamo profilazione. Le
           richieste che arrivano dal modulo le legge una persona.

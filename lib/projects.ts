@@ -5,7 +5,7 @@ import { z } from "zod";
 
 const PROJECTS_DIR = path.join(process.cwd(), "content/progetti");
 
-export const PHASES = ["progettazione", "appalto", "direzione-lavori", "maestranze"] as const;
+export const PHASES = ["progettazione", "appalto", "direzione-lavori", "interior-design"] as const;
 export type Phase = (typeof PHASES)[number];
 
 export const CATEGORIES = [

@@ -13,7 +13,7 @@ export default function Error({ reset }: { error: Error & { digest?: string }; r
   return (
     <div className="mx-auto flex max-w-2xl flex-col items-start px-6 py-24 md:px-12">
       <p className="mb-2 text-sm font-medium text-pietra">Errore</p>
-      <h1 className="mb-4 text-3xl font-black text-grafite md:text-4xl">Qualcosa non ha funzionato</h1>
+      <h1 className="mb-4 text-3xl font-bold text-grafite md:text-4xl">Qualcosa non ha funzionato</h1>
       <p className="mb-8 text-pietra">
         La pagina non è riuscita a caricarsi. Puoi riprovare, oppure ripartire da qui.
       </p>

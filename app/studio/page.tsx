@@ -16,7 +16,7 @@ export default function StudioPage() {
 
   return (
     <div className="mx-auto max-w-4xl px-6 py-16 md:px-12">
-      <h1 className="mb-4 text-3xl font-black text-grafite md:text-4xl">Lo Studio</h1>
+      <h1 className="mb-4 text-3xl font-bold text-grafite md:text-4xl">Lo Studio</h1>
       <p className="mb-4 max-w-2xl text-lg text-grafite">
         Siamo una società di architettura e ingegneria, con studio a Pescara e a Castel di Sangro. Progettiamo
         ogni disciplina qui dentro e restiamo sui lavori fino alla consegna delle chiavi.
@@ -34,7 +34,7 @@ export default function StudioPage() {
         il testo scorre accanto; su telefono si impilano.
       */}
       <section className="border-t border-nebbia py-12">
-        <h2 className="text-2xl font-black text-grafite">Chi ha fondato lo studio</h2>
+        <h2 className="text-2xl font-bold text-grafite">Chi ha fondato lo studio</h2>
         <p className="mt-2 max-w-2xl text-pietra">
           Soci fondatori dello studio dal {FOUNDED.studio} e della società dal {FOUNDED.societa}.
         </p>
@@ -65,7 +65,7 @@ export default function StudioPage() {
       </section>
 
       <section className="border-t border-nebbia py-12">
-        <h2 className="text-2xl font-black text-grafite">Chi ci lavora</h2>
+        <h2 className="text-2xl font-bold text-grafite">Chi ci lavora</h2>
 
         <div className="mt-8">
           {collaboratori.map((persona) => (
@@ -94,7 +94,7 @@ export default function StudioPage() {
       </section>
 
       <section className="border-t border-nebbia py-12">
-        <h2 className="mb-6 text-2xl font-black text-grafite">Le sedi</h2>
+        <h2 className="mb-6 text-2xl font-bold text-grafite">Le sedi</h2>
         <div className="grid gap-8 md:grid-cols-2">
           {SITE.offices.map((office) => (
             <div key={office.id}>

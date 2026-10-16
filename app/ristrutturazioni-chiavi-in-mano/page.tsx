@@ -66,7 +66,7 @@ export default function RistrutturazioniPage() {
     <>
       <section className="bg-grafite px-6 py-20 md:px-12 md:py-28">
         <div className="mx-auto max-w-4xl">
-          <h1 className="text-3xl font-black text-carta md:text-5xl">Ristrutturazioni chiavi in mano</h1>
+          <h1 className="text-3xl font-bold text-carta md:text-5xl">Ristrutturazioni chiavi in mano</h1>
           <p className="mt-6 max-w-2xl text-lg text-carta/85">
             Ristrutturare significa mettere d&apos;accordo un progettista, un&apos;impresa, tre o quattro
             artigiani e un commercialista, e di solito tocca a chi paga tenerli insieme. Qui no. Parli con noi,
@@ -108,7 +108,7 @@ export default function RistrutturazioniPage() {
       {esempi.length > 0 && (
         <section className="bg-nebbia px-6 py-16 md:px-12">
           <div className="mx-auto max-w-5xl">
-            <h2 className="mb-8 text-2xl font-black text-grafite">Ristrutturazioni e recuperi che abbiamo seguito</h2>
+            <h2 className="mb-8 text-2xl font-bold text-grafite">Ristrutturazioni e recuperi che abbiamo seguito</h2>
             <div className="grid gap-8 md:grid-cols-2">
               {esempi.map((progetto) => (
                 <ProjectCard key={progetto.slug} project={progetto} />

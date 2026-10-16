@@ -23,7 +23,7 @@ export function CtaBand({ title, cta, href, tone = "light" }: CtaBandProps) {
     return (
       <section className="bg-grafite px-6 py-24 text-carta md:px-12">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="mx-auto text-2xl font-black md:text-3xl">{title}</h2>
+          <h2 className="mx-auto text-2xl font-bold md:text-3xl">{title}</h2>
           <AnchorLink href={href} className={buttonClass}>
             {cta}
           </AnchorLink>

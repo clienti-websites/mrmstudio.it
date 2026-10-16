@@ -15,7 +15,7 @@ export function StatsSection({
     >
       {title && (
         <div className="mx-auto mb-14 max-w-3xl text-center">
-          <h2 id="numeri-titolo" className="text-2xl font-black text-grafite md:text-3xl">
+          <h2 id="numeri-titolo" className="text-2xl font-bold text-grafite md:text-3xl">
             {title}
           </h2>
           {intro && <p className="mx-auto mt-3 text-center text-pietra">{intro}</p>}

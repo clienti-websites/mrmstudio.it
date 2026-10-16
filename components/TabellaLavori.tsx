@@ -4,7 +4,7 @@ import { LAVORI } from "@/lib/lavori";
 export function TabellaLavori() {
   return (
     <section aria-labelledby="lavori-titolo" className="border-t border-nebbia pt-16">
-      <h2 id="lavori-titolo" className="text-2xl font-black text-grafite md:text-3xl">
+      <h2 id="lavori-titolo" className="text-2xl font-bold text-grafite md:text-3xl">
         Elenco dei lavori
       </h2>
       <p className="mt-3 max-w-2xl text-pietra">

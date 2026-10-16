@@ -26,14 +26,14 @@ export default function ImpegnoSocialePage() {
 
   return (
     <div className="mx-auto max-w-4xl px-6 py-16 md:px-12">
-      <h1 className="mb-4 text-3xl font-black text-grafite md:text-4xl">Impegno sociale</h1>
+      <h1 className="mb-4 text-3xl font-bold text-grafite md:text-4xl">Impegno sociale</h1>
       <p className="mb-14 max-w-2xl text-lg text-grafite">
         Una parte del lavoro dello studio non ha un committente che paga. La progettazione è la stessa, il
         metodo è lo stesso, e cambia solo chi ne beneficia.
       </p>
 
       <section className="border-t border-nebbia py-12">
-        <h2 className="text-2xl font-black text-grafite">
+        <h2 className="text-2xl font-bold text-grafite">
           La casa d&apos;accoglienza nella diocesi di Idiofa
         </h2>
         <p className="mt-5 text-grafite">

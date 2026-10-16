@@ -4,7 +4,7 @@ const LABELS: Record<Phase, string> = {
   progettazione: "Progettazione",
   appalto: "Appalto",
   "direzione-lavori": "Direzione lavori",
-  maestranze: "Maestranze",
+  "interior-design": "Interior design",
 };
 
 export function FaseChecklist({ phases }: { phases: Phase[] }) {

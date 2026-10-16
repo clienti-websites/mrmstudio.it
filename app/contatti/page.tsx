@@ -16,7 +16,7 @@ export default function ContattiPage() {
         <LocalBusinessJsonLd key={office.id} office={office} />
       ))}
 
-      <h1 className="mb-10 text-3xl font-black text-grafite md:text-4xl">Contatti</h1>
+      <h1 className="mb-10 text-3xl font-bold text-grafite md:text-4xl">Contatti</h1>
 
       <div className="grid gap-16 md:grid-cols-2">
         <div className="space-y-10">

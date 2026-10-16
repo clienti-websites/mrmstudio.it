@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
@@ -75,10 +76,22 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-carta/95 backdrop-blur">
+      <header className="sticky top-0 z-50 bg-nebbia/95 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Link href="/" className="-my-2 inline-block py-2 text-lg font-black tracking-tight text-grafite">
-            MRM Studio
+          {/* Il marchio e' un blocco impilato, largo circa due volte e
+              mezzo la sua altezza: a 40px sta nella barra senza alzarla,
+              perche' il pulsante Contatti accanto ne misura gia' 40 e quello
+              del menu 44. `priority` perche' compare in cima a ogni pagina,
+              e caricarlo per ultimo lo farebbe comparire a scatto. */}
+          <Link href="/" className="-my-2 inline-block py-2">
+            <Image
+              src="/logo-mrm.png"
+              alt="MRM Studio"
+              width={800}
+              height={307}
+              priority
+              className="h-9 w-auto lg:h-10"
+            />
           </Link>
 
           <nav aria-label="Principale" className="hidden items-center gap-8 lg:flex">
@@ -140,7 +153,7 @@ export function Header() {
               className="fixed right-0 top-0 z-50 flex h-dvh w-[min(20rem,80vw)] flex-col bg-carta px-6 py-5 shadow-xl outline-none lg:hidden"
             >
               <div className="mb-8 flex items-center justify-between">
-                <span className="text-lg font-black tracking-tight text-grafite">MRM Studio</span>
+                <Image src="/logo-mrm.png" alt="MRM Studio" width={800} height={307} className="h-8 w-auto" />
                 <button
                   type="button"
                   aria-label="Chiudi il menu"

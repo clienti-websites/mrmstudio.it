@@ -93,7 +93,7 @@ export function Hero({
       />
 
       <div className="relative mx-6 max-w-3xl px-2 text-center [text-shadow:0_2px_14px_rgba(0,0,0,0.45)]">
-        <h1 className="text-3xl font-black leading-tight text-carta md:text-5xl">{title}</h1>
+        <h1 className="text-3xl font-bold leading-tight text-carta md:text-5xl">{title}</h1>
         <p className="mx-auto mt-5 text-center text-carta/90">
           Progettiamo, gestiamo l&apos;appalto, dirigiamo il cantiere e scegliamo le imprese. Tu parli con noi e
           basta.

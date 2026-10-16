@@ -11,6 +11,7 @@
   --color-nebbia: #EAEAE5;
 
   --font-sans: var(--font-archivo), system-ui, sans-serif;
+  --font-titoli: var(--font-poppins), var(--font-archivo), system-ui, sans-serif;
 }
 
 @layer base {
@@ -25,6 +26,20 @@
     color: var(--color-grafite);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+  }
+
+  /* I titoli parlano con il carattere del marchio, il testo no. La
+     famiglia sta qui invece che su ogni h1 del progetto perché vale per
+     tutti, compresi quelli che escono dalle schede in MDX, dove non c'è
+     una classe da aggiungere. Il peso 700 è il valore di partenza: le
+     utilità di Tailwind sui singoli titoli lo scavalcano comunque, e
+     serve perché Tailwind azzera il peso dei titoli e Poppins non ha il
+     400 caricato. */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-titoli);
+    font-weight: 700;
   }
 
   /* Misura di riga leggibile. Niente `text-align: left` qui: vincerebbe

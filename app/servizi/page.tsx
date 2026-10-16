@@ -47,12 +47,12 @@ const SEZIONI: Array<{
     },
   },
   {
-    id: "maestranze",
-    title: "Maestranze",
+    id: "interior-design",
+    title: "Interior design",
     rischio:
-      "Trovare imprese e fornitori affidabili è già difficile. Farli lavorare insieme lo è di più, e quando qualcosa non torna finisci a fare da arbitro tra chi ha posato e chi doveva passare dopo.",
+      "Gli interni si decidono per ultimi, quando il budget è quasi finito e il cantiere va chiuso. Finiture, luci e arredi vengono scelti a pezzi, da fornitori diversi e in momenti diversi, e il risultato non somiglia al progetto che avevi approvato.",
     come:
-      "Le imprese le individuiamo e le coordiniamo noi, tenendo insieme tempi e lavorazioni. Tu continui a parlare con una persona sola per tutta la durata dei lavori, anche quando in cantiere ce ne sono dieci.",
+      "Gli interni li disegniamo noi, sugli stessi elaborati: distribuzione degli ambienti, finiture, illuminazione, arredi su misura. Le scelte si fanno quando un punto luce o una traccia si possono ancora spostare, non quando il muro è chiuso.",
   },
 ];
 
@@ -61,7 +61,7 @@ export default function ServiziPage() {
     <>
       <section className="bg-grafite px-6 py-20 md:px-12 md:py-28">
         <div className="mx-auto max-w-4xl">
-          <h1 className="text-3xl font-black text-carta md:text-5xl">Quattro fasi, un solo studio.</h1>
+          <h1 className="text-3xl font-bold text-carta md:text-5xl">Quattro fasi, un solo studio.</h1>
           <p className="mt-6 max-w-2xl text-lg text-carta/85">
             Costruire o ristrutturare vuol dire attraversare quattro fasi diverse, ognuna con le sue competenze e
             le sue responsabilità. Di solito ognuna ha il suo professionista, e tenere insieme il lavoro di tutti
@@ -96,7 +96,7 @@ export default function ServiziPage() {
                   </span>
                 </div>
 
-                <h2 id={`${sezione.id}-titolo`} className="mt-5 text-2xl font-black text-grafite md:text-3xl">
+                <h2 id={`${sezione.id}-titolo`} className="mt-5 text-2xl font-bold text-grafite md:text-3xl">
                   {sezione.title}
                 </h2>
 
@@ -127,7 +127,7 @@ export default function ServiziPage() {
 
       <section className="px-6 py-20 md:px-12">
         <div className="mx-auto max-w-4xl">
-          <h2 className="text-2xl font-black text-grafite">Due cose che facciamo spesso</h2>
+          <h2 className="text-2xl font-bold text-grafite">Due cose che facciamo spesso</h2>
           <div className="mt-8 grid gap-6 md:grid-cols-2">
             <Link
               href="/ristrutturazioni-chiavi-in-mano"
