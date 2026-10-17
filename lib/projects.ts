@@ -35,6 +35,9 @@ export const frontmatterSchema = z.object({
   phases: z.array(z.enum(PHASES)).default([]),
   coverImage: galleryImageSchema,
   gallery: z.array(galleryImageSchema).min(1),
+  // Il modello tridimensionale, quando lo studio ce l'ha: un .glb compresso
+  // in public/modelli. Quasi nessuna scheda ne ha uno, da qui il nullable.
+  modello: z.string().nullable().default(null),
   // Chi ha seguito l'opera. Viene dalla sezione PROJECT TEAM delle schede
   // del sito attuale: i nomi sono quelli dichiarati da MRM, i ruoli sono la
   // traduzione delle etichette inglesi usate lì.

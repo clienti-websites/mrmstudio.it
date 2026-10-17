@@ -13,6 +13,7 @@ const project: Project = {
   phases: ["progettazione"],
   coverImage: { src: "/progetti/test/cover.jpg", alt: "Vista del progetto test" },
   gallery: [{ src: "/progetti/test/cover.jpg", alt: "Vista del progetto test" }],
+  modello: null,
   outcome: "Consegnato.",
   excerpt: "Un progetto di prova.",
   content: "",

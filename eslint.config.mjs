@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Il decodificatore Draco e' codice di terzi, minificato: non lo scriviamo
+    // noi e non lo correggiamo.
+    "public/draco/**",
   ]),
 ]);
 

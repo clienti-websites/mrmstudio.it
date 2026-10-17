@@ -88,12 +88,19 @@ const SVILUPPO = process.env.NODE_ENV === "development";
 
 const CSP = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${SVILUPPO ? " 'unsafe-eval'" : ""}`,
+  // 'wasm-unsafe-eval' e worker-src blob: servono al decodificatore Draco del
+  // modello tridimensionale: e' un .wasm che il visualizzatore istanzia in un
+  // worker costruito al volo. Nessuno dei due permette eval() di JavaScript.
+  `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'${SVILUPPO ? " 'unsafe-eval'" : ""}`,
+  "worker-src 'self' blob:",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "font-src 'self'",
   "media-src 'self'",
-  "connect-src 'self'",
+  // blob: perche' le immagini dentro il modello tridimensionale diventano URL
+  // blob:, e three le legge con fetch(): senza questo l'edificio si apre
+  // grigio, con le trentatre texture rifiutate una per una.
+  "connect-src 'self' blob:",
   "frame-src https://www.google.com",
   "object-src 'none'",
   "base-uri 'self'",

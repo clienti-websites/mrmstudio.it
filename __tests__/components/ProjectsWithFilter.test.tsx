@@ -14,6 +14,7 @@ const residenziale: Project = {
   phases: ["progettazione"],
   coverImage: { src: "/x.jpg", alt: "Vista del progetto residenziale" },
   gallery: [{ src: "/x.jpg", alt: "Vista del progetto residenziale" }],
+  modello: null,
   outcome: "Consegnato.",
   excerpt: "Un progetto residenziale.",
   content: "",

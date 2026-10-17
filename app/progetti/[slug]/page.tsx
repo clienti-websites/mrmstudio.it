@@ -5,6 +5,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { getAllProjects, getProjectBySlug, getProjectSlugs, type Project } from "@/lib/projects";
 import { Gallery } from "@/components/Gallery";
 import { FaseChecklist } from "@/components/FaseChecklist";
+import { Modello3D } from "@/components/Modello3D";
 import { ContactForm } from "@/components/ContactForm";
 import { LAVORI } from "@/lib/lavori";
 import { SITE } from "@/lib/site";
@@ -142,6 +143,22 @@ export default async function ProgettoPage({ params }: { params: Promise<{ slug:
           </>
         }
       />
+
+      {/* Il modello su cui l'opera e' stata disegnata, da girare col dito.
+          Sta sotto le fotografie perche' le fotografie dicono com'e' venuta;
+          il modello dice com'e' fatta, e serve a chi sta ancora decidendo. */}
+      {project.modello && (
+        <section aria-labelledby="modello-titolo" className="mt-10 border-t border-nebbia pt-8">
+          <h2 id="modello-titolo" className="mb-2 text-2xl font-bold text-grafite">
+            Giraci attorno
+          </h2>
+          <p className="mb-6 max-w-[70ch] text-pietra">
+            Il modello tridimensionale dell&apos;opera. Trascina per girarlo, avvicinati dove ti
+            interessa.
+          </p>
+          <Modello3D src={project.modello} poster={project.coverImage} peso="4,6 MB" />
+        </section>
+      )}
 
       {/* Chi ha seguito il lavoro. Per un committente pubblico è
           un'informazione che pesa quanto le fotografie, e sul vecchio sito
