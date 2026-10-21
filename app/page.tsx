@@ -9,8 +9,8 @@ import { CATEGORIES, getAllProjects } from "@/lib/projects";
 import { LocalBusinessJsonLd } from "@/components/LocalBusinessJsonLd";
 import { SITE } from "@/lib/site";
 
-// Filmato temporaneo, da sostituire con quello di MRM prima della messa
-// online: cambiare questi due percorsi e sostituire i file in public/video.
+// Il montaggio di MRM, "Video Sito Web MRMStudio.mov", ricompresso senza
+// audio: dodici secondi che girano in tondo dietro al titolo.
 const HERO_VIDEO = {
   src: "/video/hero.mp4",
   // Ricavato dal primo mezzo secondo del filmato stesso: prima che il video
