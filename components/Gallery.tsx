@@ -40,6 +40,11 @@ function classiRiquadro(indice: number, totale: number): string {
  * la copertina a sinistra, il testo della scheda le sta a destra, e le altre
  * immagini scendono sotto a tutta larghezza.
  *
+ * La copertina tiene la sua proporzione e da 768px si incolla in alto: con
+ * un testo lungo allungarla voleva dire un ritratto 2:3 di una fotografia
+ * nata 4:3, cioè un'immagine alta due schermi. Incollata invece accompagna
+ * chi legge, e il vuoto sotto non si vede perché non resta mai fermo lì.
+ *
  * La copertina resta dentro `images` invece di arrivare per conto suo: la
  * lightbox è una sola e deve poterla sfogliare insieme alle altre, quindi
  * l'indice che apre ogni riquadro dev'essere quello vero dell'elenco. Chi
@@ -55,12 +60,12 @@ export function Gallery({ images, aside }: { images: GalleryImage[]; aside?: Rea
   return (
     <>
       {copertina && (
-        <div className="mb-2 grid items-start gap-8 md:grid-cols-[1.4fr_1fr] md:gap-12">
+        <div className="mb-2 grid gap-8 md:grid-cols-[1.4fr_1fr] md:gap-12">
           <button
             type="button"
             onClick={() => setIndex(0)}
             aria-label={`Apri l'immagine: ${copertina.alt}`}
-            className="relative block aspect-[4/3] w-full overflow-hidden bg-nebbia"
+            className="relative block aspect-[4/3] w-full overflow-hidden bg-nebbia md:sticky md:top-24 md:self-start"
           >
             <Image
               src={copertina.src}
