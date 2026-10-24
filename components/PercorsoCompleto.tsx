@@ -9,9 +9,15 @@ import { FaseIcon } from "./FaseIcon";
  * brochure. La prima è che il lavoro comincia prima del progetto — da un
  * terreno, da un immobile da rilevare, da un bando — e che le occasioni certe
  * volte arrivano da noi: è la riga di apertura, ed è l'unico punto in cui lo
- * sviluppo immobiliare si affaccia. La seconda è che del percorso si può
- * prendere tutto o un tratto solo: non c'è una frase che lo spieghi, ci sono
- * due casi concreti in fondo, che è l'unico modo di dirlo senza spiegarlo.
+ * sviluppo immobiliare si affaccia. IconaCasa Abruzzo è nominata perché il
+ * legame è reale — i due titolari sono marito e moglie — e perché senza un
+ * nome "l'occasione la portiamo noi" resta un vanto che nessuno può
+ * verificare. In pagina resta "collaboriamo", che è la forma scelta dallo
+ * studio. La seconda è che del percorso si può
+ * prendere tutto o un tratto solo. La riga di chiusura non elenca i casi:
+ * elencarli obbliga chi legge a riconoscersi in uno dei tre, e quasi nessuno
+ * sa gia' dire quale pezzo gli manca. Dice invece che il pezzo lo copriamo
+ * noi, qualunque sia, e che a individuarlo si pensa dopo.
  *
  * Opere pubbliche e urbanistica non hanno una fermata loro: comparirebbero
  * come un reparto a parte. Stanno dentro le glosse delle fermate che le
@@ -36,17 +42,21 @@ export function PercorsoCompleto() {
         </h2>
 
         <p className="mx-auto mt-6 max-w-2xl text-center text-lg text-pietra">
-          Si comincia da un terreno, da un immobile da rilevare, da un bando. Certe volte il terreno lo troviamo
-          noi.
+          Si comincia da un terreno, da un immobile da rilevare, da un bando. Certe volte l&apos;occasione la
+          portiamo noi: collaboriamo con IconaCasa Abruzzo, e quello che passa di lì lo guardiamo
+          già pensando a cosa può diventare.
         </p>
 
         <ol className="mx-auto mt-16 grid max-w-5xl md:grid-cols-4 md:gap-x-8">
           {FERMATE.map((fermata, i) => (
             <li
               key={fermata.id}
-              className="relative border-l border-nebbia pb-10 pl-7 last:border-l-transparent last:pb-0 md:border-l-0 md:pb-0 md:pl-0 md:text-center"
+              className="relative border-l border-grafite/30 pb-10 pl-7 last:border-l-transparent last:pb-0 md:border-l-0 md:pb-0 md:pl-0 md:text-center"
             >
-              {/* Sul telefono il percorso scende, e a disegnarlo è il bordo
+              {/* La linea non puo' essere nebbia: su carta fa 1,1 di contrasto
+                  e sparisce. Qui serve grafite scaricata.
+
+                  Sul telefono il percorso scende, e a disegnarlo è il bordo
                   sinistro di ogni fermata. Da 768px si corica: la linea non
                   può più essere un bordo, così ogni fermata tira il proprio
                   tratto all'indietro fino al centro di quella precedente —
@@ -55,7 +65,7 @@ export function PercorsoCompleto() {
               {i > 0 && (
                 <span
                   aria-hidden="true"
-                  className="absolute right-1/2 top-[3px] hidden h-px w-[calc(100%+2rem)] bg-nebbia md:block"
+                  className="absolute right-1/2 top-[3px] hidden h-px w-[calc(100%+2rem)] bg-grafite/30 md:block"
                 />
               )}
 
@@ -75,12 +85,8 @@ export function PercorsoCompleto() {
           ))}
         </ol>
 
-        {/* Tre buchi diversi, tre risposte che nominano il tratto di percorso
-            che copriamo noi. Non c'è una frase che dica "ci adattiamo": sono
-            i tre casi a dirlo, e si agganciano alle fermate qui sopra. */}
-        <p className="mx-auto mt-16 max-w-3xl text-center text-lg text-grafite">
-          Hai già l&apos;impresa? Progetto e direzione lavori li facciamo noi. Hai già il progetto? Ti seguiamo
-          l&apos;appalto e il cantiere. Hai solo il terreno? Partiamo da prima del progetto.
+        <p className="mx-auto mt-16 max-w-2xl text-center text-lg text-grafite">
+          Copriamo il tratto che ti manca. Anche tutto, se ti manca tutto. Qual è, lo vediamo insieme.
         </p>
       </div>
     </section>

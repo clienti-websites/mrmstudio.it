@@ -29,18 +29,21 @@ describe("PercorsoCompleto", () => {
   // togliendo il concetto, il test cade.
   it("shows the work starts before the drawings, with the studio sourcing opportunities", () => {
     render(<PercorsoCompleto />);
-    expect(screen.getByText(/un immobile da rilevare/i)).toBeInTheDocument();
-    expect(screen.getByText(/il terreno lo troviamo noi/i)).toBeInTheDocument();
+    const apertura = screen.getByText(/un immobile da rilevare/i);
+    expect(apertura).toHaveTextContent(/l'occasione la portiamo noi/i);
+    // Il nome dell'agenzia e il legame sono il contenuto della riga: senza,
+    // resta un vanto che nessuno puo' verificare.
+    expect(apertura).toHaveTextContent(/collaboriamo con IconaCasa Abruzzo/i);
   });
 
-  // Tre lacune diverse, tre risposte: e' cosi' che la sezione dice che si
-  // puo' prendere un tratto solo, senza una frase che lo spieghi.
-  it("fills whichever stretch the client is missing, shown by three examples", () => {
+  // La chiusura deve dire tre cose: che si prende un tratto solo, che si puo'
+  // prendere tutto, e che a capire quale non ci pensa il cliente. Se qualcuno
+  // la riscrive perdendone una, il test cade.
+  it("offers whichever stretch is missing, up to all of it, without making the client diagnose it", () => {
     render(<PercorsoCompleto />);
-    const chiusura = screen.getByText(/hai già l'impresa/i);
-    expect(chiusura).toHaveTextContent(/progetto e direzione lavori li facciamo noi/i);
-    expect(chiusura).toHaveTextContent(/hai già il progetto\?.*appalto e il cantiere/i);
-    expect(chiusura).toHaveTextContent(/hai solo il terreno\?.*prima del progetto/i);
+    const chiusura = screen.getByText(/il tratto che ti manca/i);
+    expect(chiusura).toHaveTextContent(/anche tutto, se ti manca tutto/i);
+    expect(chiusura).toHaveTextContent(/lo vediamo insieme/i);
   });
 
   it("surfaces public work and town planning without giving them a stop of their own", () => {
