@@ -3,9 +3,12 @@ import { OperePubbliche } from "@/components/OperePubbliche";
 import { LAVORI } from "@/lib/lavori";
 
 describe("OperePubbliche", () => {
-  it("leads with the town plan, which is what shows the studio passes scrutiny", () => {
+  // Il titolo e' piano di proposito: a convincere sono le quattro righe di
+  // registro sotto, con sigle e importi, non l'annuncio.
+  it("announces the public work plainly and leaves the proof to the register", () => {
     render(<OperePubbliche />);
-    expect(screen.getByRole("heading", { name: /piano regolatore di un comune/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /opere pubbliche/i })).toBeInTheDocument();
+    expect(screen.getByText(/Piano Regolatore Generale/)).toBeInTheDocument();
   });
 
   // Le sigle sono il punto: VAS, VINCA e la Classe IV dicono a un RUP che lo

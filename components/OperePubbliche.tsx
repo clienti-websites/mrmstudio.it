@@ -38,7 +38,7 @@ export function OperePubbliche() {
     <section aria-labelledby="pubbliche-titolo" className="bg-nebbia px-6 py-24 md:px-12">
       <div className="mx-auto max-w-5xl">
         <h2 id="pubbliche-titolo" className="max-w-3xl text-3xl font-bold tracking-tight text-grafite md:text-4xl">
-          Lo stesso studio ha scritto il piano regolatore di un comune.
+          Lavoriamo anche su opere pubbliche.
         </h2>
 
         {/* Un registro, non delle schede: quello che convince qui sono le
