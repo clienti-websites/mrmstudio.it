@@ -15,9 +15,11 @@ export const metadata: Metadata = {
  * Aruba per la consegna (vedi lib/email.ts) e il server che ospita il sito.
  *
  * Le mappe delle sedi sono l'unico contenuto di terzi del sito e hanno una
- * sezione propria: si caricano solo su richiesta esplicita, e prima di quel
- * momento verso Google non parte nessuna richiesta (verificato sul traffico
- * di rete). Il sito non installa cookie e non usa la memoria del browser.
+ * sezione propria. Dal momento in cui il pulsante "Mostra la mappa" e' stato
+ * tolto si caricano con la pagina dei contatti, quindi la richiesta a Google
+ * parte da sola: il testo qui sotto lo dice, e va riscritto di nuovo se la
+ * mappa torna dietro a un pulsante. Il sito non installa cookie propri e non
+ * usa la memoria del browser.
  *
  * I dati del titolare (ragione sociale, sedi, partita IVA, REA, email) non
  * sono segnaposto: vengono da lib/site.ts e sono quelli dichiarati da MRM
@@ -88,19 +90,19 @@ export default function PrivacyPage() {
       <section className="mt-10 border-t border-nebbia pt-10">
         <h2 className="text-xl font-bold text-grafite">Le mappe delle sedi</h2>
         <p className="mt-3 text-grafite">
-          Nella pagina dei contatti, al posto delle mappe trovi un riquadro con un pulsante. Finché non lo
-          premi, il tuo browser non contatta Google e nessun dato esce da questo sito.
+          Nella pagina dei contatti le mappe delle due sedi sono fornite da Google Maps e si caricano insieme
+          alla pagina. Aprendo quella pagina, quindi, il tuo browser contatta Google senza che tu debba
+          premere niente.
         </p>
         <p className="mt-3 text-grafite">
-          Se premi «Mostra la mappa», la mappa viene caricata da Google Maps. In quel momento Google riceve il
-          tuo indirizzo IP e le informazioni del tuo browser, e può installare propri cookie: è un trattamento
-          che avviene sotto la responsabilità di Google, secondo le sue condizioni. Google LLC ha sede negli
-          Stati Uniti, quindi i dati possono essere trattati fuori dall&apos;Unione Europea, sulla base delle
-          clausole contrattuali standard approvate dalla Commissione Europea.
+          In quel momento Google riceve il tuo indirizzo IP e le informazioni del tuo browser, e può
+          installare propri cookie: è un trattamento che avviene sotto la responsabilità di Google, secondo
+          le sue condizioni. Google LLC ha sede negli Stati Uniti, quindi i dati possono essere trattati
+          fuori dall&apos;Unione Europea, sulla base delle clausole contrattuali standard approvate dalla
+          Commissione Europea.
         </p>
         <p className="mt-3 text-grafite">
-          Accanto al pulsante c&apos;è un collegamento che apre le indicazioni stradali in una scheda nuova:
-          serve a chi vuole arrivare in sede senza caricare la mappa dentro questa pagina.
+          Sotto ogni mappa c&apos;è un collegamento che apre le indicazioni stradali in una scheda nuova.
         </p>
       </section>
 
@@ -153,9 +155,9 @@ export default function PrivacyPage() {
             che ospita le pagine e conserva i registri tecnici degli accessi.
           </li>
           <li className="border-l-2 border-nebbia pl-4 text-grafite">
-            <span className="font-medium">Google Ireland Limited</span>, ma soltanto se apri una delle mappe
-            nella pagina dei contatti. Finché non la apri, verso Google non parte nessuna richiesta. Il
-            dettaglio sta nella sezione dedicata qui sopra.
+            <span className="font-medium">Google Ireland Limited</span>, quando apri la pagina dei contatti,
+            perché le mappe delle sedi sono caricate da Google Maps. Il dettaglio sta nella sezione dedicata
+            qui sopra.
           </li>
         </ul>
         <p className="mt-4 text-grafite">
