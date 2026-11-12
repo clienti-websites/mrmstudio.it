@@ -122,13 +122,18 @@ export default function ServiziIntegratiPage() {
               {TAPPE.map((tappa, i) => (
                 <li
                   key={tappa.titolo}
-                  className={`relative border-l border-grafite/30 pb-10 pl-7 last:border-l-transparent last:pb-0 md:border-l-0 md:pb-0 md:pl-0 md:pt-14 md:text-center ${tappa.cella}`}
+                  className={`relative border-l border-grafite/30 pb-10 pl-7 last:border-l-transparent last:pb-0 md:static md:border-l-0 md:pb-0 md:pl-0 md:pt-14 md:text-center ${tappa.cella}`}
                 >
                   {/* Sul telefono il pallino sta sul bordo che fa da linea;
                       da 768px si sposta sulla serpentina, alle stesse
-                      percentuali del tracciato. Dentro c'e' il numero: le
-                      cinque tappe sono una sequenza vera, si attraversano in
-                      quest'ordine. */}
+                      percentuali del tracciato. Le percentuali contano dal
+                      contenitore della griglia, lo stesso riquadro del
+                      disegno, e non dalla cella: per questo da 768px la cella
+                      e' static e non fa piu' da riferimento, altrimenti il
+                      16,7% della prima tappa sarebbe il 16,7% di un terzo di
+                      larghezza e la linea passerebbe lontano dai pallini.
+                      Dentro c'e' il numero: le cinque tappe sono una sequenza
+                      vera, si attraversano in quest'ordine. */}
                   <span
                     aria-hidden="true"
                     className="absolute -left-[7px] top-0 flex h-[15px] w-[15px] items-center justify-center rounded-full bg-muschio text-[10px] font-medium text-carta md:left-[var(--x)] md:top-[var(--y)] md:h-9 md:w-9 md:-translate-x-1/2 md:-translate-y-1/2 md:text-sm"

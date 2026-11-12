@@ -25,6 +25,17 @@ describe("Servizi integrati", () => {
     expect(screen.getByText(/per tutto il percorso/i)).toHaveTextContent(/budget quello approvato/i);
   });
 
+  // I pallini sono posati in percentuale sullo stesso riquadro del disegno.
+  // Se la cella torna a essere un riferimento per il posizionamento, quelle
+  // percentuali diventano frazioni di cella e la linea passa lontano.
+  it("leaves the dots measured against the grid, not against their cell", () => {
+    render(<ServiziIntegratiPage />);
+    const tappe = within(screen.getByRole("list")).getAllByRole("listitem");
+    for (const tappa of tappe) {
+      expect(tappa).toHaveClass("md:static");
+    }
+  });
+
   it("sends whoever only needs the design to the other side of the fork", () => {
     render(<ServiziIntegratiPage />);
     expect(screen.getByRole("link", { name: /come progettiamo/i })).toHaveAttribute("href", "/progettazione");
