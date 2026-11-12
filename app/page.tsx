@@ -31,7 +31,6 @@ export default function HomePage() {
         image={{ src: "/progetti/via-fedra-3/01-vista-aerea.jpg", alt: "Vista aerea di un progetto residenziale MRM Studio a Pescara" }}
         title="Dall'idea alla consegna delle chiavi."
         video={HERO_VIDEO}
-        ctaHref="#contatti"
       />
 
       <PercorsoCompleto />
@@ -70,10 +69,10 @@ export default function HomePage() {
       */}
       <StatsSection
         title="Lo studio in breve"
-        intro="Progettiamo in casa e in cantiere ci andiamo di persona. Ci trovi a Pescara e a Castel di Sangro."
+        intro="Progettiamo tutto in casa e seguiamo i lavori di persona. Ci trovi a Pescara e a Castel di Sangro."
         stats={[
           { label: "Anni di attività", value: "19+" },
-          { label: "Cantieri seguiti in direzione lavori", value: "20+" },
+          { label: "Opere seguite fino alla consegna", value: "20+" },
           { label: "Sedi in Abruzzo", value: String(SITE.offices.length) },
         ]}
       />

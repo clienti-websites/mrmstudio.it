@@ -66,7 +66,7 @@ const MOMENTI: Array<{ titolo: string; quando: string; compiti: string[] }> = [
 ];
 
 export default function DirezioneLavoriPage() {
-  const esempi = getProjectsByPhase("direzione-lavori").slice(0, 2);
+  const esempi = getProjectsByPhase("progettazione").slice(0, 2);
 
   return (
     <>
@@ -74,7 +74,7 @@ export default function DirezioneLavoriPage() {
         <div className="mx-auto max-w-4xl">
           <div className="flex items-center gap-4">
             <FaseIcon phase="direzione-lavori" className="h-9 w-9 shrink-0 text-carta/70" />
-            <span className="text-sm text-carta/70">Una delle quattro fasi</span>
+            <span className="text-sm text-carta/70">Dentro la progettazione</span>
           </div>
           <h1 className="mt-6 text-3xl font-bold text-carta md:text-5xl">
             Assistenza cantieristica e direzione lavori
@@ -135,9 +135,9 @@ export default function DirezioneLavoriPage() {
       <section className="px-6 py-16 md:px-12">
         <div className="mx-auto max-w-3xl">
           <p className="text-pietra">
-            La direzione lavori è una delle quattro fasi che seguiamo.{" "}
-            <Link href="/servizi" className="inline-block py-2 text-muschio underline">
-              Guarda come lavoriamo sulle altre tre
+            La direzione lavori è una delle prestazioni che stanno dentro la progettazione.{" "}
+            <Link href="/progettazione" className="inline-block py-2 text-muschio underline">
+              Qui c&apos;è tutto quello che progettiamo
             </Link>
           </p>
         </div>

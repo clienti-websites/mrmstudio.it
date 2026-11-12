@@ -5,7 +5,11 @@ import { z } from "zod";
 
 const PROJECTS_DIR = path.join(process.cwd(), "content/progetti");
 
-export const PHASES = ["progettazione", "appalto", "direzione-lavori", "interior-design"] as const;
+// I tre approcci con cui lo studio entra in un lavoro, dichiarati da MRM
+// opera per opera. Non sono fasi: non c'e' un ordine e non si attraversano
+// tutti. Direzione lavori e interior design erano due di queste voci, ma
+// sono prestazioni dentro la progettazione, non modi di entrare.
+export const PHASES = ["progettazione", "appalto", "sviluppo-immobiliare"] as const;
 export type Phase = (typeof PHASES)[number];
 
 export const CATEGORIES = [
@@ -22,10 +26,10 @@ const galleryImageSchema = z.object({
 });
 export type GalleryImage = z.infer<typeof galleryImageSchema>;
 
-// Most works migrated from the studio's own archive have images but no
-// published year, cost, or record of which phases MRM handled. Those fields
-// are nullable so a project can be shown honestly with what is known, rather
-// than padded with figures nobody verified.
+// Anno, importo e approcci sono quelli dichiarati da MRM l'11 novembre 2026,
+// opera per opera. Restano annullabili per le schede che dovessero arrivare
+// dopo senza quei dati: meglio una scheda onesta a meta' che una riempita
+// con numeri che nessuno ha confermato.
 export const frontmatterSchema = z.object({
   title: z.string(),
   location: z.string(),

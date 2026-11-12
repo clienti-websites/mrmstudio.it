@@ -1,9 +1,9 @@
-import type { Phase } from "@/lib/projects";
+type Icona = "progettazione" | "appalto" | "sviluppo-immobiliare" | "direzione-lavori" | "interior-design";
 
 // Icone disegnate a mano, stesso tratto e stessa griglia 24×24, per non
 // introdurre una libreria e per restare coerenti col resto del sito.
 // Stanno qui perché le usano sia la home sia la pagina servizi.
-const PATHS: Record<Phase, React.ReactNode> = {
+const PATHS: Record<Icona, React.ReactNode> = {
   progettazione: (
     <>
       <path d="M4 3h11l5 5v13H4z" />
@@ -15,6 +15,15 @@ const PATHS: Record<Phase, React.ReactNode> = {
     <>
       <path d="M3 7h7l2 2h9v10H3z" />
       <path d="M7 13h10" />
+    </>
+  ),
+  // L'edificio: serve sia allo sviluppo immobiliare sia alla pagina della
+  // direzione lavori, che un approccio non e' ma un'icona ce l'ha lo stesso.
+  "sviluppo-immobiliare": (
+    <>
+      <path d="M4 20h16" />
+      <path d="M6 20V8l12-3v15" />
+      <path d="M6 12l12-3" />
     </>
   ),
   "direzione-lavori": (
@@ -36,7 +45,7 @@ const PATHS: Record<Phase, React.ReactNode> = {
   ),
 };
 
-export function FaseIcon({ phase, className }: { phase: Phase; className?: string }) {
+export function FaseIcon({ phase, className }: { phase: Icona; className?: string }) {
   return (
     <svg
       viewBox="0 0 24 24"

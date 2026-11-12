@@ -1,8 +1,7 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useRef, useSyncExternalStore } from "react";
 import Image from "next/image";
-import { AnchorLink } from "./AnchorLink";
 
 type HeroVideo = { src: string; poster: string };
 
@@ -24,12 +23,10 @@ export function Hero({
   image,
   title,
   video,
-  ctaHref = "/contatti",
 }: {
   image: { src: string; alt: string };
   title: string;
   video?: HeroVideo;
-  ctaHref?: string;
 }) {
   // shortcut: tre megabytes partono anche sotto rete mobile, salvo risparmio
   // dati attivo. Se diventa un problema, un secondo file verticale con
@@ -42,11 +39,22 @@ export function Hero({
   // L'elemento non viene proprio creato quando non serve: nasconderlo con un
   // foglio di stile lo farebbe scaricare lo stesso. Chi ha chiesto meno
   // movimento vede quindi l'immagine ferma, che e' il comportamento atteso.
+  const sezione = useRef<HTMLElement>(null);
   const vaBeneIlVideo = useSyncExternalStore(ascoltaPreferenze, leggiPreferenze, () => false);
+
+  // La freccia scorre fino al blocco che viene dopo l'apertura, qualunque
+  // sia: niente id da tenere allineato con la home.
+  function scendi() {
+    const dopo = sezione.current?.nextElementSibling;
+    const ridotto = window.matchMedia(QUERY_MOVIMENTO).matches;
+    const comportamento = ridotto ? ("auto" as const) : ("smooth" as const);
+    if (dopo) dopo.scrollIntoView({ behavior: comportamento, block: "start" });
+    else window.scrollBy({ top: window.innerHeight * 0.85, behavior: comportamento });
+  }
   const mostraVideo = Boolean(video) && vaBeneIlVideo;
 
   return (
-    <section className="relative flex h-[85dvh] min-h-[560px] w-full items-center justify-center overflow-hidden">
+    <section ref={sezione} className="relative flex h-[85dvh] min-h-[560px] w-full items-center justify-center overflow-hidden">
       <Image src={image.src} alt={image.alt} fill priority sizes="100vw" className="object-cover" />
 
       {mostraVideo && video && (
@@ -88,16 +96,34 @@ export function Hero({
       <div className="relative mx-6 max-w-3xl px-2 text-center [text-shadow:0_2px_14px_rgba(0,0,0,0.45)]">
         <h1 className="text-3xl font-bold leading-tight text-carta md:text-5xl">{title}</h1>
         <p className="mx-auto mt-5 text-center text-carta/90">
-          Progettiamo, gestiamo l&apos;appalto, dirigiamo il cantiere e scegliamo le imprese. Tu parli con noi e
-          basta.
+          Architettura e ingegneria nello stesso studio, dal primo rilievo alla consegna. A Pescara e in
+          Abruzzo.
         </p>
-        <AnchorLink
-          href={ctaHref}
-          className="mt-7 inline-block bg-muschio px-6 py-3 font-medium text-carta hover:bg-muschio/90"
-        >
-          Contattaci
-        </AnchorLink>
       </div>
+
+      {/* Al posto della chiamata all'azione che stava qui: un invito a
+          scendere, non un secondo pulsante. Il rimbalzo si ferma da se' per
+          chi ha chiesto meno movimento, e il bersaglio tattile resta di 44px
+          anche se il disegno ne occupa meno. */}
+      <button
+        type="button"
+        onClick={scendi}
+        aria-label="Scendi alla sezione successiva"
+        className="absolute bottom-6 left-1/2 flex h-11 w-11 -translate-x-1/2 items-center justify-center text-carta/80 transition-colors hover:text-carta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-carta"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          className="h-7 w-7 animate-bounce motion-reduce:animate-none"
+        >
+          <path d="M12 4v15" />
+          <path d="M5.5 13.5L12 20l6.5-6.5" />
+        </svg>
+      </button>
     </section>
   );
 }

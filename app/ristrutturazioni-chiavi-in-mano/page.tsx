@@ -122,8 +122,8 @@ export default function RistrutturazioniPage() {
         <div className="mx-auto max-w-3xl">
           <p className="text-pietra">
             Se l&apos;intervento è più grande di una ristrutturazione,{" "}
-            <Link href="/servizi" className="inline-block py-2 text-muschio underline">
-              qui c&apos;è come seguiamo le quattro fasi
+            <Link href="/progettazione" className="inline-block py-2 text-muschio underline">
+              qui c&apos;è come progettiamo
             </Link>
           </p>
         </div>

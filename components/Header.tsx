@@ -11,9 +11,14 @@ import { AnchorLink } from "./AnchorLink";
 // altrove: sulla barra è un pulsante pieno, e le altre restano testo. È
 // l'unico posto del sito, oltre alla chiamata all'azione dell'apertura, in
 // cui il verde compare come fondo e non come dettaglio.
+// "Progetti" non porta all'elenco delle opere ma alla sezione degli approcci,
+// subito sotto l'apertura: da li' si scende nel modo di lavorare che
+// interessa, e l'elenco completo resta a un click dentro ognuno dei tre.
+// La voce "Servizi" non c'e' piu': la pagina che raccoglieva le fasi e'
+// stata smontata nelle tre pagine degli approcci.
 const LINKS = [
-  { href: "/progetti", label: "Progetti" },
-  { href: "/servizi", label: "Servizi" },
+  { href: "/#approcci", label: "Progetti" },
+  { href: "/servizi-integrati", label: "Servizi integrati" },
   { href: "/studio", label: "Studio" },
   { href: "/impegno-sociale", label: "Impegno sociale" },
 ];

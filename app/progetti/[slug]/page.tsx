@@ -115,7 +115,19 @@ export default async function ProgettoPage({ params }: { params: Promise<{ slug:
           <>
             <h1 className="text-3xl font-bold text-grafite md:text-4xl">{project.title}</h1>
             <p className="mt-2 text-pietra">{[project.location, project.year].filter(Boolean).join(" · ")}</p>
-            {project.budget && <p className="mt-4 text-lg font-medium text-grafite">{project.budget}</p>}
+            {/* "Importo non divulgabile" non e' una cifra: composto come una
+                cifra sembrerebbe il prezzo dell'opera. */}
+            {project.budget && (
+              <p
+                className={
+                  project.budget.startsWith("€")
+                    ? "mt-4 text-lg font-medium text-grafite"
+                    : "mt-4 text-sm text-pietra"
+                }
+              >
+                {project.budget}
+              </p>
+            )}
 
             <div className="mt-6 h-px bg-nebbia" />
 

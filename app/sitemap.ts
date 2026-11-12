@@ -9,7 +9,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     "",
     "/progetti",
-    "/servizi",
+    "/progettazione",
+    "/appalto",
+    "/sviluppo-immobiliare",
+    "/servizi-integrati",
     "/assistenza-cantieristica-e-direzione-lavori",
     "/ristrutturazioni-chiavi-in-mano",
     "/studio",

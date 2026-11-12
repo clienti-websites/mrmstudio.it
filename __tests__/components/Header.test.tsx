@@ -13,9 +13,13 @@ describe("Header", () => {
   it("renders all primary nav links", () => {
     render(<Header />);
     const desktopNav = screen.getByRole("navigation", { name: "Principale" });
-    for (const label of ["Progetti", "Servizi", "Studio", "Impegno sociale", "Contatti"]) {
+    for (const label of ["Progetti", "Servizi integrati", "Studio", "Impegno sociale", "Contatti"]) {
       expect(within(desktopNav).getByRole("link", { name: label })).toBeInTheDocument();
     }
+    // La pagina Servizi non esiste piu': i tre approcci hanno una pagina
+    // ciascuno e l'indice e' la sezione in apertura della home.
+    expect(within(desktopNav).queryByRole("link", { name: "Servizi" })).not.toBeInTheDocument();
+    expect(within(desktopNav).getByRole("link", { name: "Progetti" })).toHaveAttribute("href", "/#approcci");
   });
 
   it("opens the mobile menu as a side panel and closes it again", async () => {
@@ -90,7 +94,7 @@ describe("Header", () => {
 
     await user.click(screen.getByRole("button", { name: "Menu" }));
     const panel = screen.getByTestId("mobile-nav");
-    await user.click(within(panel).getByRole("link", { name: "Servizi" }));
+    await user.click(within(panel).getByRole("link", { name: "Studio" }));
     await waitFor(() => expect(screen.queryByTestId("mobile-nav")).not.toBeInTheDocument());
   });
 });

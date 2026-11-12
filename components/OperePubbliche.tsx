@@ -7,17 +7,22 @@ import { LAVORI, type Lavoro } from "@/lib/lavori";
  * affida un piano regolatore a chi non ha requisiti, e un privato che legge
  * "piano regolatore" capisce da solo di che taglia è lo studio che sta
  * guardando. Per questo qui non c'è un aggettivo: ci sono quattro righe di
- * registro, con sigle, anni e importi, e il collegamento all'elenco intero.
+ * registro, con sigle e anni, e il collegamento all'elenco intero.
+ *
+ * Nella colonna di destra non ci sono più gli importi: una fila di cifre in
+ * euro in home faceva il portfolio di un'impresa, non il curriculum di uno
+ * studio. Dice invece che prestazione abbiamo svolto, con le parole del
+ * registro. Gli importi restano, uno per uno, nell'elenco completo.
  *
  * I testi non sono ricopiati: vengono da lib/lavori.ts, l'elenco dichiarato
  * dallo studio. Se una voce cambia lì, cambia anche qui; se sparisce, la
  * build si ferma invece di lasciare in home una riga che non esiste più.
  */
 const SCELTE: Array<{ cerca: string; nota: string }> = [
-  { cerca: "Piano Regolatore Generale (CIG Z3908A128E)", nota: "con le procedure VAS e VINCA" },
-  { cerca: "Scuola primaria, opera strategica di Classe IV", nota: "€ 6.500.000" },
-  { cerca: "Piano Particolareggiato di area urbana", nota: "€ 12.000.000" },
-  { cerca: "Piano di Intervento Integrato in project financing", nota: "€ 8.000.000" },
+  { cerca: "Piano Regolatore Generale (CIG Z3908A128E)", nota: "Piano, procedure VAS e VINCA" },
+  { cerca: "Scuola primaria, opera strategica di Classe IV", nota: "Definitivo ed esecutivo strutturale" },
+  { cerca: "Piano Particolareggiato di area urbana", nota: "Pianificazione, rapporto con gli enti" },
+  { cerca: "Piano di Intervento Integrato in project financing", nota: "Grafici di piano e testo normativo" },
 ];
 
 function trova(cerca: string): Lavoro {
@@ -42,7 +47,7 @@ export function OperePubbliche() {
         </h2>
 
         {/* Un registro, non delle schede: quello che convince qui sono le
-            sigle e le cifre allineate, non quattro riquadri colorati. */}
+            sigle allineate, non quattro riquadri colorati. */}
         <dl className="mt-12 border-t border-grafite/15">
           {voci.map((voce) => (
             <div
@@ -55,7 +60,7 @@ export function OperePubbliche() {
                   {[voce.luogo, voce.anno].filter(Boolean).join(" · ")}
                 </span>
               </dt>
-              <dd className="ml-0 tabular-nums text-grafite">{voce.nota}</dd>
+              <dd className="ml-0 max-w-xs text-sm text-pietra">{voce.nota}</dd>
             </div>
           ))}
         </dl>

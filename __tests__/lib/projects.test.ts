@@ -35,8 +35,8 @@ describe("getProjectBySlug", () => {
     expect(project.title).toBe("Via Fedra 3");
     expect(project.location).toBe("Via Fedra 3, Pescara");
     expect(project.year).toBe("2013–2016");
-    expect(project.budget).toBe("€ 750.000 circa");
-    expect(project.phases).toEqual(["progettazione", "direzione-lavori"]);
+    expect(project.budget).toBe("€ 750.000");
+    expect(project.phases).toEqual(["progettazione", "appalto"]);
     expect(project.gallery).toHaveLength(7);
     expect(project.gallery[0].alt.length).toBeGreaterThan(10);
   });
@@ -67,7 +67,15 @@ describe("getProjectsByPhase", () => {
   });
 
   it("excludes a project that does not list the given phase", () => {
-    const projects = getProjectsByPhase("appalto");
+    const projects = getProjectsByPhase("sviluppo-immobiliare");
     expect(projects.map((p) => p.slug)).not.toContain("via-fedra-3");
+  });
+
+  // Lo studio ha dichiarato l'approccio di ogni opera: se una delle tre
+  // pagine resta senza esempi, e' un dato perso, non una scelta.
+  it("leaves none of the three approaches without works of its own", () => {
+    for (const approccio of ["progettazione", "appalto", "sviluppo-immobiliare"] as const) {
+      expect(getProjectsByPhase(approccio).length).toBeGreaterThan(0);
+    }
   });
 });

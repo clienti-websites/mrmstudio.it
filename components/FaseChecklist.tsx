@@ -3,13 +3,12 @@ import { PHASES, type Phase } from "@/lib/projects";
 const LABELS: Record<Phase, string> = {
   progettazione: "Progettazione",
   appalto: "Appalto",
-  "direzione-lavori": "Direzione lavori",
-  "interior-design": "Interior design",
+  "sviluppo-immobiliare": "Sviluppo immobiliare",
 };
 
 export function FaseChecklist({ phases }: { phases: Phase[] }) {
   return (
-    <ul aria-label="Le quattro fasi su questo progetto" className="flex flex-wrap gap-x-5 gap-y-2">
+    <ul aria-label="Quello che abbiamo seguito su questo progetto" className="flex flex-wrap gap-x-5 gap-y-2">
       {PHASES.map((phase) => {
         const done = phases.includes(phase);
         return (

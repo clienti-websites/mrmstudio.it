@@ -26,6 +26,9 @@ const PAGINE: Array<[string, string]> = [
   ["/privacy-policy", "/privacy"],
   ["/cookie-policy", "/privacy"],
   ["/prova-slide", "/"],
+  // /servizi teneva insieme le quattro fasi. Adesso i tre approcci hanno una
+  // pagina ciascuno e il loro indice e' la sezione in apertura della home.
+  ["/servizi", "/#approcci"],
 ];
 
 const OPERE: Array<[string, string]> = [
