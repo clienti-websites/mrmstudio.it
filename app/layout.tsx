@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { archivo, poppins } from "./fonts";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { BottoneContatto } from "@/components/BottoneContatto";
 import { SITE } from "@/lib/site";
 import "./globals.css";
 
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
         <Footer />
+        <BottoneContatto />
       </body>
     </html>
   );
