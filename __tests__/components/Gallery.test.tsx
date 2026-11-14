@@ -20,6 +20,15 @@ describe("Gallery", () => {
     expect(screen.getByRole("dialog")).toBeInTheDocument();
   });
 
+  // Sul telefono la fotografia sta in 390px e nasce da 2000: senza lo zoom
+  // non si legge un dettaglio. Il pinch non si puo' simulare qui, quindi il
+  // test guarda il comando che il plugin aggiunge: se il plugin esce, sparisce.
+  it("lets whoever opened a photograph zoom into it", async () => {
+    render(<Gallery images={images} />);
+    await userEvent.click(screen.getAllByRole("button")[0]);
+    expect(within(screen.getByRole("dialog")).getByRole("button", { name: /zoom in/i })).toBeInTheDocument();
+  });
+
   describe("with a side column", () => {
     const tre = [...images, { src: "/progetti/test/03.jpg", alt: "Terza immagine" }];
 

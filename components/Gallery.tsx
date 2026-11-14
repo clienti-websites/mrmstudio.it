@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Lightbox from "yet-another-react-lightbox";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/styles.css";
 import type { GalleryImage } from "@/lib/projects";
 
@@ -95,11 +96,18 @@ export function Gallery({ images, aside }: { images: GalleryImage[]; aside?: Rea
         ))}
       </div>
 
+      {/* Le fotografie sono larghe 2000px e sul telefono si vedevano a 390:
+          senza zoom un dettaglio costruttivo era illeggibile. Il plugin porta
+          pinch e doppio tocco e non ha un foglio di stile suo. Il limite
+          resta quello predefinito, cioe' un pixel dell'immagine per pixel CSS:
+          su un telefono sono circa cinque ingrandimenti, oltre si vedrebbe
+          solo la sgranatura. */}
       <Lightbox
         open={index >= 0}
         index={index}
         close={() => setIndex(-1)}
         slides={images.map((image) => ({ src: image.src, alt: image.alt }))}
+        plugins={[Zoom]}
       />
     </>
   );
