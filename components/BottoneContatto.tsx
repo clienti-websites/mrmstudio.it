@@ -28,7 +28,7 @@ export function BottoneContatto() {
       <span className="relative block h-11 w-11 shrink-0 overflow-hidden rounded-full bg-carta/20">
         <Image src={VOLTO.photo} alt="" fill sizes="44px" className="object-cover" />
       </span>
-      Come possiamo aiutarti
+      Come possiamo aiutarti?
     </Link>
   );
 }

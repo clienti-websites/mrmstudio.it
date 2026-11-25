@@ -6,7 +6,7 @@ describe("BottoneContatto", () => {
   // dev'essere la pagina contatti, non l'ancora che esiste solo in home.
   it("points at the contact page so it works from every page", () => {
     render(<BottoneContatto />);
-    expect(screen.getByRole("link", { name: "Come possiamo aiutarti" })).toHaveAttribute("href", "/contatti");
+    expect(screen.getByRole("link", { name: "Come possiamo aiutarti?" })).toHaveAttribute("href", "/contatti");
   });
 
   // Il volto invita a premere ma non deve entrare nel nome del collegamento:
