@@ -22,7 +22,12 @@ export function ProjectCard({ project, featured = false }: { project: Project; f
               ? "(min-width: 1152px) 1152px, 100vw"
               : "(min-width: 1152px) 568px, (min-width: 768px) 50vw, 100vw"
           }
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          // L'ingrandimento andava a scatti: il browser ri-rasterizzava una
+          // fotografia grande a ogni fotogramma. transform-gpu la promuove a
+          // un livello suo una volta sola, invece di ridisegnarla, e un
+          // ingrandimento piu' corto su una curva piu' lunga lascia meno
+          // lavoro per fotogramma.
+          className="object-cover transform-gpu transition-transform duration-500 ease-out group-hover:scale-[1.03]"
         />
       </div>
       {/*

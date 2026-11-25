@@ -73,13 +73,19 @@
   }
 }
 
+/* Chi chiede meno movimento chiede di non vedere cose che si muovono da
+   sole: le animazioni a fotogrammi, che partono al caricamento e vanno
+   avanti da se', e lo scorrimento lungo. Le transizioni invece partono solo
+   quando qualcuno passa sopra o mette il fuoco su un elemento, durano mezzo
+   secondo e non spostano la pagina. Azzerarle anche quelle, com'era qui
+   prima, voleva dire ridurre a 0,01ms ogni passaggio del sito: lo zoom di
+   una copertina diventava uno scatto secco. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
 }
