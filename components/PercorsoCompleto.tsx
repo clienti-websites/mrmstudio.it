@@ -2,8 +2,14 @@ import Link from "next/link";
 import { FaseIcon } from "./FaseIcon";
 
 /**
- * La sezione è un percorso, non tre riquadri affiancati: una linea con tre
- * fermate, nell'ordine in cui si attraversano.
+ * La sezione è un percorso, non quattro riquadri affiancati: una linea con
+ * le fermate, nell'ordine in cui si attraversano.
+ *
+ * Le prime tre sono gli approcci. La quarta, l'elenco dei lavori, non è un
+ * modo di lavorare ed è ultima per questo: dopo aver letto cosa facciamo,
+ * la domanda successiva è "e allora cosa avete fatto". Porta alla tabella
+ * dentro /progetti, non a una pagina sua, e la sua icona è un documento e
+ * non un oggetto del mestiere, così si vede che è di un'altra natura.
  *
  * Non ha un titolo: la riga di apertura dice già di cosa si parla, e un
  * titolo sopra avrebbe ripetuto "dal terreno alle chiavi in mano", che è la
@@ -42,22 +48,37 @@ import { FaseIcon } from "./FaseIcon";
 const FERMATE = [
   {
     id: "progettazione",
+    href: "/progettazione",
     icona: "progettazione",
     label: "Progettazione",
     gloss: "Architettura, ingegneria, energia, urbanistica e direzione lavori.",
   },
-  { id: "appalto", icona: "appalto", label: "Appalto", gloss: "Lavori pubblici e realizzazioni private." },
+  {
+    id: "appalto",
+    href: "/appalto",
+    icona: "appalto",
+    label: "Appalto",
+    gloss: "Lavori pubblici e realizzazioni private.",
+  },
   {
     id: "sviluppo-immobiliare",
+    href: "/sviluppo-immobiliare",
     icona: "direzione-lavori",
     label: "Sviluppo immobiliare",
     gloss: "Dal terreno alle chiavi in mano.",
+  },
+  {
+    id: "elenco-lavori",
+    href: "/progetti#lavori-titolo",
+    icona: "elenco",
+    label: "Elenco lavori",
+    gloss: "Gli incarichi svolti, con importo e prestazioni.",
   },
 ] as const;
 
 export function PercorsoCompleto() {
   return (
-    <section id="approcci" aria-label="I tre approcci" className="scroll-mt-20 px-6 py-24 md:px-12">
+    <section id="approcci" aria-label="Da dove si entra" className="scroll-mt-20 px-6 py-24 md:px-12">
       <div className="mx-auto max-w-6xl">
         {/* Una riga sola, grande, e sotto la prova in piccolo. Prima era un
             paragrafo di cinque frasi che cominciava spiegando la situazione
@@ -72,7 +93,7 @@ export function PercorsoCompleto() {
           hai l&apos;occasione, la portiamo noi.
         </p>
 
-        <ol className="mx-auto mt-16 grid max-w-5xl md:grid-cols-3 md:gap-x-8">
+        <ol className="mx-auto mt-16 grid max-w-5xl md:grid-cols-4 md:gap-x-8">
           {FERMATE.map((fermata, i) => (
             <li
               key={fermata.id}
@@ -99,7 +120,7 @@ export function PercorsoCompleto() {
                 className="absolute -left-[3px] top-[5px] h-[7px] w-[7px] rounded-full bg-muschio md:static md:mx-auto md:mb-6 md:block"
               />
 
-              <Link href={`/${fermata.id}`} className="group block">
+              <Link href={fermata.href} className="group block">
                 <FaseIcon phase={fermata.icona} className="h-10 w-10 text-muschio md:mx-auto" />
                 <span className="mt-4 block font-medium text-grafite group-hover:text-muschio group-hover:underline">
                   {fermata.label}

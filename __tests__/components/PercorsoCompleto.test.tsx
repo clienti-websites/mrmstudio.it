@@ -2,14 +2,17 @@ import { render, screen, within } from "@testing-library/react";
 import { PercorsoCompleto } from "@/components/PercorsoCompleto";
 
 describe("PercorsoCompleto", () => {
-  it("lists the three stops in order", () => {
+  // I tre approcci, e in coda l'elenco dei lavori: non e' un quarto modo di
+  // lavorare, e' la prova dei primi tre, e sta ultimo per questo.
+  it("lists the three approaches in order, with the register last", () => {
     render(<PercorsoCompleto />);
     const items = within(screen.getByRole("list")).getAllByRole("listitem");
-    expect(items).toHaveLength(3);
+    expect(items).toHaveLength(4);
     expect(items.map((item) => item.textContent)).toEqual([
       expect.stringContaining("Progettazione"),
       expect.stringContaining("Appalto"),
       expect.stringContaining("Sviluppo immobiliare"),
+      expect.stringContaining("Elenco lavori"),
     ]);
   });
 
@@ -41,18 +44,26 @@ describe("PercorsoCompleto", () => {
       "href",
       "/sviluppo-immobiliare",
     );
+    // L'elenco non ha una pagina sua: sta dentro /progetti, sotto le schede,
+    // e l'ancora e' il titolo della tabella.
+    expect(screen.getByRole("link", { name: /elenco lavori/i })).toHaveAttribute(
+      "href",
+      "/progetti#lavori-titolo",
+    );
   });
 
-  // La biforcazione del punto 11: le tre fermate sono la competenza
-  // progettuale, i servizi integrati quella esecutiva. Deve restare una riga
-  // sola, non una quarta fermata.
-  it("forks to the executive side without adding a fourth stop", () => {
+  // La biforcazione: le fermate sono la competenza progettuale, i servizi
+  // integrati quella esecutiva. Resta una riga sola e non diventa una voce
+  // in fila con le altre, perche' non e' un approccio in piu': e' tutti e
+  // tre insieme.
+  it("forks to the executive side in a line of its own, not as a stop", () => {
     render(<PercorsoCompleto />);
     expect(screen.getByRole("link", { name: /servizi integrati/i })).toHaveAttribute(
       "href",
       "/servizi-integrati",
     );
-    expect(within(screen.getByRole("list")).getAllByRole("listitem")).toHaveLength(3);
+    const fermate = within(screen.getByRole("list")).getAllByRole("listitem");
+    expect(fermate.map((f) => f.textContent).join(" ")).not.toMatch(/servizi integrati/i);
   });
 
   // La voce "Progetti" della barra porta qui: senza l'id il salto non
@@ -71,7 +82,7 @@ describe("PercorsoCompleto", () => {
   it("keeps the icons out of the accessibility tree so labels carry the meaning", () => {
     const { container } = render(<PercorsoCompleto />);
     const icons = container.querySelectorAll("svg");
-    expect(icons).toHaveLength(3);
+    expect(icons).toHaveLength(4);
     for (const icon of icons) {
       expect(icon).toHaveAttribute("aria-hidden", "true");
     }
