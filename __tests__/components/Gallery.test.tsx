@@ -29,6 +29,17 @@ describe("Gallery", () => {
     expect(within(screen.getByRole("dialog")).getByRole("button", { name: /zoom in/i })).toBeInTheDocument();
   });
 
+  // Lo stesso ingrandimento delle schede in home, copertina compresa: dice
+  // che la fotografia si apre. transform-gpu evita che il browser ridisegni
+  // una fotografia da 2000px a ogni fotogramma, come succedeva in home.
+  it("grows every photograph under the pointer, the cover included", () => {
+    render(<Gallery images={images} aside={<p>Scheda</p>} />);
+    for (const immagine of screen.getAllByRole("img")) {
+      expect(immagine).toHaveClass("transform-gpu", "transition-transform", "group-hover:scale-[1.03]");
+      expect(immagine.closest("button")).toHaveClass("group");
+    }
+  });
+
   describe("with a side column", () => {
     const tre = [...images, { src: "/progetti/test/03.jpg", alt: "Terza immagine" }];
 

@@ -66,15 +66,17 @@ export function Gallery({ images, aside }: { images: GalleryImage[]; aside?: Rea
             type="button"
             onClick={() => setIndex(0)}
             aria-label={`Apri l'immagine: ${copertina.alt}`}
-            className="relative block aspect-[4/3] w-full overflow-hidden bg-nebbia md:sticky md:top-24 md:self-start"
+            className="group relative block aspect-[4/3] w-full overflow-hidden bg-nebbia md:sticky md:top-24 md:self-start"
           >
+            {/* Lo stesso ingrandimento delle schede in home: dice che la
+                fotografia si apre, prima ancora di leggere l'etichetta. */}
             <Image
               src={copertina.src}
               alt={copertina.alt}
               fill
               priority
               sizes="(min-width: 768px) 56vw, 100vw"
-              className="object-cover"
+              className="object-cover transform-gpu transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none"
             />
           </button>
 
@@ -89,9 +91,15 @@ export function Gallery({ images, aside }: { images: GalleryImage[]; aside?: Rea
             type="button"
             onClick={() => setIndex(i + scarto)}
             aria-label={`Apri l'immagine: ${image.alt}`}
-            className={`relative overflow-hidden bg-nebbia ${classiRiquadro(i, riquadri.length)}`}
+            className={`group relative overflow-hidden bg-nebbia ${classiRiquadro(i, riquadri.length)}`}
           >
-            <Image src={image.src} alt={image.alt} fill sizes="(min-width: 1024px) 336px, (min-width: 768px) 33vw, 50vw" className="object-cover" />
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              sizes="(min-width: 1024px) 336px, (min-width: 768px) 33vw, 50vw"
+              className="object-cover transform-gpu transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none"
+            />
           </button>
         ))}
       </div>
