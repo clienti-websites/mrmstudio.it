@@ -35,17 +35,27 @@ export default function HomePage() {
 
       <section className="px-6 py-24 md:px-12">
         <div className="mx-auto max-w-6xl">
-          <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <h2 className="text-2xl font-bold text-grafite md:text-3xl">Progetti</h2>
-              <p className="mt-2 text-pietra">Una selezione. Cambia tipologia per vederne altri.</p>
-            </div>
-            <Link href="/progetti" className="-my-2 inline-block py-2 text-muschio underline">
-              Tutti i progetti e i lavori svolti
-            </Link>
+          <div className="mb-10">
+            <h2 className="text-2xl font-bold text-grafite md:text-3xl">Progetti</h2>
+            <p className="mt-2 text-pietra">Una selezione. Cambia tipologia per vederne altri.</p>
           </div>
           {projects.length > 0 ? (
-            <ProjectsWithFilter projects={projects} categories={[...CATEGORIES]} limit={3} />
+            <>
+              <ProjectsWithFilter projects={projects} categories={[...CATEGORIES]} limit={3} />
+              {/* Il numero sta nel pulsante, non in un rimando in alto a
+                  destra: con tre schede in vista la sezione sembrava tutto
+                  quello che c'e', e chi aveva finito di guardarle stava
+                  guardando in basso, non in alto. Il conto viene dalle schede,
+                  cosi' non puo' smentire la pagina che apre. */}
+              <div className="mt-12 text-center">
+                <Link
+                  href="/progetti"
+                  className="inline-block bg-muschio px-6 py-3 font-medium text-carta hover:bg-muschio/90"
+                >
+                  Vedi tutte le {projects.length} opere
+                </Link>
+              </div>
+            </>
           ) : (
             <p className="text-pietra">Nuove schede progetto in arrivo.</p>
           )}
