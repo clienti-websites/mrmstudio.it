@@ -2,26 +2,18 @@ import { render, screen, within } from "@testing-library/react";
 import { PercorsoCompleto } from "@/components/PercorsoCompleto";
 
 describe("PercorsoCompleto", () => {
-  it("lists the three approaches in order", () => {
+  // I tre approcci, e in coda l'elenco dei lavori: non e' un quarto modo di
+  // lavorare, e' la prova dei primi tre, e sta ultimo per questo.
+  it("lists the three approaches in order, with the register last", () => {
     render(<PercorsoCompleto />);
     const items = within(screen.getByRole("list")).getAllByRole("listitem");
-    expect(items).toHaveLength(3);
+    expect(items).toHaveLength(4);
     expect(items.map((item) => item.textContent)).toEqual([
       expect.stringContaining("Progettazione"),
       expect.stringContaining("Appalto"),
       expect.stringContaining("Sviluppo immobiliare"),
+      expect.stringContaining("Elenco lavori"),
     ]);
-  });
-
-  // L'elenco dei lavori e' la prova dei tre approcci, non un quarto modo di
-  // lavorare: sta fuori dalla fila, come pulsante, e non ha una pagina sua
-  // ma una tabella dentro /progetti, la cui ancora e' il titolo.
-  it("sends to the register with a button of its own, outside the stops", () => {
-    render(<PercorsoCompleto />);
-    const pulsante = screen.getByRole("link", { name: /elenco dei lavori/i });
-    expect(pulsante).toHaveAttribute("href", "/progetti#lavori-titolo");
-    const fermate = within(screen.getByRole("list")).getAllByRole("listitem");
-    expect(fermate.map((f) => f.textContent).join(" ")).not.toMatch(/elenco dei lavori/i);
   });
 
   // Il concetto chiave del sito: lo studio e' il pezzo che manca, e i tre
@@ -51,6 +43,12 @@ describe("PercorsoCompleto", () => {
     expect(screen.getByRole("link", { name: /sviluppo immobiliare/i })).toHaveAttribute(
       "href",
       "/sviluppo-immobiliare",
+    );
+    // L'elenco non ha una pagina sua: sta dentro /progetti, sotto le schede,
+    // e l'ancora e' il titolo della tabella.
+    expect(screen.getByRole("link", { name: /elenco lavori/i })).toHaveAttribute(
+      "href",
+      "/progetti#lavori-titolo",
     );
   });
 
@@ -84,7 +82,7 @@ describe("PercorsoCompleto", () => {
   it("keeps the icons out of the accessibility tree so labels carry the meaning", () => {
     const { container } = render(<PercorsoCompleto />);
     const icons = container.querySelectorAll("svg");
-    expect(icons).toHaveLength(3);
+    expect(icons).toHaveLength(4);
     for (const icon of icons) {
       expect(icon).toHaveAttribute("aria-hidden", "true");
     }
