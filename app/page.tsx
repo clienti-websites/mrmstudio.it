@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Hero } from "@/components/Hero";
 import { PercorsoCompleto } from "@/components/PercorsoCompleto";
-import { OperePubbliche } from "@/components/OperePubbliche";
 import { ProjectsWithFilter } from "@/components/ProjectsWithFilter";
 import { StatsSection } from "@/components/StatsSection";
 import { ContactForm } from "@/components/ContactForm";
@@ -30,8 +29,6 @@ export default function HomePage() {
       <Hero title="Dall'idea alla consegna delle chiavi." video={HERO_VIDEO} />
 
       <PercorsoCompleto />
-
-      <OperePubbliche />
 
       <section className="px-6 py-24 md:px-12">
         <div className="mx-auto max-w-6xl">
