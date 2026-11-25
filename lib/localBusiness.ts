@@ -4,7 +4,7 @@ export function buildLocalBusinessJsonLd(office: Office) {
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    name: `${SITE.name} — ${office.city}`,
+    name: `${SITE.name}, ${office.city}`,
     url: SITE.url,
     telephone: office.phone,
     email: SITE.email,

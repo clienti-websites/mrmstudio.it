@@ -9,7 +9,7 @@ export function Footer() {
           <p className="text-lg font-black">{SITE.name}</p>
           <p className="mt-2 text-sm text-carta/70">{SITE.legalName}</p>
           <p className="mt-4 text-sm text-carta/70">
-            P.IVA {SITE.vatNumber} — REA {SITE.rea}
+            P.IVA {SITE.vatNumber} · REA {SITE.rea}
           </p>
         </div>
 

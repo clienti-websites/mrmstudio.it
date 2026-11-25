@@ -34,10 +34,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const project = findProjectBySlug(slug);
   if (!project) return {};
   return {
-    title: `${project.title} — ${project.location}`,
+    title: `${project.title}, ${project.location}`,
     description: project.excerpt,
     openGraph: {
-      title: `${project.title} — ${project.location}`,
+      title: `${project.title}, ${project.location}`,
       description: project.excerpt,
       images: [{ url: project.coverImage.src, alt: project.coverImage.alt }],
     },

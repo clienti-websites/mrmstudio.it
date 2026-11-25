@@ -13,13 +13,24 @@ describe("PercorsoCompleto", () => {
     ]);
   });
 
+  // Il concetto chiave del sito: lo studio e' il pezzo che manca, e i tre
+  // casi vanno scritti uno per uno. Prima era una metafora in chiusura,
+  // "copriamo il tratto che ti manca", e non arrivava a nessuno. Se qualcuno
+  // rimette la figura al posto del parallelismo, il test cade.
+  it("opens by saying the studio is whichever piece the client lacks", () => {
+    render(<PercorsoCompleto />);
+    expect(screen.getByText(/noi siamo la parte che ti manca/i)).toBeInTheDocument();
+    const casi = screen.getByText(/se non hai il progetto, siamo il progetto/i);
+    expect(casi).toHaveTextContent(/se non hai l'appalto, siamo l'appalto/i);
+    expect(casi).toHaveTextContent(/se non hai l'occasione, la portiamo noi/i);
+    expect(screen.queryByText(/tratto/i)).not.toBeInTheDocument();
+  });
+
   // Senza il nome dell'agenzia "l'occasione la portiamo noi" resta un vanto
   // che nessuno puo' verificare: e' il contenuto della riga, non un dettaglio.
-  it("opens by naming where the opportunities come from", () => {
+  it("names where the opportunities actually come from", () => {
     render(<PercorsoCompleto />);
-    const apertura = screen.getByText(/un immobile da rilevare/i);
-    expect(apertura).toHaveTextContent(/l'occasione la portiamo noi/i);
-    expect(apertura).toHaveTextContent(/collaboriamo con IconaCasa Abruzzo/i);
+    expect(screen.getByText(/IconaCasa Abruzzo/i)).toHaveTextContent(/cosa può diventare/i);
   });
 
   it("gives every stop its own page", () => {
@@ -49,16 +60,6 @@ describe("PercorsoCompleto", () => {
   it("is the anchor the nav sends visitors to", () => {
     const { container } = render(<PercorsoCompleto />);
     expect(container.querySelector("#approcci")).toBeInTheDocument();
-  });
-
-  // La chiusura deve dire tre cose: che si prende un tratto solo, che si puo'
-  // prendere tutto, e che a capire quale non ci pensa il cliente. Se qualcuno
-  // la riscrive perdendone una, il test cade.
-  it("offers whichever stretch is missing, up to all of it, without making the client diagnose it", () => {
-    render(<PercorsoCompleto />);
-    const chiusura = screen.getByText(/il tratto che ti manca/i);
-    expect(chiusura).toHaveTextContent(/anche tutto, se ti manca tutto/i);
-    expect(chiusura).toHaveTextContent(/lo vediamo insieme/i);
   });
 
   it("surfaces public work and town planning without giving them a stop of their own", () => {

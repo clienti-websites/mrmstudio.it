@@ -106,7 +106,7 @@ describe("sendContactEmail", () => {
     await sendContactEmail({ ...richiesta, reference: "Harmonia" });
 
     expect(inviaMock.mock.calls[0][0].subject).toBe(
-      "Nuova richiesta dal sito — Ristrutturazione (da Harmonia)",
+      "Nuova richiesta dal sito: Ristrutturazione (da Harmonia)",
     );
   });
 

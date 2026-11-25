@@ -5,7 +5,7 @@ import { MappaSede } from "@/components/MappaSede";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contatti — Pescara e Castel di Sangro",
+  title: "Contatti | Pescara e Castel di Sangro",
   description: "Contatta MRM Studio: sede a Pescara e a Castel di Sangro, Abruzzo.",
 };
 

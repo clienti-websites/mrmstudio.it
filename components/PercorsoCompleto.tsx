@@ -12,15 +12,20 @@ import { FaseIcon } from "./FaseIcon";
  *
  * Lo sviluppo immobiliare è una fermata in fila con le altre: dice che lo
  * studio parte dall'occasione e non dall'incarico senza doverlo spiegare.
- * La riga di apertura gli dà il nome che gli serve — IconaCasa Abruzzo, il
- * legame è reale, i due titolari sono marito e moglie — perché senza un nome
- * "l'occasione la portiamo noi" resta un vanto che nessuno può verificare.
+ * La riga sotto le fermate gli dà il nome che gli serve, IconaCasa Abruzzo,
+ * perché senza un nome "l'occasione la portiamo noi" resta un vanto che
+ * nessuno può verificare. Il legame fra i due è di famiglia, ma in home non
+ * si dice: sta su /sviluppo-immobiliare, dove chi è arrivato fin lì ha
+ * motivo di saperlo.
  *
- * Va fatto capire senza scriverlo che del percorso si può
- * prendere tutto o un tratto solo. La riga di chiusura non elenca i casi:
- * elencarli obbliga chi legge a riconoscersi in uno dei tre, e quasi nessuno
- * sa gia' dire quale pezzo gli manca. Dice invece che il pezzo lo copriamo
- * noi, qualunque sia, e che a individuarlo si pensa dopo.
+ * Il concetto chiave del sito è che lo studio è il pezzo che al cliente
+ * manca. Prima stava in chiusura e per metafora, "copriamo il tratto che ti
+ * manca", col percorso come figura implicita: non arrivava, perché chi legge
+ * non ha in testa nessun tratto da coprire. Adesso sta in apertura, prima
+ * delle fermate, e i tre casi sono scritti uno per uno — se non hai il
+ * progetto siamo il progetto, e così per gli altri due — perché è il
+ * parallelismo a far capire da sé che sono alternative e non tappe. La parola
+ * "tratto" è sparita da questa sezione.
  *
  * Opere pubbliche e urbanistica non hanno una fermata loro: comparirebbero
  * come un reparto a parte. Stanno dentro le glosse delle fermate che le
@@ -54,10 +59,17 @@ export function PercorsoCompleto() {
   return (
     <section id="approcci" aria-label="I tre approcci" className="scroll-mt-20 px-6 py-24 md:px-12">
       <div className="mx-auto max-w-6xl">
-        <p className="mx-auto max-w-2xl text-center text-lg text-grafite">
-          Si comincia da un terreno, da un immobile da rilevare, da un bando. Certe volte l&apos;occasione la
-          portiamo noi: collaboriamo con IconaCasa Abruzzo, e quello che passa di lì lo guardiamo già pensando
-          a cosa può diventare.
+        {/* Una riga sola, grande, e sotto la prova in piccolo. Prima era un
+            paragrafo di cinque frasi che cominciava spiegando la situazione
+            del cliente: giusto nel contenuto, ma nessuno lo leggeva fino al
+            punto in cui arrivava il concetto. Adesso il concetto e' la prima
+            cosa che si vede, e i tre casi lo dimostrano dopo. */}
+        <p className="mx-auto max-w-2xl text-center text-2xl font-medium leading-snug text-grafite md:text-3xl">
+          Noi siamo la parte che ti manca.
+        </p>
+        <p className="mx-auto mt-5 max-w-xl text-center text-pietra">
+          Se non hai il progetto, siamo il progetto. Se non hai l&apos;appalto, siamo l&apos;appalto. Se non
+          hai l&apos;occasione, la portiamo noi.
         </p>
 
         <ol className="mx-auto mt-16 grid max-w-5xl md:grid-cols-3 md:gap-x-8">
@@ -98,16 +110,20 @@ export function PercorsoCompleto() {
           ))}
         </ol>
 
+        {/* Testo di MRM, parola per parola. Prima diceva "a volte la
+            portiamo davvero", che suonava come se le occasioni capitassero
+            per fortuna, e tirava in mezzo la famiglia. */}
         <p className="mx-auto mt-16 max-w-2xl text-center text-lg text-grafite">
-          Copriamo il tratto che ti manca. Anche tutto, se ti manca tutto. Qual è, lo vediamo insieme.
+          Le occasioni le portiamo davvero: quello che passa per IconaCasa Abruzzo lo guardiamo già pensando a
+          cosa può diventare.
         </p>
 
         {/* La biforcazione, in una riga sola: chi cerca un progettista resta
-            sulle tre fermate, chi vuole la casa fatta prende il percorso
-            intero. Una quarta fermata avrebbe detto che e' un approccio in
-            piu', e non lo e': e' tutti e tre insieme. */}
+            sulle tre fermate, chi vuole la casa fatta prende tutti e tre.
+            Una quarta fermata avrebbe detto che e' un approccio in piu', e
+            non lo e': e' tutti e tre insieme. */}
         <p className="mx-auto mt-4 max-w-2xl text-center text-pietra">
-          Quando il tratto è tutto,{" "}
+          E se ti manca tutto, facciamo tutto:{" "}
           <Link href="/servizi-integrati" className="inline-block py-2 text-muschio underline">
             si chiama servizi integrati
           </Link>

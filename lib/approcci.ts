@@ -105,7 +105,7 @@ export const APPROCCI: Approccio[] = [
     metaDescrizione:
       "Valutazione di terreni e immobili, verifica di cosa le norme consentono, preliminare e business plan, piani in project financing: MRM Studio porta l'operazione, non solo il progetto.",
     apertura:
-      "Un terreno, un immobile da rilevare, un'area ferma da anni. Collaboriamo con IconaCasa Abruzzo — i titolari dei due studi sono marito e moglie — e quello che passa dall'agenzia lo guardiamo già pensando a cosa può diventare.",
+      "Un terreno, un immobile da rilevare, un'area ferma da anni. Lavoriamo con IconaCasa Abruzzo, e quello che passa dall'agenzia lo guardiamo già pensando a cosa può diventare.",
     rischio:
       "Un'operazione immobiliare si decide prima del progetto: su cosa le norme consentono davvero in quel punto, su quanto costa realizzarlo e su quanto regge il mercato della zona. Sbagliato quel conto, il progetto più bello del mondo non torna.",
     come:

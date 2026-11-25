@@ -69,8 +69,8 @@ export async function sendContactEmail(input: ContactEmailInput): Promise<boolea
   });
 
   const oggetto = input.reference
-    ? `Nuova richiesta dal sito — ${input.interventionType} (da ${input.reference})`
-    : `Nuova richiesta dal sito — ${input.interventionType}`;
+    ? `Nuova richiesta dal sito: ${input.interventionType} (da ${input.reference})`
+    : `Nuova richiesta dal sito: ${input.interventionType}`;
 
   const testo = [
     `Nome: ${input.name}`,

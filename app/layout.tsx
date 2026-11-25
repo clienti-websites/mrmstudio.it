@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     canonical: "./",
   },
   title: {
-    default: "MRM Studio — Architettura e Ingegneria a Pescara e Abruzzo",
+    default: "MRM Studio | Architettura e Ingegneria a Pescara e Abruzzo",
     template: "%s | MRM Studio",
   },
   description:

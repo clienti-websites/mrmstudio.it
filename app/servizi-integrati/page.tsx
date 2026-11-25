@@ -89,8 +89,8 @@ export default function ServiziIntegratiPage() {
             Un percorso senza ostacoli.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-carta/85">
-            Se della casa vuoi che ce ne occupiamo noi dall&apos;inizio alla fine, questo è il tratto che
-            percorriamo. Un solo interlocutore, dalla prima idea alle chiavi.
+            Se della casa vuoi che ce ne occupiamo noi dall&apos;inizio alla fine, questo è quello che
+            facciamo. Un solo interlocutore, dalla prima idea alle chiavi.
           </p>
         </div>
       </section>
