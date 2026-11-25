@@ -27,11 +27,7 @@ export default function HomePage() {
         <LocalBusinessJsonLd key={office.id} office={office} />
       ))}
 
-      <Hero
-        image={{ src: "/progetti/via-fedra-3/01-vista-aerea.jpg", alt: "Vista aerea di un progetto residenziale MRM Studio a Pescara" }}
-        title="Dall'idea alla consegna delle chiavi."
-        video={HERO_VIDEO}
-      />
+      <Hero title="Dall'idea alla consegna delle chiavi." video={HERO_VIDEO} />
 
       <PercorsoCompleto />
 

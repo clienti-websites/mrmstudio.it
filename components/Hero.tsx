@@ -1,46 +1,22 @@
 "use client";
 
-import { useRef, useSyncExternalStore } from "react";
-import Image from "next/image";
+import { useRef } from "react";
 
 type HeroVideo = { src: string; poster: string };
 
 const QUERY_MOVIMENTO = "(prefers-reduced-motion: reduce)";
 
-function ascoltaPreferenze(alCambio: () => void) {
-  const movimento = window.matchMedia(QUERY_MOVIMENTO);
-  movimento.addEventListener("change", alCambio);
-  return () => movimento.removeEventListener("change", alCambio);
-}
-
-function leggiPreferenze() {
-  const risparmioDati =
-    (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
-  return !window.matchMedia(QUERY_MOVIMENTO).matches && !risparmioDati;
-}
-
-export function Hero({
-  image,
-  title,
-  video,
-}: {
-  image: { src: string; alt: string };
-  title: string;
-  video?: HeroVideo;
-}) {
-  // shortcut: tre megabytes partono anche sotto rete mobile, salvo risparmio
-  // dati attivo. Se diventa un problema, un secondo file verticale con
-  // <source media="(max-width: 767px)">.
-  //
-  // Il video e' decorativo: non lo scarica chi ha chiesto meno movimento o chi
-  // ha il risparmio dati attivo. Sotto resta sempre la fotografia, che
-  // next/image consegna gia' ridimensionata per lo schermo.
-  //
-  // L'elemento non viene proprio creato quando non serve: nasconderlo con un
-  // foglio di stile lo farebbe scaricare lo stesso. Chi ha chiesto meno
-  // movimento vede quindi l'immagine ferma, che e' il comportamento atteso.
+export function Hero({ title, video }: { title: string; video: HeroVideo }) {
   const sezione = useRef<HTMLElement>(null);
-  const vaBeneIlVideo = useSyncExternalStore(ascoltaPreferenze, leggiPreferenze, () => false);
+
+  // L'apertura mostrava il video solo dopo l'idratazione, e solo a chi non
+  // aveva ne' movimento ridotto ne' risparmio dati: sotto stava la fotografia
+  // di un altro progetto, quindi la home cambiava faccia da un dispositivo
+  // all'altro e per un istante anche sullo stesso. Adesso il filmato parte
+  // sempre, anche per chi ha chiesto meno movimento: e' una scelta di MRM,
+  // l'apertura del sito deve essere una sola. Il prezzo e' che un visitatore
+  // che ha chiesto meno movimento se lo trova comunque in moto; se si vuole
+  // tornare indietro, basta rimettere una pausa su prefers-reduced-motion.
 
   // La freccia scorre fino al blocco che viene dopo l'apertura, qualunque
   // sia: niente id da tenere allineato con la home.
@@ -51,30 +27,30 @@ export function Hero({
     if (dopo) dopo.scrollIntoView({ behavior: comportamento, block: "start" });
     else window.scrollBy({ top: window.innerHeight * 0.85, behavior: comportamento });
   }
-  const mostraVideo = Boolean(video) && vaBeneIlVideo;
 
   return (
-    <section ref={sezione} className="relative flex h-[85dvh] min-h-[560px] w-full items-center justify-center overflow-hidden">
-      <Image src={image.src} alt={image.alt} fill priority sizes="100vw" className="object-cover" />
+    <section ref={sezione} className="relative flex h-[85dvh] min-h-[560px] w-full items-center justify-center overflow-hidden bg-grafite">
+      {/* shortcut: tre megabytes partono anche sotto rete mobile, perche'
+          l'apertura deve essere la stessa per tutti. Se diventa un problema,
+          un secondo file verticale piu' leggero con
+          <source media="(max-width: 767px)">.
 
-      {mostraVideo && video && (
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
-          src={video.src}
-          poster={video.poster}
-          // Del filmato si scarica prima la sola intestazione: il primo
-          // fotogramma a schermo lo dà il poster, quindi non serve tirare
-          // giù tutto per avere qualcosa da mostrare.
-          preload="metadata"
-          width={1592}
-          height={890}
-          autoPlay
-          muted
-          loop
-          playsInline
-          aria-hidden="true"
-        />
-      )}
+          Il poster e' il primo fotogramma del filmato: finche' il video non
+          ha dati, e anche se non arrivasse mai, quello che si vede e'
+          comunque l'inquadratura giusta e non un'altra fotografia. */}
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        src={video.src}
+        poster={video.poster}
+        preload="auto"
+        width={1592}
+        height={890}
+        autoPlay
+        muted
+        loop
+        playsInline
+        aria-hidden="true"
+      />
 
       {/*
         Niente riquadro dietro al testo: il bordo netto di un pannello in
