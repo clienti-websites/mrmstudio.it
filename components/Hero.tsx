@@ -29,7 +29,7 @@ export function Hero({ title, video }: { title: string; video: HeroVideo }) {
   }
 
   return (
-    <section ref={sezione} className="relative flex h-[85dvh] min-h-[560px] w-full items-center justify-center overflow-hidden bg-grafite">
+    <section ref={sezione} className="relative flex h-[85dvh] min-h-[560px] w-full items-end justify-center overflow-hidden bg-grafite">
       {/* shortcut: tre megabytes partono anche sotto rete mobile, perche'
           l'apertura deve essere la stessa per tutti. Se diventa un problema,
           un secondo file verticale piu' leggero con
@@ -52,26 +52,18 @@ export function Hero({ title, video }: { title: string; video: HeroVideo }) {
         aria-hidden="true"
       />
 
-      {/*
-        Niente riquadro dietro al testo: il bordo netto di un pannello in
-        mezzo al video si vede e pesa. Al suo posto uno scurimento sfumato,
-        piu' intenso dove sta il testo e quasi assente ai lati, che sfuma
-        senza lasciare margini. Deve restare abbastanza carico da reggere il
-        caso peggiore, cioe' un cielo bianco proprio dietro le parole: sotto
-        una certa soglia il testo chiaro non sarebbe piu' leggibile.
-      */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 90% 80% at 50% 45%, rgba(28,30,27,0.86) 0%, rgba(28,30,27,0.86) 65%, rgba(28,30,27,0.5) 100%)",
-        }}
-      />
+      {/* Lo scurimento che copriva tutta l'apertura e' stato tolto: era li'
+          per reggere il testo centrato sopra il video, e il filmato si vedeva
+          attraverso una garza. Adesso il video si vede com'e'.
 
-      <div className="relative mx-6 max-w-3xl px-2 text-center [text-shadow:0_2px_14px_rgba(0,0,0,0.45)]">
+          Quello che tiene in piedi il testo e' l'ombra qui sotto. Regge
+          perche' il testo sta in basso, dove il filmato e' scuro per conto
+          suo; se un domani il montaggio cambia e sotto arriva un cielo
+          bianco, le parole diventano illeggibili e serve una sfumatura
+          bassa, non un velo su tutta la sezione. */}
+      <div className="relative mx-6 mb-24 max-w-3xl px-2 text-center [text-shadow:0_2px_10px_rgba(0,0,0,0.75),0_1px_3px_rgba(0,0,0,0.6)]">
         <h1 className="text-3xl font-bold leading-tight text-carta md:text-5xl">{title}</h1>
-        <p className="mx-auto mt-5 text-center text-carta/90">
+        <p className="mx-auto mt-5 text-center text-carta">
           Architettura e ingegneria nello stesso studio, dal primo rilievo alla consegna. A Pescara e in
           Abruzzo.
         </p>
