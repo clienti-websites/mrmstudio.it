@@ -6,11 +6,11 @@ describe("BottoneContatto", () => {
   // dev'essere la pagina contatti, non l'ancora che esiste solo in home.
   it("points at the contact page so it works from every page", () => {
     render(<BottoneContatto />);
-    expect(screen.getByRole("link", { name: "Contattaci" })).toHaveAttribute("href", "/contatti");
+    expect(screen.getByRole("link", { name: "Come possiamo aiutarti" })).toHaveAttribute("href", "/contatti");
   });
 
   // Il volto invita a premere ma non deve entrare nel nome del collegamento:
-  // chi lo sente leggere deve sentire "Contattaci", non anche un ritratto.
+  // chi lo sente leggere deve sentire solo l'invito, non anche un ritratto.
   it("keeps the face out of the accessible name", () => {
     const { container } = render(<BottoneContatto />);
     const foto = container.querySelector("img");

@@ -12,9 +12,9 @@ const VOLTO = TEAM.find((persona) => persona.founder) ?? TEAM[0];
  * fondo a una scheda progetto se lo lasciava alle spalle.
  *
  * La faccia e' quello che lo fa premere: dice che dall'altra parte c'e' una
- * persona e non un modulo. Resta muta per chi usa un lettore di schermo —
- * il nome del collegamento e' gia' "Contattaci", e una didascalia in piu'
- * qui direbbe solo la stessa cosa due volte.
+ * persona e non un modulo. Resta muta per chi usa un lettore di schermo: il
+ * nome del collegamento dice gia' tutto, e una didascalia in piu' qui
+ * direbbe la stessa cosa due volte.
  *
  * Punta alla pagina contatti e non alla sezione in home: da una scheda
  * progetto "#contatti" non porterebbe da nessuna parte.
@@ -28,7 +28,7 @@ export function BottoneContatto() {
       <span className="relative block h-11 w-11 shrink-0 overflow-hidden rounded-full bg-carta/20">
         <Image src={VOLTO.photo} alt="" fill sizes="44px" className="object-cover" />
       </span>
-      Contattaci
+      Come possiamo aiutarti
     </Link>
   );
 }
