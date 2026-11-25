@@ -32,3 +32,19 @@ export const SITE = {
 } as const;
 
 export type Office = (typeof SITE.offices)[number];
+
+/**
+ * L'indirizzo WhatsApp di una sede, ricavato dal cellulare che sta gia'
+ * nella scheda: un secondo campo da tenere allineato a mano sarebbe la
+ * prima cosa a divergere. wa.me vuole il numero senza il piu' e senza spazi.
+ *
+ * Il messaggio precompilato dice da dove arriva chi scrive: su un telefono
+ * di studio che riceve anche altro, sapere che la richiesta viene dal sito
+ * cambia il modo di rispondere. Resta modificabile prima dell'invio, come
+ * ogni messaggio WhatsApp.
+ */
+export function whatsappUrl(office: Office): string {
+  const numero = office.mobile.replace(/[^0-9]/g, "");
+  const testo = encodeURIComponent(`Buongiorno, vi scrivo dal sito ${SITE.name}.`);
+  return `https://wa.me/${numero}?text=${testo}`;
+}

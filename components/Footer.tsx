@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SITE } from "@/lib/site";
+import { SITE, whatsappUrl } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -22,6 +22,15 @@ export function Footer() {
             </a>
             <a href={`tel:${office.mobile}`} className="block py-2 text-sm text-carta/70 hover:text-carta">
               {office.mobileDisplay}
+            </a>
+            {/* Stesso numero del cellulare qui sopra, altro modo di usarlo. */}
+            <a
+              href={whatsappUrl(office)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block py-2 text-sm text-carta/70 hover:text-carta"
+            >
+              WhatsApp
             </a>
           </div>
         ))}

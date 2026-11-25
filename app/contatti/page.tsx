@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
 import { LocalBusinessJsonLd } from "@/components/LocalBusinessJsonLd";
 import { MappaSede } from "@/components/MappaSede";
-import { SITE } from "@/lib/site";
+import { SITE, whatsappUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contatti | Pescara e Castel di Sangro",
@@ -29,6 +29,14 @@ export default function ContattiPage() {
               </a>
               <a href={`tel:${office.mobile}`} className="block py-2 text-muschio underline">
                 {office.mobileDisplay}
+              </a>
+              <a
+                href={whatsappUrl(office)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block py-2 text-muschio underline"
+              >
+                Scrivici su WhatsApp
               </a>
               <div className="mt-4">
                 <MappaSede office={office} />
