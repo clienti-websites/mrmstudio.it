@@ -3,6 +3,7 @@ import Image from "next/image";
 import { SITE } from "@/lib/site";
 import { FOUNDED, TEAM } from "@/lib/team";
 import { CtaBand } from "@/components/CtaBand";
+import { CurriculumMirco } from "@/components/CurriculumMirco";
 
 export const metadata: Metadata = {
   title: "Lo studio e le persone, a Pescara e Abruzzo",
@@ -57,6 +58,7 @@ export default function StudioPage() {
                 </div>
                 <h3 className="font-medium text-grafite">{persona.name}</h3>
                 <p className="text-sm text-pietra">{persona.role}</p>
+                {persona.curriculum && <CurriculumMirco nome={persona.name} />}
               </div>
               <p className="text-grafite">{persona.bio}</p>
             </article>

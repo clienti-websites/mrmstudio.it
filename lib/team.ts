@@ -27,6 +27,8 @@ export interface Persona {
    */
   photo: string;
   bio: string;
+  /** Vero solo per chi ha un curriculum trascritto in lib/cvMirco.ts. */
+  curriculum?: boolean;
 }
 
 export const TEAM: Persona[] = [
@@ -36,6 +38,7 @@ export const TEAM: Persona[] = [
     role: "Architetto",
     founder: true,
     office: null,
+    curriculum: true,
     bio:
       "Classe 1987. Comincia come geometra, poi si laurea in Architettura alla G. d'Annunzio con una tesi sperimentale in urbanistica. Iscritto all'Ordine degli Architetti dell'Aquila dal 2013. Segue la progettazione architettonica e strutturale integrata, la direzione lavori su opere pubbliche e private e la progettazione urbanistica.",
   },
