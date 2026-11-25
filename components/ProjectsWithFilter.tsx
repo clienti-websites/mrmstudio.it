@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
 import type { Category, Project } from "@/lib/projects";
 import { ProjectGrid } from "./ProjectGrid";
 
@@ -14,9 +13,17 @@ const CATEGORY_LABELS: Record<Category, string> = {
 
 /**
  * `limit` serve alla home, dove si mostra un assaggio invece dell'intero
- * catalogo. Il cambio di categoria e' animato perche' altrimenti la griglia
- * si sostituisce di colpo e non si capisce che e' successo qualcosa; chi ha
- * chiesto meno movimento la vede cambiare e basta.
+ * catalogo.
+ *
+ * Il cambio di categoria era un dissolvenza con scivolamento di framer-motion,
+ * e aveva due difetti. Uno di sostanza: la dissolvenza-piu'-scivolamento su un
+ * blocco intero e' il tic da sito generato, ed e' fra le cose che qui non si
+ * fanno. Uno tecnico, che si vedeva in console: `initial` dipendeva da
+ * useReducedMotion(), che sul server vale null, quindi il server scriveva
+ * opacity 0 e translateY(8px) e il client subito dopo opacity 1 e transform
+ * none - un disallineamento di idratazione su tutta la griglia delle opere.
+ * Il cambio di categoria si capisce dal filtro che si accende, non serve
+ * animare la griglia.
  */
 export function ProjectsWithFilter({
   projects,
@@ -28,7 +35,6 @@ export function ProjectsWithFilter({
   limit?: number;
 }) {
   const [active, setActive] = useState<Category | "tutti">("tutti");
-  const reduceMotion = useReducedMotion();
 
   const availableCategories = categories.filter((category) => projects.some((p) => p.category === category));
 
@@ -97,14 +103,7 @@ export function ProjectsWithFilter({
       )}
 
       {filtered.length > 0 ? (
-        <motion.div
-          key={active}
-          initial={reduceMotion ? false : { opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.25, ease: "easeOut" }}
-        >
-          <ProjectGrid projects={filtered} />
-        </motion.div>
+        <ProjectGrid projects={filtered} />
       ) : (
         <p className="text-pietra">Nessun progetto in questa categoria per ora.</p>
       )}
