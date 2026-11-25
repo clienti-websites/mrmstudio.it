@@ -41,14 +41,22 @@ export function TabellaLavori() {
                 </th>
                 <td className="py-5 pr-6 text-pietra">{lavoro.luogo ?? "Non indicato"}</td>
                 <td className="py-5 pr-6 text-grafite">
-                  {lavoro.slug ? (
-                    <Link href={`/progetti/${lavoro.slug}`} className="text-muschio underline">
-                      {lavoro.intervento}
-                    </Link>
-                  ) : (
-                    lavoro.intervento
-                  )}
+                  {lavoro.intervento}
                   <span className="mt-1 block text-pietra">{lavoro.prestazioni}</span>
+                  {/* Un pulsante e non l'intervento sottolineato: in una
+                      tabella di righe lunghe il titolo cliccabile non si
+                      distingue da quello che non lo e'. L'etichetta per il
+                      lettore di schermo dice di quale lavoro e' la scheda,
+                      perche' "Vedi la scheda" si ripete su piu' righe. */}
+                  {lavoro.slug && (
+                    <Link
+                      href={`/progetti/${lavoro.slug}`}
+                      aria-label={`Vedi la scheda: ${lavoro.intervento}`}
+                      className="mt-3 inline-block border border-grafite/30 px-3 py-1.5 text-xs font-medium text-grafite transition-colors hover:border-grafite/60 hover:bg-nebbia motion-reduce:transition-none"
+                    >
+                      Vedi la scheda
+                    </Link>
+                  )}
                 </td>
                 <td className="whitespace-nowrap py-5 pr-6 text-grafite">
                   {lavoro.importo ?? <span className="text-pietra">Non divulgato</span>}

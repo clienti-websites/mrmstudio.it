@@ -142,21 +142,15 @@ export default async function ProgettoPage({ params }: { params: Promise<{ slug:
             )}
 
             {inElenco && (
-              <div className="mt-6">
-                <p className="text-sm text-pietra">
-                  Questo intervento compare anche nell&apos;elenco dei lavori, con importo e
-                  prestazioni.
-                </p>
-                {/* Un pulsante e non il link dentro la frase: in fondo a una
-                    scheda il rimando e' un passo successivo, e un pulsante si
-                    vede scorrendo mentre una parola sottolineata si perde. */}
-                <Link
-                  href="/progetti#lavori-titolo"
-                  className="mt-3 inline-block border border-grafite/30 px-5 py-2.5 text-sm font-medium text-grafite transition-colors hover:border-grafite/60 hover:bg-nebbia motion-reduce:transition-none"
-                >
-                  Vedi l&apos;elenco dei lavori
+              <p className="mt-6 text-sm text-pietra">
+                Questo intervento compare anche{" "}
+                {/* py-1.5 su un elemento in linea allarga solo l'area toccabile:
+                    sborda sopra e sotto la riga senza spostare il testo. */}
+                <Link href="/progetti#lavori-titolo" className="py-1.5 text-muschio underline">
+                  nell&apos;elenco dei lavori
                 </Link>
-              </div>
+                , con importo e prestazioni.
+              </p>
             )}
           </>
         }

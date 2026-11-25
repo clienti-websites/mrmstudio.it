@@ -17,15 +17,16 @@ describe("TabellaLavori", () => {
     expect(screen.getAllByText("Non divulgato")).toHaveLength(undisclosed);
   });
 
-  it("links a work to its project page only when one exists", () => {
+  // Il rimando e' un pulsante sotto la riga, non il titolo sottolineato: in
+  // una tabella di interventi lunghi non si vedeva quale fosse cliccabile.
+  it("gives a work with a page its own button, and no other work one", () => {
     render(<TabellaLavori />);
     const withPages = LAVORI.filter((lavoro) => lavoro.slug);
     expect(screen.getAllByRole("link")).toHaveLength(withPages.length);
     for (const lavoro of withPages) {
-      expect(screen.getByRole("link", { name: lavoro.intervento })).toHaveAttribute(
-        "href",
-        `/progetti/${lavoro.slug}`
-      );
+      const pulsante = screen.getByRole("link", { name: `Vedi la scheda: ${lavoro.intervento}` });
+      expect(pulsante).toHaveTextContent("Vedi la scheda");
+      expect(pulsante).toHaveAttribute("href", `/progetti/${lavoro.slug}`);
     }
   });
 
