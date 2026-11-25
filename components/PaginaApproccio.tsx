@@ -35,6 +35,16 @@ export function PaginaApproccio({ approccio }: { approccio: Approccio }) {
         <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-2">
           <p className="text-lg leading-relaxed text-grafite">{approccio.rischio}</p>
           <p className="border-l-2 border-muschio pl-5 text-grafite">{approccio.come}</p>
+          {approccio.dentro && (
+            <p className="md:col-start-2">
+              <Link
+                href={approccio.dentro.href}
+                className="-my-2 inline-block py-2 text-muschio underline"
+              >
+                {approccio.dentro.testo}
+              </Link>
+            </p>
+          )}
         </div>
       </section>
 

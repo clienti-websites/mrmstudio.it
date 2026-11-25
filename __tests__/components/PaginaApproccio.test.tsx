@@ -54,6 +54,16 @@ describe("PaginaApproccio", () => {
     expect(within(soloDopo).getAllByRole("link")).toHaveLength(1);
   });
 
+  // La direzione lavori ha una pagina sua, ed e' raggiungibile solo da qui:
+  // se questo collegamento salta, quella pagina torna orfana.
+  it("reaches the site-supervision page from the design approach", () => {
+    render(<PaginaApproccio approccio={getApproccio("progettazione")} />);
+    expect(screen.getByRole("link", { name: /cantiere/i })).toHaveAttribute(
+      "href",
+      "/assistenza-cantieristica-e-direzione-lavori",
+    );
+  });
+
   // Ogni approccio ha le sue opere dichiarate: nessuna delle tre pagine
   // deve cavarsela col solo registro.
   it("shows the works that declare that approach, on all three pages", () => {

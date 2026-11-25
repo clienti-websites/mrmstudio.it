@@ -34,6 +34,12 @@ export interface Approccio {
   apertura: string;
   rischio: string;
   come: string;
+  /**
+   * Una prestazione che sta dentro l'approccio e ha una pagina sua, dove ne
+   * ha davvero una. Senza questo rimando la direzione lavori restava una
+   * pagina orfana: nessun collegamento la raggiungeva.
+   */
+  dentro?: { href: string; testo: string };
   /** La fase dichiarata nelle schede progetto, dove esiste. */
   fase: Phase | null;
   registro: Array<{ cerca: string; nota: string }>;
@@ -55,6 +61,10 @@ export const APPROCCI: Approccio[] = [
       "Quando architettonico, strutture e impianti nascono in tre studi diversi, le incongruenze non vengono fuori sui disegni: vengono fuori dopo, come varianti e fermi che nessuno aveva previsto. E quando succede, ognuno indica l'altro.",
     come:
       "Facciamo il rilievo, il progetto architettonico e il definitivo, l'esecutivo strutturale, il progetto energetico e degli impianti, i grafici esecutivi e il computo, le viste fotorealistiche per vedere come verrà prima di cominciare, gli interni sugli stessi elaborati, e la direzione dei lavori fino al collaudo. Se una scelta strutturale complica gli impianti ce ne accorgiamo mentre disegniamo, non quando il muro è chiuso.",
+    dentro: {
+      href: "/assistenza-cantieristica-e-direzione-lavori",
+      testo: "Come seguiamo il cantiere, dall'apertura al collaudo",
+    },
     fase: "progettazione",
     registroIntro: "Qualche incarico di sola progettazione, dall'elenco dei lavori.",
     registro: [

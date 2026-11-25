@@ -14,7 +14,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/sviluppo-immobiliare",
     "/servizi-integrati",
     "/assistenza-cantieristica-e-direzione-lavori",
-    "/ristrutturazioni-chiavi-in-mano",
     "/studio",
     "/impegno-sociale",
     "/contatti",

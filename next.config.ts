@@ -13,9 +13,9 @@ import type { NextConfig } from "next";
  * corrisponde a Via Fedra 3, l'integrazione del tessuto urbano a Un Nuovo
  * Equilibrio Urbano).
  *
- * Non compaiono qui /contatti, /assistenza-cantieristica-e-direzione-lavori e
- * /ristrutturazioni-chiavi-in-mano: nel sito nuovo hanno lo stesso indirizzo,
- * quindi non c'è niente da rimandare.
+ * Non compaiono qui /contatti e /assistenza-cantieristica-e-direzione-lavori:
+ * nel sito nuovo hanno lo stesso indirizzo, quindi non c'è niente da
+ * rimandare.
  */
 const PAGINE: Array<[string, string]> = [
   ["/chi-siamo", "/studio"],
@@ -29,6 +29,10 @@ const PAGINE: Array<[string, string]> = [
   // /servizi teneva insieme le quattro fasi. Adesso i tre approcci hanno una
   // pagina ciascuno e il loro indice e' la sezione in apertura della home.
   ["/servizi", "/#approcci"],
+  // La pagina sulle ristrutturazioni chiavi in mano diceva quello che dice
+  // /servizi-integrati, e non era collegata da nessuna parte: restava solo
+  // come atterraggio dalla ricerca. La ricerca ora atterra sull'altra.
+  ["/ristrutturazioni-chiavi-in-mano", "/servizi-integrati"],
 ];
 
 const OPERE: Array<[string, string]> = [
