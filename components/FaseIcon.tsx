@@ -3,8 +3,7 @@ type Icona =
   | "appalto"
   | "sviluppo-immobiliare"
   | "direzione-lavori"
-  | "interior-design"
-  | "elenco";
+  | "interior-design";
 
 // Icone disegnate a mano, stesso tratto e stessa griglia 24×24, per non
 // introdurre una libreria e per restare coerenti col resto del sito.
@@ -37,15 +36,6 @@ const PATHS: Record<Icona, React.ReactNode> = {
       <path d="M4 20h16" />
       <path d="M6 20V8l12-3v15" />
       <path d="M6 12l12-3" />
-    </>
-  ),
-  // Una tabella: tre righe e la colonna che separa l'anno dal resto. Le
-  // altre icone sono oggetti del mestiere, questa e' un documento, ed e'
-  // giusto cosi': l'elenco lavori non e' un modo di lavorare, e' la prova.
-  elenco: (
-    <>
-      <path d="M4 6h16M4 12h16M4 18h16" />
-      <path d="M9.5 3v18" />
     </>
   ),
   // Una poltrona: schienale, braccioli che scendono nella seduta, gambe.

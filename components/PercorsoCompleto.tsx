@@ -5,11 +5,11 @@ import { FaseIcon } from "./FaseIcon";
  * La sezione è un percorso, non quattro riquadri affiancati: una linea con
  * le fermate, nell'ordine in cui si attraversano.
  *
- * Le prime tre sono gli approcci. La quarta, l'elenco dei lavori, non è un
- * modo di lavorare ed è ultima per questo: dopo aver letto cosa facciamo,
- * la domanda successiva è "e allora cosa avete fatto". Porta alla tabella
- * dentro /progetti, non a una pagina sua, e la sua icona è un documento e
- * non un oggetto del mestiere, così si vede che è di un'altra natura.
+ * Le fermate sono tre, gli approcci. L'elenco dei lavori non è una quarta
+ * fermata: non è un modo di lavorare, è la prova dei tre, e in fila con
+ * loro si leggeva come un quarto modo. Sta sotto, come pulsante, dove la
+ * domanda arriva da sé: letto cosa facciamo, si vuole sapere cosa abbiamo
+ * fatto. Porta alla tabella dentro /progetti, non a una pagina sua.
  *
  * Non ha un titolo: la riga di apertura dice già di cosa si parla, e un
  * titolo sopra avrebbe ripetuto "dal terreno alle chiavi in mano", che è la
@@ -67,13 +67,6 @@ const FERMATE = [
     label: "Sviluppo immobiliare",
     gloss: "Dal terreno alle chiavi in mano.",
   },
-  {
-    id: "elenco-lavori",
-    href: "/progetti#lavori-titolo",
-    icona: "elenco",
-    label: "Elenco lavori",
-    gloss: "Gli incarichi svolti, con importo e prestazioni.",
-  },
 ] as const;
 
 export function PercorsoCompleto() {
@@ -93,7 +86,7 @@ export function PercorsoCompleto() {
           hai l&apos;occasione, la portiamo noi.
         </p>
 
-        <ol className="mx-auto mt-16 grid max-w-5xl md:grid-cols-4 md:gap-x-8">
+        <ol className="mx-auto mt-16 grid max-w-5xl md:grid-cols-3 md:gap-x-8">
           {FERMATE.map((fermata, i) => (
             <li
               key={fermata.id}
@@ -130,6 +123,19 @@ export function PercorsoCompleto() {
             </li>
           ))}
         </ol>
+
+        {/* Un pulsante, non una quarta fermata: in fila con gli approcci
+            l'elenco si leggeva come un quarto modo di lavorare, e non lo e',
+            e' la prova degli altri tre. */}
+        <div className="mt-14 text-center">
+          <Link
+            href="/progetti#lavori-titolo"
+            className="inline-block border border-grafite/30 px-6 py-3 font-medium text-grafite transition-colors hover:border-grafite/60 hover:bg-nebbia motion-reduce:transition-none"
+          >
+            Vedi l&apos;elenco dei lavori
+          </Link>
+          <p className="mt-3 text-sm text-pietra">Gli incarichi svolti, con importo e prestazioni.</p>
+        </div>
 
         {/* Testo di MRM, parola per parola. Prima diceva "a volte la
             portiamo davvero", che suonava come se le occasioni capitassero
