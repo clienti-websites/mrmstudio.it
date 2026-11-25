@@ -65,7 +65,7 @@ export default function StudioPage() {
       </section>
 
       <section className="border-t border-nebbia py-12">
-        <h2 className="text-2xl font-bold text-grafite">Chi ci lavora</h2>
+        <h2 className="text-2xl font-bold text-grafite">Team</h2>
 
         <div className="mt-8">
           {collaboratori.map((persona) => (
